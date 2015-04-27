@@ -1,33 +1,41 @@
 package wikiroutes;
 
-import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class User{
+@Entity
+public class User {
 	
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	private String userName;
 	private String pass;
-	private Boolean permision;
+	private boolean permision;
+	private String apiKey;
 	
-	public User(String name, String pass, Boolean permision) {
+	public User(){
+		
+	}
+
+	public User(String name, String pass, boolean permision) {
 		this.userName = name;
-		this.pass = pass;
+		this.pass = HashPassword.generateHashPassword(pass);
 		this.permision = permision;
+		this.apiKey = generateApiKey();
 	}
 	
 	public User(User user) {
 		this(user.getUserName(),user.getPass(),user.getPermision());
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -44,7 +52,7 @@ public class User{
 	}
 
 	public void setPass(String pass) {
-		this.pass = pass;
+		this.pass = HashPassword.generateHashPassword(pass);
 	}
 
 	public Boolean getPermision() {
@@ -53,6 +61,18 @@ public class User{
 
 	public void setPermision(Boolean permision) {
 		this.permision = permision;
+	}
+	
+	public String getApiKey() {
+		return apiKey;
+	}
+
+	public void setPermision(boolean permision) {
+		this.permision = permision;
+	}
+	
+	private String generateApiKey(){
+		return UUID.randomUUID().toString();
 	}
 	
 	
