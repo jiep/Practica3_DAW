@@ -71,10 +71,6 @@ public class User {
 		return permission;
 	}
 
-	public void setPermission(Boolean permission) {
-		this.permission = permission;
-	}
-
 	public String getApiKey() {
 		return apiKey;
 	}
