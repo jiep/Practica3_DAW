@@ -21,7 +21,7 @@ public class User {
 	private long id;
 	private String userName;
 	private String pass;
-	private boolean permision;
+	private boolean permission;
 	private String apiKey;
 	private boolean activatedNotifications;
 	
@@ -41,7 +41,7 @@ public class User {
 	public User(String name, String pass, boolean permision) {
 		this.userName = name;
 		this.pass = HashPassword.generateHashPassword(pass);
-		this.permision = permision;
+		this.permission = permision;
 		this.apiKey = generateApiKey();
 	}
 
@@ -69,12 +69,12 @@ public class User {
 		this.pass = HashPassword.generateHashPassword(pass);
 	}
 
-	public Boolean getPermision() {
-		return permision;
+	public Boolean getPermission() {
+		return permission;
 	}
 
 	public void setPermision(Boolean permision) {
-		this.permision = permision;
+		this.permission = permision;
 	}
 
 	public String getApiKey() {
@@ -82,7 +82,7 @@ public class User {
 	}
 
 	public void setPermision(boolean permision) {
-		this.permision = permision;
+		this.permission = permision;
 	}
 
 	private String generateApiKey() {
