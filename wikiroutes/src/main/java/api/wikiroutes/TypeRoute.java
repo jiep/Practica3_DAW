@@ -1,22 +1,31 @@
-package wikiroutes;
+package api.wikiroutes;
+
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class TypeRoute {
 	@Id
 	@Column(name = "type_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
-	
-	public TypeRoute(){
-		
+
+	@OneToMany(fetch = FetchType.LAZY)
+	private List<Route> routes;
+
+	public TypeRoute() {
+
 	}
-	
-	public TypeRoute(String name){
+
+	public TypeRoute(String name) {
 		this.name = name;
 	}
 
@@ -30,5 +39,13 @@ public class TypeRoute {
 
 	public Long getId() {
 		return id;
+	}
+
+	public List<Route> getRoutes() {
+		return routes;
+	}
+
+	public void setRoutes(List<Route> routes) {
+		this.routes = routes;
 	}
 }

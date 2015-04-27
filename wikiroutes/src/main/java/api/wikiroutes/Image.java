@@ -1,4 +1,5 @@
-package wikiroutes;
+package api.wikiroutes;
+
 
 import java.util.Date;
 

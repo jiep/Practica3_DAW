@@ -1,4 +1,4 @@
-package wikiroutes;
+package api.wikiroutes;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

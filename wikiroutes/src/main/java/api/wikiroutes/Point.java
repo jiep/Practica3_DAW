@@ -1,10 +1,15 @@
-package wikiroutes;
+package api.wikiroutes;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class Point {
 	@Id
 	@Column(name = "point_id")
@@ -13,6 +18,10 @@ public class Point {
 	private double latiude;
 	private double longitude;
 	private double altitude;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "stretch_id")
+	private Stretch stretch;
 	
 	private Point(){
 		
@@ -46,5 +55,13 @@ public class Point {
 
 	public void setAltitude(double altitude) {
 		this.altitude = altitude;
+	}
+
+	public Stretch getStretch() {
+		return stretch;
+	}
+
+	public void setStretch(Stretch stretch) {
+		this.stretch = stretch;
 	}
 }
