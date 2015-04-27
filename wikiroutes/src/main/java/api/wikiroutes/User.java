@@ -38,15 +38,15 @@ public class User {
 
 	}
 
-	public User(String name, String pass, boolean permision) {
+	public User(String name, String pass, boolean permission) {
 		this.userName = name;
 		this.pass = HashPassword.generateHashPassword(pass);
-		this.permission = permision;
+		this.permission = permission;
 		this.apiKey = generateApiKey();
 	}
 
 	public User(User user) {
-		this(user.getUserName(), user.getPass(), user.getPermision());
+		this(user.getUserName(), user.getPass(), user.getPermission());
 	}
 
 	public long getId() {
@@ -73,16 +73,16 @@ public class User {
 		return permission;
 	}
 
-	public void setPermision(Boolean permision) {
-		this.permission = permision;
+	public void setPermission(Boolean permission) {
+		this.permission = permission;
 	}
 
 	public String getApiKey() {
 		return apiKey;
 	}
 
-	public void setPermision(boolean permision) {
-		this.permission = permision;
+	public void setPermission(boolean permission) {
+		this.permission = permission;
 	}
 
 	private String generateApiKey() {
