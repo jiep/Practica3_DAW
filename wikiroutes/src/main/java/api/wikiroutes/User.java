@@ -23,10 +23,11 @@ public class User {
 	private String pass;
 	private boolean permission;
 	private String apiKey;
+	private String email;
 	private boolean activatedNotifications;
 	
 	@OneToMany(fetch = FetchType.LAZY)
-	private List<Route> routes;
+	private List<Route> routes = new ArrayList<Route>();
 	
 	@OneToMany(mappedBy = "sourceUser")
     private List<Friendship> friendships = new ArrayList<Friendship>();
@@ -38,15 +39,12 @@ public class User {
 
 	}
 
-	public User(String name, String pass, boolean permission) {
+	public User(String name, String pass, String email, boolean permission) {
 		this.userName = name;
 		this.pass = HashPassword.generateHashPassword(pass);
 		this.permission = permission;
 		this.apiKey = generateApiKey();
-	}
-
-	public User(User user) {
-		this(user.getUserName(), user.getPass(), user.getPermission());
+		this.email = email;
 	}
 
 	public long getId() {
@@ -127,6 +125,14 @@ public class User {
 
 	public void setApiKey(String apiKey) {
 		this.apiKey = apiKey;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
