@@ -3,6 +3,7 @@ package api.wikiroutes;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,10 +35,10 @@ public class Route {
 	private double rate;
 	private boolean isPrivate;
 
-	@OneToMany
+	@OneToMany(cascade= CascadeType.ALL)
 	private List<Stretch> stretches;
 
-	@OneToMany
+	@OneToMany(cascade= CascadeType.ALL)
 	private List<Comment> comments;
 
 	public Route() {
@@ -127,7 +128,7 @@ public class Route {
 		return comments;
 	}
 
-	public void setComments(List<Comment> comments) {
+	public void setComments(ArrayList<Comment> comments) {
 		this.comments = comments;
 	}
 

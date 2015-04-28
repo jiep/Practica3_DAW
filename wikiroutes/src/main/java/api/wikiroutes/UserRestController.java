@@ -28,12 +28,15 @@ public class UserRestController {
 	@Autowired
 	TypeRouteRepository types;
 
+	
+	// GET /users
 	@RequestMapping
 	public List<User> getUsers() {
 
 		return users.findAll();
 	}
 
+	// POST /users
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<User> addUser(@RequestBody User user) {
 		user.setRoutes(new ArrayList<Route>());
@@ -46,6 +49,7 @@ public class UserRestController {
 		return new ResponseEntity<>(u, HttpStatus.CREATED);
 	}
 	
+	// PUT /users/{id}
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<User> modifyUser(@PathVariable Long id, @RequestBody User user) {
 		User updatedUser = users.findById(id);
@@ -59,12 +63,14 @@ public class UserRestController {
 		return new ResponseEntity<>(u, HttpStatus.CREATED);
 	}
 
+	// GET /users/id
 	@RequestMapping("/{id}")
 	public User getUserById(@PathVariable Long id) {
 
 		return users.findById(id);
 	}
 
+	// DELETE /users/id
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void deleteUserById(@PathVariable Long id) {
 
@@ -73,11 +79,32 @@ public class UserRestController {
 		}
 	}
 
+	// GET /users/{id}/routes
 	@RequestMapping("/{id}/routes")
 	public List<Route> getRoutesById(@PathVariable Long id) {
 
 		return users.findOne(id).getRoutes();
 
 	}
+	
+	// POST /users/{id}/routes
+	/*@RequestMapping(value = "/{id}/routes", method = RequestMethod.POST)
+	public ResponseEntity<Object> insertRouteIntoUser(@RequestBody Route route, @PathVariable Long id){
+		
+		User user = users.findById(id);
+		
+		System.out.println(user);
+		
+		if(user != null){
+			
+			Route r = new Route(route.getName(), route.getDescription(), user, route.getRate(),
+			route.isPrivate());
+			
+			routes.saveAndFlush(r);
+			
+		}
+		
+		return new ResponseEntity<>(null, HttpStatus.CREATED);
+	}*/
 
 }
