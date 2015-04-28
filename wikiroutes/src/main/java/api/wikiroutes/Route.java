@@ -1,16 +1,18 @@
 package api.wikiroutes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Route {
@@ -22,20 +24,20 @@ public class Route {
 	private String name;
 	private String description;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JsonIgnore
+	@ManyToOne
 	private User user;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "typeroute_id")
 	private TypeRoute type;
 	private double rate;
 	private boolean isPrivate;
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany
 	private List<Stretch> stretches;
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany
 	private List<Comment> comments;
 
 	public Route() {
@@ -48,6 +50,15 @@ public class Route {
 		this.description = description;
 		this.user = user;
 		this.type = type;
+		this.rate = rate;
+		this.isPrivate = isPrivate;
+	}
+
+	public Route(String name, String description, User user, double rate,
+			boolean isPrivate) {
+		this.name = name;
+		this.description = description;
+		this.user = user;
 		this.rate = rate;
 		this.isPrivate = isPrivate;
 	}
@@ -108,7 +119,7 @@ public class Route {
 		return stretches;
 	}
 
-	public void setStretches(List<Stretch> stretches) {
+	public void setStretches(ArrayList<Stretch> stretches) {
 		this.stretches = stretches;
 	}
 

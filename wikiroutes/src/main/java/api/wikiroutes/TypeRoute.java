@@ -18,7 +18,7 @@ public class TypeRoute {
 	private Long id;
 	private String name;
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Route> routes;
 
 	public TypeRoute() {

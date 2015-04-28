@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import utils.ApiKeyGenerator;
+import utils.HashPassword;
 
 @Entity
 public class User {
@@ -26,13 +29,13 @@ public class User {
 	private String email;
 	private boolean activatedNotifications;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(cascade= CascadeType.ALL)
 	private List<Route> routes = new ArrayList<Route>();
 	
 	@OneToMany(mappedBy = "sourceUser")
     private List<Friendship> friendships = new ArrayList<Friendship>();
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany
 	private List<Comment> comments = new ArrayList<Comment>();
 
 	public User() {
@@ -43,7 +46,7 @@ public class User {
 		this.userName = name;
 		this.pass = HashPassword.generateHashPassword(pass);
 		this.permission = permission;
-		this.apiKey = generateApiKey();
+		this.apiKey = ApiKeyGenerator.generate();
 		this.email = email;
 	}
 
@@ -77,10 +80,6 @@ public class User {
 
 	public void setPermission(boolean permission) {
 		this.permission = permission;
-	}
-
-	private String generateApiKey() {
-		return UUID.randomUUID().toString();
 	}
 
 	public boolean isActivatedNotifications() {

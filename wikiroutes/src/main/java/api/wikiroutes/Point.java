@@ -2,12 +2,12 @@ package api.wikiroutes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Point {
@@ -19,15 +19,15 @@ public class Point {
 	private double longitude;
 	private double altitude;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "stretch_id")
+	@JsonIgnore
+	@ManyToOne
 	private Stretch stretch;
 	
-	private Point(){
+	public Point(){
 		
 	}
 	
-	private Point(double latitude, double longitude, double altitude){
+	public Point(double latitude, double longitude, double altitude){
 		this.latiude = latitude;
 		this.longitude = longitude;
 		this.altitude = altitude;
