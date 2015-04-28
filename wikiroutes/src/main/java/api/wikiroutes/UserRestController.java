@@ -38,7 +38,21 @@ public class UserRestController {
 		user.setPass(HashPassword.generateHashPassword(user.getPass()));
 		user.setPermission(false);
 		user.setFriendships(new ArrayList<Friendship>());
+		user.setApiKey(ApiKeyGenerator.generate());
 		User u = users.save(user);
+		return new ResponseEntity<>(u, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<User> modifyUser(@PathVariable Long id, @RequestBody User user) {
+		User updatedUser = users.findById(id);
+		
+		updatedUser.setUserName(user.getUserName());
+		updatedUser.setEmail(user.getEmail());
+		updatedUser.setPass(HashPassword.generateHashPassword(user.getPass()));
+		updatedUser.setActivatedNotifications(user.isActivatedNotifications());
+		
+		User u = users.save(updatedUser);
 		return new ResponseEntity<>(u, HttpStatus.CREATED);
 	}
 
