@@ -1,4 +1,4 @@
-package api.wikiroutes;
+package utils;
 
 import java.util.UUID;
 

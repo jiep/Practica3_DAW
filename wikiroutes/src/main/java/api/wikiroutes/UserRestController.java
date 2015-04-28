@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import utils.ApiKeyGenerator;
+import utils.HashPassword;
+
 @RestController
 @RequestMapping("/users")
 public class UserRestController {
@@ -58,10 +61,6 @@ public class UserRestController {
 
 	@RequestMapping("/{id}")
 	public User getUserById(@PathVariable Long id) {
-
-		User u = new User("pepe", "1234", "email@dsñfsdf.es", true);
-
-		users.save(u);
 
 		return users.findById(id);
 	}
