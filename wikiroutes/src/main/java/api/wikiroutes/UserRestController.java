@@ -30,14 +30,14 @@ public class UserRestController {
 
 	@Autowired
 	StretchRepository stretches;
-	
+
 	@Autowired
 	PointRepository points;
 
 	// GET /users
 	@RequestMapping
 	public List<User> getUsers() {
-		
+
 		return users.findAll();
 	}
 
@@ -119,7 +119,7 @@ public class UserRestController {
 					p.setStretch(s);
 					points.save(p);
 				}
-				
+
 				s.setRoute(r);
 				stretches.save(s);
 
@@ -132,6 +132,23 @@ public class UserRestController {
 		}
 
 		return new ResponseEntity<>(r, HttpStatus.CREATED);
+	}
+
+	// GET /users/{id}/routes/{id}
+	@RequestMapping("/{user_id}/routes/{route_id}")
+	public Route getRouteByIdAndUserId(@PathVariable Long user_id, @PathVariable Long route_id) {
+
+		List<Route> usersRoutes = routes.findByUserId(user_id);
+		
+		Route route = null;
+		
+		for(Route r : usersRoutes){
+			if(r.getId() == route_id){
+				route = r;
+			}
+		}
+		
+		return route;
 	}
 
 }
