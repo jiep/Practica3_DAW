@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import utils.ApiKeyGenerator;
@@ -153,7 +154,56 @@ public class UserRestController {
 	
 	// PUT /users/{id}/routes/{id}
 	@RequestMapping(value = "/{user_id}/routes/{route_id}", method = RequestMethod.PUT)
-	public ResponseEntity<Object> modifyRouteByIdAndUserId(@PathVariable Long user_id, @PathVariable Long route_id) {
+	public ResponseEntity<Object> modifyRouteByIdAndUserId(@PathVariable Long user_id, @PathVariable Long route_id, @RequestBody Route route) {
+
+		List<Route> usersRoutes = routes.findByUserId(user_id);
+		
+		Route r1 = null;
+		
+		for(Route r : usersRoutes){
+			if(r.getId() == route_id){
+				r1 = r;
+			}
+		}
+		
+		Route r = null;
+
+		if (route != null) {
+			
+			User user = users.findById(user_id);
+
+			r1 = new Route(route.getName(), route.getDescription(), user,
+					route.getRate(), route.isPrivate());
+
+			List<Stretch> ls = route.getStretches();
+
+			r1.setStretches(ls);
+
+			routes.saveAndFlush(r);
+
+			for (Stretch s : ls) {
+				List<Point> pl = s.getPoints();
+				for (Point p : pl) {
+					p.setStretch(s);
+					points.save(p);
+				}
+
+				s.setRoute(r1);
+				stretches.save(s);
+
+			}
+
+			user.getRoutes().add(r1);
+
+			users.saveAndFlush(user);
+
+		}
+
+		return new ResponseEntity<>(r, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/{user_id}/routes/{route_id}", method = RequestMethod.DELETE)
+	public void deleteRouteByIdAndUserId(@PathVariable Long user_id, @PathVariable Long route_id) {
 
 		List<Route> usersRoutes = routes.findByUserId(user_id);
 
@@ -165,40 +215,12 @@ public class UserRestController {
 			}
 		}
 		
-		Route r = null;
-
 		if (route != null) {
-			
-			User user = users.findById(user_id);
-
-			r = new Route(route.getName(), route.getDescription(), user,
-					route.getRate(), route.isPrivate());
-
-			List<Stretch> ls = route.getStretches();
-
-			r.setStretches(ls);
-
-			routes.saveAndFlush(r);
-
-			for (Stretch s : ls) {
-				List<Point> pl = s.getPoints();
-				for (Point p : pl) {
-					p.setStretch(s);
-					points.save(p);
-				}
-
-				s.setRoute(r);
-				stretches.save(s);
-
-			}
-
-			user.getRoutes().add(r);
-
-			users.saveAndFlush(user);
-
+			routes.delete(route);
 		}
-
-		return new ResponseEntity<>(r, HttpStatus.CREATED);
+		
+		
 	}
+
 
 }
