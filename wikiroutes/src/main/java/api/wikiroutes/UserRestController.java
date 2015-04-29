@@ -1,6 +1,7 @@
 package api.wikiroutes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import utils.ApiKeyGenerator;
 import utils.HashPassword;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/users")
@@ -32,7 +36,35 @@ public class UserRestController {
 	// GET /users
 	@RequestMapping
 	public List<User> getUsers() {
+		Long id = (long) 1;
+		User u = users.findOne(id);
+		
+		Point p1 = new Point(10, 20, 30);
+		Point p2 = new Point(30, 40, 50);
+		List<Point> pl = new ArrayList<Point>();
+		pl.add(p1);
+		pl.add(p2);
+		
+		Stretch s1 = new Stretch(pl, 1);
+		Collections.reverse(pl);
+		Stretch s2 = new Stretch(pl, 2);
+		
+		List<Stretch> sl = new ArrayList<Stretch>();
+		sl.add(s1);
+		sl.add(s2);
 
+		
+		Route r = new Route("Ruta de la muerte", "La ruta de la muerte es temida", u, new TypeRoute(), 6, true);
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+			System.out.println(mapper.writeValueAsString(r));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+		
 		return users.findAll();
 	}
 

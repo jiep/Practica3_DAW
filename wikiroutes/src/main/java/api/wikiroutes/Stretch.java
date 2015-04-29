@@ -20,7 +20,7 @@ public class Stretch {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@OneToMany(cascade= CascadeType.ALL)
+	@OneToMany(mappedBy="stretch", cascade= CascadeType.ALL)
 	private List<Point> points;
 	
 	@Column(name = "order_")
