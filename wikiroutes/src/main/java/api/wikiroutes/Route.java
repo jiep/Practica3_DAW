@@ -35,7 +35,7 @@ public class Route {
 	private double rate;
 	private boolean isPrivate;
 
-	@OneToMany(cascade= CascadeType.ALL)
+	@OneToMany(mappedBy="route", cascade= CascadeType.ALL)
 	private List<Stretch> stretches;
 
 	@OneToMany(cascade= CascadeType.ALL)
@@ -120,7 +120,7 @@ public class Route {
 		return stretches;
 	}
 
-	public void setStretches(ArrayList<Stretch> stretches) {
+	public void setStretches(List<Stretch> stretches) {
 		this.stretches = stretches;
 	}
 
@@ -128,7 +128,7 @@ public class Route {
 		return comments;
 	}
 
-	public void setComments(ArrayList<Comment> comments) {
+	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
 

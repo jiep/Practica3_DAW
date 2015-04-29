@@ -22,6 +22,8 @@ public class Stretch {
 	
 	@OneToMany(cascade= CascadeType.ALL)
 	private List<Point> points;
+	
+	@Column(name = "order_")
 	private int order;
 	
 	@JsonIgnore

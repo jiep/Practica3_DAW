@@ -88,23 +88,27 @@ public class UserRestController {
 	}
 	
 	// POST /users/{id}/routes
-	/*@RequestMapping(value = "/{id}/routes", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}/routes", method = RequestMethod.POST)
 	public ResponseEntity<Object> insertRouteIntoUser(@RequestBody Route route, @PathVariable Long id){
 		
 		User user = users.findById(id);
 		
-		System.out.println(user);
-		
+		Route r = null;
+				
 		if(user != null){
 			
-			Route r = new Route(route.getName(), route.getDescription(), user, route.getRate(),
+			r = new Route(route.getName(), route.getDescription(), user, route.getRate(),
 			route.isPrivate());
 			
 			routes.saveAndFlush(r);
 			
+			user.getRoutes().add(r);
+			
+			users.saveAndFlush(user);
+			
 		}
 		
-		return new ResponseEntity<>(null, HttpStatus.CREATED);
-	}*/
+		return new ResponseEntity<>(r, HttpStatus.CREATED);
+	}
 
 }
