@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import utils.ApiKeyGenerator;
@@ -34,6 +33,9 @@ public class UserRestController {
 
 	@Autowired
 	PointRepository points;
+	
+	@Autowired
+	CommentRepository comments;
 
 	// GET /users
 	@RequestMapping
@@ -201,7 +203,7 @@ public class UserRestController {
 
 		return new ResponseEntity<>(r, HttpStatus.CREATED);
 	}
-	
+	// DELETE /users/{id}/routes/{id}
 	@RequestMapping(value = "/{user_id}/routes/{route_id}", method = RequestMethod.DELETE)
 	public void deleteRouteByIdAndUserId(@PathVariable Long user_id, @PathVariable Long route_id) {
 
@@ -221,6 +223,14 @@ public class UserRestController {
 		
 		
 	}
+	
+	// GET /users/{id}/comments
 
+	@RequestMapping(value = "/{id}/comments")
+	public List<Comment> getCommentsByUserId(@PathVariable Long id) {
 
+		return comments.findByUserId(id);
+		
+		
+	}
 }

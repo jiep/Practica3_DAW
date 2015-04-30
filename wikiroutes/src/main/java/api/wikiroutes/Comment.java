@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Comment {
 
@@ -17,6 +19,7 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@JsonIgnore
 	@ManyToOne
 	private User user;
 	private String description;
