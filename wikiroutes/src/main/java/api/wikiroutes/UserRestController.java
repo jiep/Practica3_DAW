@@ -416,5 +416,20 @@ public class UserRestController {
 		
 		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 	}
+	
+	// GET /users/{id}/friends
+	@RequestMapping("/{id}/friends")
+	public List<User> getFriendsByUserId(@PathVariable Long id){
+		List<Friendship> friendships = users.findById(id).getFriendships();
+		
+		List<User> friends = new ArrayList<>();
+		
+		for(Friendship f : friendships){
+			friends.add(users.findById(f.getTargetUser().getId()));
+		}
+		
+		return friends;
+		
+	}
 
 }
