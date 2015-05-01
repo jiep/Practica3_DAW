@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import utils.ApiKeyGenerator;
 import utils.HashPassword;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class User {
 
@@ -31,9 +33,11 @@ public class User {
 	@OneToMany(cascade= CascadeType.ALL)
 	private List<Route> routes = new ArrayList<Route>();
 	
+    @JsonManagedReference
 	@OneToMany(mappedBy = "sourceUser")
     private List<Friendship> friendships = new ArrayList<Friendship>();
 	
+
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	private List<Comment> comments = new ArrayList<Comment>();
 
@@ -128,5 +132,6 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 }

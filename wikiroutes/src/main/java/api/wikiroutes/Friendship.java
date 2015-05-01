@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Friendship {
 	
@@ -17,9 +20,11 @@ public class Friendship {
 	private Long id;
     	
     @ManyToOne()
+    @JsonBackReference
     @JoinColumn(name = "user_id")
     private User sourceUser;
 
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "friend_id")
     private User targetUser;
