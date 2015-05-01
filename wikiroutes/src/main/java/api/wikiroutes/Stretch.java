@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Stretch {
@@ -29,6 +30,10 @@ public class Stretch {
 	@JsonIgnore
 	@ManyToOne
 	private Route route;
+	
+    @JsonManagedReference
+	@OneToMany(mappedBy="stretch", cascade= CascadeType.ALL)
+	private List<Image> images;
 
 	public Stretch() {
 
@@ -65,6 +70,14 @@ public class Stretch {
 
 	public void setPoints(List<Point> points) {
 		this.points = points;
+	}
+
+	public List<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
 	}
 
 }

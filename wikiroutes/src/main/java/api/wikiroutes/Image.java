@@ -4,10 +4,15 @@ package api.wikiroutes;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity
 public class Image {
 	@Id
 	@Column(name = "image_id")
@@ -16,10 +21,16 @@ public class Image {
 	private String description;
 	private String place;
 	private Date date;
-
+	
+	@JsonBackReference
+	@ManyToOne
+	private Stretch stretch;
+	
+	
 	public Image() {
 
 	}
+
 
 	public Image(String description, String place, Date date) {
 		this.description = description;
@@ -53,6 +64,16 @@ public class Image {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+
+	public Stretch getStretch() {
+		return stretch;
+	}
+
+
+	public void setStretch(Stretch stretch) {
+		this.stretch = stretch;
 	}
 
 }
