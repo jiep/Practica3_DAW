@@ -25,6 +25,7 @@ public class Comment {
 	private String description;
 	private Date date;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Route route;
 

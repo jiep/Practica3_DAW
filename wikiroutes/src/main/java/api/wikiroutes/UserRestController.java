@@ -138,7 +138,7 @@ public class UserRestController {
 	}
 
 	// GET /users/{id}/routes/{id}
-	@RequestMapping("/users/{user_id}/routes/{route_id}")
+	@RequestMapping("/{user_id}/routes/{route_id}")
 	public Route getRouteByIdAndUserId(@PathVariable Long user_id,
 			@PathVariable Long route_id) {
 
@@ -238,7 +238,8 @@ public class UserRestController {
 
 	// GET /users/{id}/routes/{id}/comments
 	@RequestMapping(value = "/{user_id}/routes/{route_id}/comments")
-	public List<Comment> getCommentsByUserIdAndRouteId(@PathVariable Long user_id, @PathVariable Long route_id) {
+	public List<Comment> getCommentsByUserIdAndRouteId(
+			@PathVariable Long user_id, @PathVariable Long route_id) {
 
 		List<Route> usersRoutes = routes.findByUserId(user_id);
 
@@ -249,8 +250,52 @@ public class UserRestController {
 				route = r;
 			}
 		}
-		
+
 		return route.getComments();
 
 	}
+
+	// POST /users/{id}/routes/{id}/comments
+	@RequestMapping(value = "/{user_id}/routes/{route_id}/comments", method = RequestMethod.POST)
+	public ResponseEntity<Comment> addNewCommentToRoute(
+			@PathVariable Long user_id, @PathVariable Long route_id,
+			@RequestBody Comment comment) {
+		
+		List<Route> usersRoutes = routes.findByUserId(user_id);
+
+		Route route = null;
+
+		for (Route r : usersRoutes) {
+			if (r.getId() == route_id) {
+				route = r;
+			}
+		}
+
+		if (route != null) {
+			User u = users.findById(user_id);
+
+			List<Comment> commentList = route.getComments();
+			comment.setRoute(route);
+			comment.setUser(u);
+			commentList.add(comment);
+			comments.save(commentList);
+			
+
+			List<Comment> userComments = u.getComments();
+			userComments.add(comment);
+			users.saveAndFlush(u);
+
+			route.getComments().add(comment);
+			routes.saveAndFlush(route);
+
+			
+
+		}
+
+		return new ResponseEntity<Comment>(comment, HttpStatus.CREATED);
+	}
+	
+	
+	
+	
 }

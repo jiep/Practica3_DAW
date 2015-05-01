@@ -34,7 +34,7 @@ public class User {
 	@OneToMany(mappedBy = "sourceUser")
     private List<Friendship> friendships = new ArrayList<Friendship>();
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	private List<Comment> comments = new ArrayList<Comment>();
 
 	public User() {

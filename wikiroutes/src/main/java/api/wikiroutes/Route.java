@@ -37,7 +37,7 @@ public class Route {
 	@OneToMany(mappedBy="route", cascade= CascadeType.ALL)
 	private List<Stretch> stretches;
 
-	@OneToMany(cascade= CascadeType.ALL)
+	@OneToMany(mappedBy="route", cascade= CascadeType.ALL)
 	private List<Comment> comments;
 
 	public Route() {
