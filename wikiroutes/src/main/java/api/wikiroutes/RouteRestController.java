@@ -20,6 +20,4 @@ public class RouteRestController {
 		return routes.findByIsPrivate(false);
 	}
 	
-
-	
 }

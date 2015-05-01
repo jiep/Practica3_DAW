@@ -13,5 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	// Busca usuarios por apiKey
 	User findByApiKey(String apiKey);
 	
-
+	// Busca usuarios por id de comentario
+	User findByCommentsId(Long id);
+	
 }
