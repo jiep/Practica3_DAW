@@ -36,7 +36,7 @@ public class UserRestController {
 
 	@Autowired
 	CommentRepository comments;
-	
+
 	@Autowired
 	FriendshipRepository friendships;
 
@@ -54,7 +54,7 @@ public class UserRestController {
 		user.setComments(new ArrayList<Comment>());
 		user.setPass(HashPassword.generateHashPassword(user.getPass()));
 		user.setPermission(false);
-		//user.setFriendships(new ArrayList<Friendship>());
+		// user.setFriendships(new ArrayList<Friendship>());
 		user.setApiKey(ApiKeyGenerator.generate());
 		User u = users.save(user);
 		return new ResponseEntity<>(u, HttpStatus.CREATED);
@@ -391,45 +391,59 @@ public class UserRestController {
 				rt.setComments(routeComments);
 
 				routes.save(rt);
-				
+
 				comments.delete(cmmnt);
 
 			}
 		}
 
 	}
-	
+
 	// POST /users/{id}/friends
 	@RequestMapping(value = "/{id}/friends", method = RequestMethod.POST)
-	public ResponseEntity<User> addFriend(
-			@PathVariable Long id, User newFriend) {
+	public ResponseEntity<User> addFriend(@PathVariable Long id, User newFriend) {
 
 		User user = users.findById(id);
-		
-		Friendship fs = new Friendship(newFriend,user);
-		
+
+		Friendship fs = new Friendship(newFriend, user);
+
 		friendships.save(fs);
-		
+
 		user.getFriendships().add(fs);
-		
+
 		users.saveAndFlush(user);
-		
+
 		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 	}
-	
+
 	// GET /users/{id}/friends
 	@RequestMapping("/{id}/friends")
-	public List<User> getFriendsByUserId(@PathVariable Long id){
+	public List<User> getFriendsByUserId(@PathVariable Long id) {
 		List<Friendship> friendships = users.findById(id).getFriendships();
-		
+
 		List<User> friends = new ArrayList<>();
-		
-		for(Friendship f : friendships){
+
+		for (Friendship f : friendships) {
 			friends.add(users.findById(f.getTargetUser().getId()));
 		}
-		
+
 		return friends;
-		
+
+	}
+
+	// GET /users/{id}/friends/routes
+	@RequestMapping("/{id}/friends/routes")
+	public List<Route> getFriendsRoutesByUserId(@PathVariable Long id) {
+		List<Friendship> friendships = users.findById(id).getFriendships();
+
+		List<Route> routes = new ArrayList<>();
+
+		for (Friendship f : friendships) {
+			routes.addAll(users.findById(f.getTargetUser().getId()).getRoutes());
+		}
+
+		return routes;
+
 	}
 
 }
