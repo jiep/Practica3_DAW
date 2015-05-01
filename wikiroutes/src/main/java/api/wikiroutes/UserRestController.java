@@ -297,5 +297,52 @@ public class UserRestController {
 	
 	
 	
+	// PUT /users/{id}/routes/{id}/comments/{id}
+		@RequestMapping(value = "/{user_id}/routes/{route_id}/comments/{comment_id}", method = RequestMethod.PUT)
+		public ResponseEntity<Comment> modifyCommentInRoute(
+				@PathVariable Long user_id, @PathVariable Long route_id, @PathVariable Long comment_id, @RequestBody Comment comment) {
+			
+			List<Route> usersRoutes = routes.findByUserId(user_id);
+
+			Route route = null;
+			
+			Comment cmmnt = null;
+
+			for (Route r : usersRoutes) {
+				if (r.getId() == route_id) {
+					route = r;
+					for(Comment c : r.getComments()){
+						if(c.getId() == comment_id){
+							cmmnt = c;
+						}
+					}
+				}
+			}
+
+			if (cmmnt != null) {
+				User u = users.findById(user_id);
+
+				List<Comment> commentList = route.getComments();
+				cmmnt.setRoute(route);
+				cmmnt.setUser(u);
+				cmmnt.setDate(comment.getDate());
+				cmmnt.setDescription(comment.getDescription());
+				commentList.add(comment);
+				comments.save(commentList);
+				
+
+				List<Comment> userComments = u.getComments();
+				userComments.add(comment);
+				users.saveAndFlush(u);
+
+				route.getComments().add(comment);
+				routes.saveAndFlush(route);
+
+			}
+
+			return new ResponseEntity<Comment>(comment, HttpStatus.CREATED);
+		}
+	
+	
 	
 }
