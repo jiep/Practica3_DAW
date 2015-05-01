@@ -33,7 +33,7 @@ public class UserRestController {
 
 	@Autowired
 	PointRepository points;
-	
+
 	@Autowired
 	CommentRepository comments;
 
@@ -139,39 +139,42 @@ public class UserRestController {
 
 	// GET /users/{id}/routes/{id}
 	@RequestMapping("/users/{user_id}/routes/{route_id}")
-	public Route getRouteByIdAndUserId(@PathVariable Long user_id, @PathVariable Long route_id) {
+	public Route getRouteByIdAndUserId(@PathVariable Long user_id,
+			@PathVariable Long route_id) {
 
 		List<Route> usersRoutes = routes.findByUserId(user_id);
-		
+
 		Route route = null;
-		
-		for(Route r : usersRoutes){
-			if(r.getId() == route_id){
+
+		for (Route r : usersRoutes) {
+			if (r.getId() == route_id) {
 				route = r;
 			}
 		}
-		
+
 		return route;
 	}
-	
+
 	// PUT /users/{id}/routes/{id}
 	@RequestMapping(value = "/{user_id}/routes/{route_id}", method = RequestMethod.PUT)
-	public ResponseEntity<Object> modifyRouteByIdAndUserId(@PathVariable Long user_id, @PathVariable Long route_id, @RequestBody Route route) {
+	public ResponseEntity<Object> modifyRouteByIdAndUserId(
+			@PathVariable Long user_id, @PathVariable Long route_id,
+			@RequestBody Route route) {
 
 		List<Route> usersRoutes = routes.findByUserId(user_id);
-		
+
 		Route r1 = null;
-		
-		for(Route r : usersRoutes){
-			if(r.getId() == route_id){
+
+		for (Route r : usersRoutes) {
+			if (r.getId() == route_id) {
 				r1 = r;
 			}
 		}
-		
+
 		Route r = null;
 
 		if (route != null) {
-			
+
 			User user = users.findById(user_id);
 
 			r1 = new Route(route.getName(), route.getDescription(), user,
@@ -203,34 +206,51 @@ public class UserRestController {
 
 		return new ResponseEntity<>(r, HttpStatus.CREATED);
 	}
+
 	// DELETE /users/{id}/routes/{id}
 	@RequestMapping(value = "/{user_id}/routes/{route_id}", method = RequestMethod.DELETE)
-	public void deleteRouteByIdAndUserId(@PathVariable Long user_id, @PathVariable Long route_id) {
+	public void deleteRouteByIdAndUserId(@PathVariable Long user_id,
+			@PathVariable Long route_id) {
 
 		List<Route> usersRoutes = routes.findByUserId(user_id);
 
 		Route route = null;
-		
-		for(Route r : usersRoutes){
-			if(r.getId() == route_id){
+
+		for (Route r : usersRoutes) {
+			if (r.getId() == route_id) {
 				route = r;
 			}
 		}
-		
+
 		if (route != null) {
 			routes.delete(route);
 		}
-		
-		
-	}
-	
-	// GET /users/{id}/comments
 
+	}
+
+	// GET /users/{id}/comments
 	@RequestMapping(value = "/{id}/comments")
 	public List<Comment> getCommentsByUserId(@PathVariable Long id) {
 
 		return comments.findByUserId(id);
+
+	}
+
+	// GET /users/{id}/routes/{id}/comments
+	@RequestMapping(value = "/{user_id}/routes/{route_id}/comments")
+	public List<Comment> getCommentsByUserIdAndRouteId(@PathVariable Long user_id, @PathVariable Long route_id) {
+
+		List<Route> usersRoutes = routes.findByUserId(user_id);
+
+		Route route = null;
+
+		for (Route r : usersRoutes) {
+			if (r.getId() == route_id) {
+				route = r;
+			}
+		}
 		
-		
+		return route.getComments();
+
 	}
 }
