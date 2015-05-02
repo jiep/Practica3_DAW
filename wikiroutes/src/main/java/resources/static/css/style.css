@@ -1,0 +1,13 @@
+.angular-google-map-container {
+   height: 100%;
+}
+
+
+.md-divider {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#top {
+  z-index: 0;
+}

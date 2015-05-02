@@ -1,0 +1,83 @@
+<html lang="en" ng-app="WikiroutesApp">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1" />
+
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body layout="column" ng-controller="NavCtrl as ctrl">
+    <md-toolbar layout="row">
+      <div flex="10">
+        <h1 class="md-toolbar-tools" layout-align="left">
+          <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Wikipedia's_W.svg/50px-Wikipedia's_W.svg.png"/>
+        </h1>
+      </div>
+      <div flex="10">
+        <h1 class="md-toolbar-tools">Wikiroutes</h1>
+      </div>
+      <div flex="60">
+        <h1 class="md-toolbar-tools">
+          <ng-md-icon icon="search" size="36"></ng-md-icon>
+          <md-autocomplete flex
+              md-no-cache="ctrl.noCache"
+              md-selected-item="ctrl.selectedItem"
+              md-search-text="ctrl.searchText"
+              md-items="item in ctrl.querySearch(ctrl.searchText)"
+              md-item-text="item.display"
+              placeholder="Buscar rutas"
+              md-floating-label="Favorite state">
+            <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
+          </md-autocomplete>
+        </h1>
+      </div>
+      <div flex="20" layout-align="right">
+        <h1 class="md-toolbar-tools">
+          <ng-md-icon icon="account_box" size="36"></ng-md-icon>
+          Iniciar sesión
+        </h1>
+      </div>
+
+    </md-toolbar>
+
+
+
+    <md-content layout-padding style="padding: 50px">
+
+      <div layout="row" ng-controller="MapCtrl">
+        <div flex="60">
+          <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds" events="map.events">
+                  <ui-gmap-polyline path="polyline.path" stroke="polyline.stroke" visible='polyline.visible'
+                            geodesic='polyline.geodesic' fit="false" editable="polyline.editable" draggable="polyline.draggable" icons='polyline.icons' events="polyline.events"></ui-gmap-polyline>
+              </ui-gmap-google-map>
+          </div>
+        <div flex="40">
+          <md-list>
+            <md-list-item class="md-3-line" ng-repeat="item in todos">
+              <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
+              <div class="md-list-item-text">
+                <h3>{{ item.who }}</h3>
+                <h4>{{ item.what }}</h4>
+                <p>{{ item.notes }}</p>
+              </div>
+            </md-list-item>
+          </md-list>
+        </div>
+      </div>
+
+    </md-content>
+
+    <!-- Angular Material Dependencies -->
+    <script src='https://maps.googleapis.com/maps/api/js?sensor=false'></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src='bower_components/lodash/dist/lodash.js'></script>
+    <script src='bower_components/angular-google-maps/dist/angular-google-maps.js'></script>
+
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="https://cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
+    <script src="app/app.js"></script>
+  </body>
+</html>
