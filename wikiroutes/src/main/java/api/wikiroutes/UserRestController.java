@@ -101,7 +101,7 @@ public class UserRestController {
 
 	// POST /users/{id}/routes
 	@RequestMapping(value = "/{id}/routes", method = RequestMethod.POST)
-	public ResponseEntity<Object> insertRouteIntoUser(@RequestBody Route route,
+	public ResponseEntity<Route> insertRouteIntoUser(@RequestBody Route route,
 			@PathVariable Long id) {
 
 		User user = users.findById(id);
@@ -160,7 +160,7 @@ public class UserRestController {
 
 	// PUT /users/{id}/routes/{id}
 	@RequestMapping(value = "/{user_id}/routes/{route_id}", method = RequestMethod.PUT)
-	public ResponseEntity<Object> modifyRouteByIdAndUserId(
+	public ResponseEntity<Route> modifyRouteByIdAndUserId(
 			@PathVariable Long user_id, @PathVariable Long route_id,
 			@RequestBody Route route) {
 
