@@ -1,0 +1,25 @@
+.angular-google-map-container {
+   height: 100%;
+}
+
+
+.md-divider {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#top {
+  z-index: 0;
+}
+
+.carousel-img {
+	width: 100%;
+}
+
+.slick-prev, .slick-next {
+	display:none;
+}
+
+ng-md-icon * {
+  vertical-align: middle;
+}
