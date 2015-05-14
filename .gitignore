@@ -126,4 +126,4 @@ sympy-plots-for-*.tex/
 *.sav
 
 /target/*
-/wikiroutes/src/java/main/reosurces/static/bower_components/*
+/wikiroutes/src/java/main/resources/static/bower_components/*
