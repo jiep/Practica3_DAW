@@ -335,7 +335,6 @@ public class UserRestController {
 
 			route.getComments().add(comment);
 			routes.saveAndFlush(route);
-
 		}
 
 		return new ResponseEntity<Comment>(comment, HttpStatus.CREATED);
@@ -355,7 +354,7 @@ public class UserRestController {
 		for (Route r : usersRoutes) {
 			if (r.getId() == route_id) {
 				route = r;
-				for (Comment c : r.getComments()) {
+				for (Comment c : route.getComments()) {
 					if (c.getId() == comment_id) {
 						cmmnt = c;
 					}
