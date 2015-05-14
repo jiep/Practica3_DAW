@@ -125,5 +125,5 @@ sympy-plots-for-*.tex/
 *.bak
 *.sav
 
-/target/*
-bower_components
+target
+#bower_components
