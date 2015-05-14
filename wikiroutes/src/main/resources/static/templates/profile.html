@@ -1,14 +1,18 @@
 <md-content layout-padding style="padding: 50px"
 	ng-controller="HomeCtrl">
-
-
-
 <div layout="row">
-	<div md-container flex="100">
+	<div md-container flex="30">AQUI VAN NOMBRE Y APELLIDOS</div>
+
+
+	<div md-container flex="70">
+		<md-button class="md-raised md-primary">
+		<h3>Añadir ruta</h3>
+		</md-button>
+
 		<md-toolbar>
 		<div class="md-toolbar-tools">
 			<h2 class="md-flex">
-				<strong>Nuestras rutas más valoradas</strong>
+				<strong>Tus rutas</strong>
 			</h2>
 		</div>
 		</md-toolbar>
@@ -30,14 +34,10 @@
 				<div flex="20">
 					<div layout="column">
 						<div>
-							<span><ng-md-icon icon="star" size="36"
-									style="fill:#e9dba5"></ng-md-icon></span><span><ng-md-icon
-									icon="star" size="36" style="fill:#e9dba5"></ng-md-icon></span><span><ng-md-icon
-									icon="star" size="36" style="fill:#e9dba5"></ng-md-icon></span><span><ng-md-icon
-									icon="star" size="36" style="fill:#e9dba5"></ng-md-icon></span><span><ng-md-icon
-									icon="star" size="36" style="fill:#e9dba5"></ng-md-icon></span>
+							<span><ng-md-icon icon="lock" size="36"></ng-md-icon></span> <span><ng-md-icon
+									icon="mode_edit" size="36"></ng-md-icon></span> <span><ng-md-icon
+									icon="clear" size="36"></ng-md-icon></span>
 						</div>
-
 						<div>
 							<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
 						</div>
@@ -50,7 +50,6 @@
 			</md-toolbar>
 		</div>
 	</div>
-
 </div>
 
 </md-content>
