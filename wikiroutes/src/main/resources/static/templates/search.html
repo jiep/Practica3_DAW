@@ -1,26 +1,112 @@
 <div>
-  <md-content class="md-padding">
-    <md-tabs md-dynamic-height md-border-bottom>
-      <md-tab label="Todo">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Tab One</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
-        </md-content>
-      </md-tab>
-      <md-tab label="Rutas">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Tab Two</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
-          <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
-          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-        </md-content>
-      </md-tab>
-      <md-tab label="Usuarios">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Tab Three</h1>
-          
-        </md-content>
-      </md-tab>
-    </md-tabs>
-  </md-content>
+	<md-content class="md-padding"> <md-tabs md-dynamic-height
+		md-border-bottom> <md-tab label="Todo"> <md-content
+		class="md-padding">
+	<h1 class="md-display-2">Tab One</h1>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+		venenatis ante augue. Phasellus volutpat neque ac dui mattis
+		vulputate. Etiam consequat aliquam cursus. In sodales pretium
+		ultrices. Maecenas lectus est, sollicitudin consectetur felis nec,
+		feugiat ultricies mi.</p>
+	</md-content> </md-tab> <md-tab label="Rutas"> <md-content class="md-padding">
+
+	<md-content layout-padding style="padding: 50px"
+		ng-controller="HomeCtrl">
+	<div layout="row">
+		<div md-container flex="100">
+
+			<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2 class="md-flex">
+					<strong>Rutas encontradas:</strong>
+				</h2>
+			</div>
+			</md-toolbar>
+
+			<div ng-repeat="route in routes">
+				<md-list-item class="md-3-line">
+				<div layout="row">
+					<div flex="20">
+						<md-card class="card"> <img ng-src="/img/nature4.jpg"
+							class="md-avatar" alt="{{item.who}}" /> </md-card>
+					</div>
+					<div flex="60">
+						<div class="md-list-item-text">
+							<h3>{{route.name}}</h3>
+							<h4>{{route.description}}</h4>
+							<p>{{route.user}}</p>
+						</div>
+					</div>
+					<div flex="20">
+						<div layout="column">
+							<div>
+								<span><ng-md-icon icon="lock" size="36"></ng-md-icon></span> <span><ng-md-icon
+										icon="mode_edit" size="36"></ng-md-icon></span> <span><ng-md-icon
+										icon="clear" size="36"></ng-md-icon></span>
+							</div>
+							<div>
+								<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				</md-list-item>
+				<md-divider></md-divider>
+				</md-toolbar>
+			</div>
+		</div>
+	</div>
+	</md-content> 
+	</md-content> 
+	</md-tab> <md-tab label="Usuarios"> <md-content class="md-padding">
+	
+	<md-content layout-padding style="padding: 50px"
+		ng-controller="HomeCtrl">
+	<div layout="row">
+		<div md-container flex="100">
+
+			<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2 class="md-flex">
+					<strong>Usuarios encontrados:</strong>
+				</h2>
+			</div>
+			</md-toolbar>
+
+			<div ng-repeat="user in users">
+				<md-list-item class="md-3-line">
+				<div layout="row">
+					<div flex="20">
+						<md-card class="card"> <img ng-src="/img/foto_user.png"
+							class="md-avatar" alt="{{item.who}}" /> </md-card>
+					</div>
+					<div flex="60">
+						<div class="md-list-item-text">
+							<h3>{{user.userName}}</h3>
+							<h4>{{user.email}}</h4>
+						</div>
+					</div>
+					<div flex="20">
+						<div layout="column">
+							<div>
+								<span><ng-md-icon icon="lock" size="36"></ng-md-icon></span> <span><ng-md-icon
+										icon="mode_edit" size="36"></ng-md-icon></span> <span><ng-md-icon
+										icon="clear" size="36"></ng-md-icon></span>
+							</div>
+							<div>
+								<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				</md-list-item>
+				<md-divider></md-divider>
+				</md-toolbar>
+			</div>
+		</div>
+	</div>
+	</md-content> 
+	
+	
+	</md-content> </md-tab> </md-tabs> </md-content>
 </div>
