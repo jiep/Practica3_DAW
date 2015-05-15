@@ -14,5 +14,8 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
 	
 	// Busca rutas id de comentario 
 	Route findByCommentsId(Long id);
+	
+	// Busca rutas por id de usuario y por privacidad
+	List<Route> findByUserIdAndIsPrivate(Long id, boolean isPrivate);
 }
 

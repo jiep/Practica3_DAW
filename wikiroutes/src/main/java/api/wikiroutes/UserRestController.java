@@ -62,29 +62,33 @@ public class UserRestController {
 	}
 
 	// PUT /users/{id}
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers={"Authorization"})
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = { "Authorization" })
 	public ResponseEntity<User> modifyUser(@PathVariable Long id,
-			@RequestBody User user, @RequestHeader("Authorization") String authorization) {
-		
+			@RequestBody User user,
+			@RequestHeader("Authorization") String authorization) {
+
 		User auth_user = users.findByApiKey(authorization);
-		
+
 		User u = null;
-		
+
 		HttpStatus status = HttpStatus.UNAUTHORIZED;
-				
-		if(auth_user != null && auth_user.getId() == id && !authorization.isEmpty()){
-		
+
+		if (auth_user != null && auth_user.getId() == id
+				&& !authorization.isEmpty()) {
+
 			User updatedUser = users.findById(id);
-	
+
 			updatedUser.setUserName(user.getUserName());
 			updatedUser.setEmail(user.getEmail());
-			updatedUser.setPass(HashPassword.generateHashPassword(user.getPass()));
-			updatedUser.setActivatedNotifications(user.isActivatedNotifications());
-	
+			updatedUser.setPass(HashPassword.generateHashPassword(user
+					.getPass()));
+			updatedUser.setActivatedNotifications(user
+					.isActivatedNotifications());
+
 			u = users.save(updatedUser);
-			
+
 			status = HttpStatus.CREATED;
-		
+
 		}
 		return new ResponseEntity<>(u, status);
 	}
@@ -97,61 +101,101 @@ public class UserRestController {
 	}
 
 	// DELETE /users/id
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void deleteUserById(@PathVariable Long id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = { "Authorization" })
+	public ResponseEntity<User> deleteUserById(@PathVariable Long id,
+			@RequestHeader("Authorization") String authorization) {
 
-		if (users.findById(id) != null) {
-			users.delete(id);
+		User auth_user = users.findByApiKey(authorization);
+
+		User u = null;
+
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
+
+		if (auth_user != null && auth_user.getId() == id
+				&& !authorization.isEmpty()) {
+
+			if (users.findById(id) != null) {
+				users.delete(id);
+				status = HttpStatus.CREATED;
+			}
+
 		}
+
+		return new ResponseEntity<>(u, status);
 	}
 
 	// GET /users/{id}/routes
 	@RequestMapping("/{id}/routes")
-	public List<Route> getRoutesById(@PathVariable Long id) {
+	public List<Route> getRoutesById(@PathVariable Long id,
+			@RequestHeader("Authorization") String authorization) {
 
-		return users.findOne(id).getRoutes();
+		User auth_user = users.findByApiKey(authorization);
+
+		List<Route> routes_list = null;
+
+		if (auth_user != null && auth_user.getId() == id
+				&& !authorization.isEmpty()) {
+
+			routes_list = users.findOne(id).getRoutes();
+		} else {
+
+			routes_list = routes.findByUserIdAndIsPrivate(id, false);
+		}
+
+		return routes_list;
 
 	}
 
 	// POST /users/{id}/routes
 	@RequestMapping(value = "/{id}/routes", method = RequestMethod.POST)
 	public ResponseEntity<Route> insertRouteIntoUser(@RequestBody Route route,
-			@PathVariable Long id) {
+			@PathVariable Long id,
+			@RequestHeader("Authorization") String authorization) {
 
-		User user = users.findById(id);
+		User auth_user = users.findByApiKey(authorization);
 
 		Route r = null;
 
-		if (user != null) {
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
 
-			r = new Route(route.getName(), route.getDescription(), user,
-					route.getRate(), route.isPrivate());
+		if (auth_user != null && auth_user.getId() == id
+				&& !authorization.isEmpty()) {
 
-			List<Stretch> ls = route.getStretches();
+			User user = users.findById(id);
 
-			r.setStretches(ls);
+			if (user != null) {
 
-			routes.saveAndFlush(r);
+				r = new Route(route.getName(), route.getDescription(), user,
+						route.getRate(), route.isPrivate());
 
-			for (Stretch s : ls) {
-				List<Point> pl = s.getPoints();
-				for (Point p : pl) {
-					p.setStretch(s);
-					points.save(p);
+				List<Stretch> ls = route.getStretches();
+
+				r.setStretches(ls);
+
+				routes.saveAndFlush(r);
+
+				for (Stretch s : ls) {
+					List<Point> pl = s.getPoints();
+					for (Point p : pl) {
+						p.setStretch(s);
+						points.save(p);
+					}
+
+					s.setRoute(r);
+					stretches.save(s);
+
 				}
 
-				s.setRoute(r);
-				stretches.save(s);
+				user.getRoutes().add(r);
+
+				users.saveAndFlush(user);
+
+				status = HttpStatus.CREATED;
 
 			}
-
-			user.getRoutes().add(r);
-
-			users.saveAndFlush(user);
-
 		}
 
-		return new ResponseEntity<>(r, HttpStatus.CREATED);
+		return new ResponseEntity<>(r, status);
 	}
 
 	// GET /users/{id}/routes/{id}
@@ -176,72 +220,100 @@ public class UserRestController {
 	@RequestMapping(value = "/{user_id}/routes/{route_id}", method = RequestMethod.PUT)
 	public ResponseEntity<Route> modifyRouteByIdAndUserId(
 			@PathVariable Long user_id, @PathVariable Long route_id,
-			@RequestBody Route route) {
+			@RequestBody Route route,
+			@RequestHeader("Authorization") String authorization) {
 
-		List<Route> usersRoutes = routes.findByUserId(user_id);
-
-		Route r1 = null;
-
-		for (Route r : usersRoutes) {
-			if (r.getId() == route_id) {
-				r1 = r;
-			}
-		}
+		User auth_user = users.findByApiKey(authorization);
 
 		Route r = null;
 
-		if (route != null) {
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
 
-			User user = users.findById(user_id);
+		if (auth_user != null && auth_user.getId() == user_id
+				&& !authorization.isEmpty()) {
 
-			r1 = new Route(route.getName(), route.getDescription(), user,
-					route.getRate(), route.isPrivate());
+			List<Route> usersRoutes = routes.findByUserId(user_id);
 
-			List<Stretch> ls = route.getStretches();
+			Route r1 = null;
 
-			r1.setStretches(ls);
-
-			routes.saveAndFlush(r);
-
-			for (Stretch s : ls) {
-				List<Point> pl = s.getPoints();
-				for (Point p : pl) {
-					p.setStretch(s);
-					points.save(p);
+			for (Route r2 : usersRoutes) {
+				if (r2.getId() == route_id) {
+					r1 = r2;
 				}
-
-				s.setRoute(r1);
-				stretches.save(s);
-
 			}
 
-			user.getRoutes().add(r1);
+			r = null;
 
-			users.saveAndFlush(user);
+			if (route != null) {
 
+				User user = users.findById(user_id);
+
+				r1 = new Route(route.getName(), route.getDescription(), user,
+						route.getRate(), route.isPrivate());
+
+				List<Stretch> ls = route.getStretches();
+
+				r1.setStretches(ls);
+
+				routes.saveAndFlush(r);
+
+				for (Stretch s : ls) {
+					List<Point> pl = s.getPoints();
+					for (Point p : pl) {
+						p.setStretch(s);
+						points.save(p);
+					}
+
+					s.setRoute(r1);
+					stretches.save(s);
+
+				}
+
+				user.getRoutes().add(r1);
+
+				users.saveAndFlush(user);
+
+				status = HttpStatus.CREATED;
+
+			}
 		}
 
-		return new ResponseEntity<>(r, HttpStatus.CREATED);
+		return new ResponseEntity<>(r, status);
 	}
 
 	// DELETE /users/{id}/routes/{id}
 	@RequestMapping(value = "/{user_id}/routes/{route_id}", method = RequestMethod.DELETE)
-	public void deleteRouteByIdAndUserId(@PathVariable Long user_id,
-			@PathVariable Long route_id) {
+	public ResponseEntity<Route> deleteRouteByIdAndUserId(
+			@PathVariable Long user_id, @PathVariable Long route_id,
+			@RequestHeader("Authorization") String authorization) {
 
-		List<Route> usersRoutes = routes.findByUserId(user_id);
+		User auth_user = users.findByApiKey(authorization);
 
-		Route route = null;
+		Route r = null;
 
-		for (Route r : usersRoutes) {
-			if (r.getId() == route_id) {
-				route = r;
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
+
+		if (auth_user != null && auth_user.getId() == user_id
+				&& !authorization.isEmpty()) {
+
+			List<Route> usersRoutes = routes.findByUserId(user_id);
+
+			Route route = null;
+
+			for (Route r1 : usersRoutes) {
+				if (r1.getId() == route_id) {
+					route = r1;
+				}
 			}
+
+			if (route != null) {
+				routes.delete(route);
+			}
+
+			status = HttpStatus.CREATED;
 		}
 
-		if (route != null) {
-			routes.delete(route);
-		}
+		return new ResponseEntity<>(r, status);
 
 	}
 
@@ -276,157 +348,212 @@ public class UserRestController {
 	@RequestMapping(value = "/{user_id}/routes/{route_id}/comments", method = RequestMethod.POST)
 	public ResponseEntity<Comment> addNewCommentToRoute(
 			@PathVariable Long user_id, @PathVariable Long route_id,
-			@RequestBody Comment comment) {
+			@RequestBody Comment comment,
+			@RequestHeader("Authorization") String authorization) {
 
-		List<Route> usersRoutes = routes.findByUserId(user_id);
+		User auth_user = users.findByApiKey(authorization);
 
-		Route route = null;
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
 
-		for (Route r : usersRoutes) {
-			if (r.getId() == route_id) {
-				route = r;
+		if (auth_user != null && auth_user.getId() == user_id
+				&& !authorization.isEmpty()) {
+
+			List<Route> usersRoutes = routes.findByUserId(user_id);
+
+			Route route = null;
+
+			for (Route r : usersRoutes) {
+				if (r.getId() == route_id) {
+					route = r;
+				}
 			}
+
+			if (route != null) {
+				User u = users.findById(user_id);
+
+				List<Comment> commentList = route.getComments();
+				comment.setRoute(route);
+				comment.setUser(u);
+				commentList.add(comment);
+				comments.save(commentList);
+
+				List<Comment> userComments = u.getComments();
+				userComments.add(comment);
+				users.saveAndFlush(u);
+
+				route.getComments().add(comment);
+				routes.saveAndFlush(route);
+
+			}
+
+			status = HttpStatus.CREATED;
+
 		}
 
-		if (route != null) {
-			User u = users.findById(user_id);
-
-			List<Comment> commentList = route.getComments();
-			comment.setRoute(route);
-			comment.setUser(u);
-			commentList.add(comment);
-			comments.save(commentList);
-
-			List<Comment> userComments = u.getComments();
-			userComments.add(comment);
-			users.saveAndFlush(u);
-
-			route.getComments().add(comment);
-			routes.saveAndFlush(route);
-
-		}
-
-		return new ResponseEntity<Comment>(comment, HttpStatus.CREATED);
+		return new ResponseEntity<Comment>(comment, status);
 	}
 
 	// PUT /users/{id}/routes/{id}/comments/{id}
 	@RequestMapping(value = "/{user_id}/routes/{route_id}/comments/{comment_id}", method = RequestMethod.PUT)
 	public ResponseEntity<Comment> modifyCommentInRoute(
 			@PathVariable Long user_id, @PathVariable Long route_id,
-			@PathVariable Long comment_id, @RequestBody Comment comment) {
+			@PathVariable Long comment_id, @RequestBody Comment comment,
+			@RequestHeader("Authorization") String authorization) {
 
-		List<Route> usersRoutes = routes.findByUserId(user_id);
+		User auth_user = users.findByApiKey(authorization);
 
-		Route route = null;
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
 
-		Comment cmmnt = null;
+		if (auth_user != null && auth_user.getId() == user_id
+				&& !authorization.isEmpty()) {
 
-		for (Route r : usersRoutes) {
-			if (r.getId() == route_id) {
-				route = r;
-				for (Comment c : r.getComments()) {
-					if (c.getId() == comment_id) {
-						cmmnt = c;
+			List<Route> usersRoutes = routes.findByUserId(user_id);
+
+			Route route = null;
+
+			Comment cmmnt = null;
+
+			for (Route r : usersRoutes) {
+				if (r.getId() == route_id) {
+					route = r;
+					for (Comment c : r.getComments()) {
+						if (c.getId() == comment_id) {
+							cmmnt = c;
+						}
 					}
 				}
 			}
+
+			if (cmmnt != null) {
+				User u = users.findById(user_id);
+
+				List<Comment> commentList = route.getComments();
+				cmmnt.setRoute(route);
+				cmmnt.setUser(u);
+				cmmnt.setDate(comment.getDate());
+				cmmnt.setDescription(comment.getDescription());
+				commentList.add(comment);
+				comments.save(commentList);
+
+				List<Comment> userComments = u.getComments();
+				userComments.add(comment);
+				users.saveAndFlush(u);
+
+				route.getComments().add(comment);
+				routes.saveAndFlush(route);
+			}
+
+			status = HttpStatus.CREATED;
+
 		}
 
-		if (cmmnt != null) {
-			User u = users.findById(user_id);
-
-			List<Comment> commentList = route.getComments();
-			cmmnt.setRoute(route);
-			cmmnt.setUser(u);
-			cmmnt.setDate(comment.getDate());
-			cmmnt.setDescription(comment.getDescription());
-			commentList.add(comment);
-			comments.save(commentList);
-
-			List<Comment> userComments = u.getComments();
-			userComments.add(comment);
-			users.saveAndFlush(u);
-
-			route.getComments().add(comment);
-			routes.saveAndFlush(route);
-		}
-
-		return new ResponseEntity<Comment>(comment, HttpStatus.CREATED);
+		return new ResponseEntity<Comment>(comment, status);
 	}
 
 	// DELETE /users/{id}/routes/{id}/comments/{id}
 	@RequestMapping(value = "/{user_id}/routes/{route_id}/comments/{comment_id}", method = RequestMethod.DELETE)
-	public void deleteCommentInRoute(@PathVariable Long user_id,
-			@PathVariable Long route_id, @PathVariable Long comment_id) {
+	public ResponseEntity<Comment> deleteCommentInRoute(
+			@PathVariable Long user_id, @PathVariable Long route_id,
+			@PathVariable Long comment_id,
+			@RequestHeader("Authorization") String authorization) {
 
-		List<Route> usersRoutes = routes.findByUserId(user_id);
+		User auth_user = users.findByApiKey(authorization);
 
-		Route route = null;
+		Comment cm = null;
 
-		Comment cmmnt = null;
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
 
-		for (Route r : usersRoutes) {
-			if (r.getId() == route_id) {
-				route = r;
-				for (Comment c : route.getComments()) {
-					if (c.getId() == comment_id) {
-						cmmnt = c;
+		if (auth_user != null && auth_user.getId() == user_id
+				&& !authorization.isEmpty()) {
+
+			List<Route> usersRoutes = routes.findByUserId(user_id);
+
+			Route route = null;
+
+			Comment cmmnt = null;
+
+			for (Route r : usersRoutes) {
+				if (r.getId() == route_id) {
+					route = r;
+					for (Comment c : route.getComments()) {
+						if (c.getId() == comment_id) {
+							cmmnt = c;
+						}
 					}
 				}
 			}
-		}
 
-		if (cmmnt != null) {
-			User u = users.findByCommentsId(comment_id);
-			List<Comment> usersComments = u.getComments();
+			if (cmmnt != null) {
+				User u = users.findByCommentsId(comment_id);
+				List<Comment> usersComments = u.getComments();
 
-			if (usersComments != null) {
+				if (usersComments != null) {
 
-				for (Comment c : usersComments) {
-					if (c.getId() == comment_id) {
-						usersComments.remove(c);
+					for (Comment c : usersComments) {
+						if (c.getId() == comment_id) {
+							usersComments.remove(c);
+						}
 					}
-				}
 
-				u.setComments(usersComments);
+					u.setComments(usersComments);
 
-				users.save(u);
+					users.save(u);
 
-				Route rt = routes.findByCommentsId(comment_id);
-				List<Comment> routeComments = rt.getComments();
+					Route rt = routes.findByCommentsId(comment_id);
+					List<Comment> routeComments = rt.getComments();
 
-				for (Comment rout : routeComments) {
-					if (rout.getId() == comment_id) {
-						routeComments.remove(rout);
+					for (Comment rout : routeComments) {
+						if (rout.getId() == comment_id) {
+							routeComments.remove(rout);
+						}
 					}
+
+					rt.setComments(routeComments);
+
+					routes.save(rt);
+
+					comments.delete(cmmnt);
+
 				}
-
-				rt.setComments(routeComments);
-
-				routes.save(rt);
-
-				comments.delete(cmmnt);
-
 			}
+
+			status = HttpStatus.CREATED;
+
 		}
+
+		return new ResponseEntity<>(cm, status);
 
 	}
 
 	// POST /users/{id}/friends
 	@RequestMapping(value = "/{id}/friends", method = RequestMethod.POST)
-	public ResponseEntity<User> addFriend(@PathVariable Long id, User newFriend) {
+	public ResponseEntity<User> addFriend(@PathVariable Long id,
+			User newFriend, @RequestHeader("Authorization") String authorization) {
 
-		User user = users.findById(id);
+		User auth_user = users.findByApiKey(authorization);
 
-		Friendship fs = new Friendship(newFriend, user);
+		User user = null;
 
-		friendships.save(fs);
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
 
-		user.getFriendships().add(fs);
+		if (auth_user != null && auth_user.getId() == newFriend.getId()
+				&& !authorization.isEmpty()) {
 
-		users.saveAndFlush(user);
+			user = users.findById(id);
 
-		return new ResponseEntity<User>(user, HttpStatus.CREATED);
+			Friendship fs = new Friendship(newFriend, user);
+
+			friendships.save(fs);
+
+			user.getFriendships().add(fs);
+
+			users.saveAndFlush(user);
+			
+			status = HttpStatus.CREATED;
+
+		}
+
+		return new ResponseEntity<User>(user, status);
 	}
 
 	// GET /users/{id}/friends
