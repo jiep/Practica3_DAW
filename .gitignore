@@ -127,3 +127,7 @@ sympy-plots-for-*.tex/
 
 target
 bower_components
+
+*.pdf
+
+*.pdf
