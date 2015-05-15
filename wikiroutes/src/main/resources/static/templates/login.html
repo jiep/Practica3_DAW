@@ -1,23 +1,46 @@
-<md-content layout-padding style="padding: 50px" ng-controller="LoginCtrl">
+
+<div layout="row">
+<div flex="15">
+  </div>
+  <div flex="30">
+	<md-list>
+  		<md-list-item>
+         	<p>Crea tus propias rutas</p>
+  		</md-list-item>
+  		<md-list-item>
+         	<p>Sigue a tus amigos y visita sus rutas</p>
+  		</md-list-item>
+  		<md-list-item>
+         	<p>Comparte tus rutas con tus redes sociales</p>
+  		</md-list-item>
+  		<md-list-item>
+         	<p>¡Diviertete buscando las rutas más interesantes del mundo!</p>
+  		</md-list-item>
+	</md-list>
+	 <md-content> 
+		<a href="#/register"><md-button md-no-ink class="md-accent">Registrarse</md-button></a> 
+	</md-content> 
+  </div>
+  
+  <div flex="30">
+    <md-content layout-padding style="padding: 50px" ng-controller="LoginCtrl"> 
 	<md-content layout-padding>
-		<form name="loginForm">
-			<md-input-container>
-				<label>Nombre de usuario
-				</label>
-				<input md-maxlength="10" required name="username" ng-model="login.username">
-				<div ng-messages="loginForm.username.$error">
-					<div ng-message="required">Campo requerido</div>
-					<div ng-message="md-maxlength">El nombre de usuario es demasiado largo
-					</div>
-				</div>
-			</md-input-container>
-			<md-input-container>
-				<label>Contraseña</label>
-				<input type="password" required name="pass" ng-model="login.pass">
-				<div ng-messages="loginForm.pass.$error">
-					<div ng-message="required">Campo requerido</div>
-				</div>
-			</md-input-container>
+<form name="loginForm">
+	<md-input-container> <label>Nombre de
+		usuario</label> <input md-maxlength="10" required name="username"
+		ng-model="login.username">
+	<div ng-messages="loginForm.username.$error">
+		<div ng-message="required">Campo requerido</div>
+		<div ng-message="md-maxlength">El nombre de usuario es demasiado
+			largo</div>
+	</div>
+	</md-input-container>
+	<md-input-container> <label>Contraseña</label> <input
+		type="password" required name="pass" ng-model="login.pass">
+	<div ng-messages="loginForm.pass.$error">
+		<div ng-message="required">Campo requerido</div>
+	</div>
+	</md-input-container>
 
 			<md-input-container layout-align="right">
 				<a href="#/profile">
@@ -26,11 +49,12 @@
 				</a>
 			</md-input-container>
 
-		</form>
-	</md-content>
-	<md-content>
-		<a href="#/register">
-			<md-button md-no-ink class="md-accent">Registrarse</md-button>
-		</a>
-	</md-content>
+
+</form>
+</md-content> 
 </md-content>
+  </div>
+  <div flex="15">
+  </div>
+</div>
+
