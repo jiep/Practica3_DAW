@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +42,7 @@ public class UserRestController {
 	FriendshipRepository friendships;
 
 	// GET /users
-	@RequestMapping
+	@RequestMapping()
 	public List<User> getUsers() {
 
 		return users.findAll();
@@ -61,18 +62,31 @@ public class UserRestController {
 	}
 
 	// PUT /users/{id}
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers={"Authorization"})
 	public ResponseEntity<User> modifyUser(@PathVariable Long id,
-			@RequestBody User user) {
-		User updatedUser = users.findById(id);
-
-		updatedUser.setUserName(user.getUserName());
-		updatedUser.setEmail(user.getEmail());
-		updatedUser.setPass(HashPassword.generateHashPassword(user.getPass()));
-		updatedUser.setActivatedNotifications(user.isActivatedNotifications());
-
-		User u = users.save(updatedUser);
-		return new ResponseEntity<>(u, HttpStatus.CREATED);
+			@RequestBody User user, @RequestHeader("Authorization") String authorization) {
+		
+		User auth_user = users.findByApiKey(authorization);
+		
+		User u = null;
+		
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
+				
+		if(auth_user != null && auth_user.getId() == id && !authorization.isEmpty()){
+		
+			User updatedUser = users.findById(id);
+	
+			updatedUser.setUserName(user.getUserName());
+			updatedUser.setEmail(user.getEmail());
+			updatedUser.setPass(HashPassword.generateHashPassword(user.getPass()));
+			updatedUser.setActivatedNotifications(user.isActivatedNotifications());
+	
+			u = users.save(updatedUser);
+			
+			status = HttpStatus.CREATED;
+		
+		}
+		return new ResponseEntity<>(u, status);
 	}
 
 	// GET /users/id
