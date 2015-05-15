@@ -5,7 +5,7 @@
 	<groupId>es.urjc</groupId>
 	<artifactId>wikiroutes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>wikiroutes</name>
 	<url>http://maven.apache.org</url>
@@ -18,7 +18,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<start-class>api.wikiroutes.Application</start-class>
 	</properties>
 
@@ -45,8 +45,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		<dependency>
- 			<groupId>com.h2database</groupId>
- 			<artifactId>h2</artifactId>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
