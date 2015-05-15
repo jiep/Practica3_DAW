@@ -1,12 +1,11 @@
 <md-content layout-padding style="padding: 50px">
 
-  <div layout="row" ng-controller="MapCtrl">
-    <div flex>
-      <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds" events="map.events">
-              <ui-gmap-polyline path="polyline.path" stroke="polyline.stroke" visible='polyline.visible'
-                        geodesic='polyline.geodesic' fit="false" editable="polyline.editable" draggable="polyline.draggable" icons='polyline.icons' events="polyline.events"></ui-gmap-polyline>
-          </ui-gmap-google-map>
-      </div>
-  </div>
+	<div layout="row" ng-controller="MapCtrl">
+		<div flex>
+			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds" events="map.events">
+				<ui-gmap-polyline path="polyline.path" stroke="polyline.stroke" visible='polyline.visible' geodesic='polyline.geodesic' fit="false" editable="polyline.editable" draggable="polyline.draggable" icons='polyline.icons' events="polyline.events"></ui-gmap-polyline>
+			</ui-gmap-google-map>
+		</div>
+	</div>
 
 </md-content>

@@ -19,6 +19,8 @@ app.config(function($routeProvider) {
 		templateUrl : "/templates/profile.html"
 	}).when("/search", {
 		templateUrl : "/templates/search.html"
+	}).when("/developers", {
+		templateUrl : "/templates/developers.html"
 	}).otherwise({
 		redirectTo : "/"
 	})

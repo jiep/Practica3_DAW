@@ -1,56 +1,54 @@
-<md-content layout-padding style="padding: 50px"
-	ng-controller="HomeCtrl">
+<md-content layout-padding style="padding: 50px" ng-controller="HomeCtrl">
 
 
 
-<div layout="row">
-	<div md-container flex="100">
-		<md-toolbar>
-		<div class="md-toolbar-tools">
-			<h2 class="md-flex">
+	<div layout="row">
+		<div md-container flex="100">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<h2 class="md-flex">
 				<strong>Nuestras rutas más valoradas</strong>
 			</h2>
-		</div>
-		</md-toolbar>
+				</div>
+			</md-toolbar>
 
-		<div ng-repeat="route in routes">
-			<md-list-item class="md-3-line">
-			<div layout="row">
-				<div flex="20">
-					<md-card class="card"> <img ng-src="/img/nature4.jpg"
-						class="md-avatar" alt="{{item.who}}" /> </md-card>
-				</div>
-				<div flex="60">
-					<div class="md-list-item-text">
-						<h3>{{route.name}}</h3>
-						<h4>{{route.description}}</h4>
-						<p>{{route.user}}</p>
-					</div>
-				</div>
-				<div flex="20">
-					<div layout="column">
-						<div>
-							<span><ng-md-icon icon="star" size="36"
+			<div ng-repeat="route in routes">
+				<md-list-item class="md-3-line">
+					<div layout="row">
+						<div flex="20">
+							<md-card class="card"> <img ng-src="/img/nature4.jpg" class="md-avatar" alt="{{item.who}}" /> </md-card>
+						</div>
+						<div flex="60">
+							<div class="md-list-item-text">
+								<h3>{{route.name}}</h3>
+								<h4>{{route.description}}</h4>
+								<p>{{route.user}}</p>
+							</div>
+						</div>
+						<div flex="20">
+							<div layout="column">
+								<div>
+									<span><ng-md-icon icon="star" size="36"
 									style="fill:#e9dba5"></ng-md-icon></span><span><ng-md-icon
 									icon="star" size="36" style="fill:#e9dba5"></ng-md-icon></span><span><ng-md-icon
 									icon="star" size="36" style="fill:#e9dba5"></ng-md-icon></span><span><ng-md-icon
 									icon="star" size="36" style="fill:#e9dba5"></ng-md-icon></span><span><ng-md-icon
 									icon="star" size="36" style="fill:#e9dba5"></ng-md-icon></span>
-						</div>
+								</div>
 
-						<div>
-							<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
+								<div>
+									<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</md-list-item>
+				<md-divider></md-divider>
+
+				</md-toolbar>
 			</div>
-			</md-list-item>
-			<md-divider></md-divider>
-
-			</md-toolbar>
 		</div>
-	</div>
 
-</div>
+	</div>
 
 </md-content>

@@ -1,27 +1,36 @@
-<md-content layout-padding style="padding: 50px"
-	ng-controller="LoginCtrl"> <md-content layout-padding>
-<form name="loginForm">
-	<md-input-container> <label>Nombre de
-		usuario</label> <input md-maxlength="10" required name="username"
-		ng-model="login.username">
-	<div ng-messages="loginForm.username.$error">
-		<div ng-message="required">Campo requerido</div>
-		<div ng-message="md-maxlength">El nombre de usuario es demasiado
-			largo</div>
-	</div>
-	</md-input-container>
-	<md-input-container> <label>Contraseña</label> <input
-		type="password" required name="pass" ng-model="login.pass">
-	<div ng-messages="loginForm.pass.$error">
-		<div ng-message="required">Campo requerido</div>
-	</div>
-	</md-input-container>
+<md-content layout-padding style="padding: 50px" ng-controller="LoginCtrl">
+	<md-content layout-padding>
+		<form name="loginForm">
+			<md-input-container>
+				<label>Nombre de usuario
+				</label>
+				<input md-maxlength="10" required name="username" ng-model="login.username">
+				<div ng-messages="loginForm.username.$error">
+					<div ng-message="required">Campo requerido</div>
+					<div ng-message="md-maxlength">El nombre de usuario es demasiado largo
+					</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Contraseña</label>
+				<input type="password" required name="pass" ng-model="login.pass">
+				<div ng-messages="loginForm.pass.$error">
+					<div ng-message="required">Campo requerido</div>
+				</div>
+			</md-input-container>
 
-	<md-input-container layout-align="right"> <a
-		href="#/profile"> <md-button md-no-ink class="md-primary">Iniciar
-		sesión</md-button>
-	</a> </md-input-container>
+			<md-input-container layout-align="right">
+				<a href="#/profile">
+					<md-button md-no-ink class="md-primary">Iniciar sesión
+					</md-button>
+				</a>
+			</md-input-container>
 
-</form>
-</md-content> <md-content> <a href="#/register"><md-button md-no-ink
-		class="md-accent">Registrarse</md-button></a> </md-content> </md-content>
+		</form>
+	</md-content>
+	<md-content>
+		<a href="#/register">
+			<md-button md-no-ink class="md-accent">Registrarse</md-button>
+		</a>
+	</md-content>
+</md-content>
