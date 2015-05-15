@@ -1,0 +1,51 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[spanish,es-nodecimaldot,es-lcroman,es-tabla,es-noshorthands]{babel}
+\usepackage[left=3cm,right=2cm, bottom=4cm]{geometry}
+\usepackage{subfigure}
+
+\setsansfont[Ligatures=TeX]{texgyreadventor}
+\setmainfont[Ligatures=TeX]{texgyrepagella}
+
+\input{portada}
+
+\newcommand*{\autores}{
+\begin{tabular}{r l}
+GII+GIS: & Germán Alonso Azcutia \\
+GIS:		 & Carlos Vázquez Sánchez \\
+GIS+MAT: & José Ignacio Escribano Pablos
+\end{tabular}
+}
+
+\begin{document}
+
+\pagenumbering{alph}
+\setcounter{page}{1}
+
+\portada{Práctica 3}{Diseño de Aplicaciones Web}{Diseño e implementación de una \\ aplicación web de rutas en AngularJS y Spring}{\autores}{Móstoles}
+
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{Introducción}
+
+\section{Diagramas UML}
+
+\subsection{Diagramas UML del backend}
+
+\subsection{Diagramas UML del frontend}
+
+\section{Recorrido por la aplicación}
+
+\section{Conclusiones}
+
+
+\end{document}
