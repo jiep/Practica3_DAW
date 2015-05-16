@@ -1,5 +1,4 @@
 <md-content layout-padding style="padding: 50px">
-	<form name="editRoute">
 	<md-input-container>
 		<label>Nombre de usuario</label>
 		<input md-maxlength="10" required name="username" ng-model="login.username" readonly>
@@ -7,10 +6,11 @@
 	<br>
 	<br>
 	<md-input-container>		
-		<div layout="row" ng-controller="MapCtrl">
+		<div layout="row" ng-controller="MapViewCtrl">
 		<div flex>
 			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds" events="map.events">
-				<ui-gmap-polyline path="polyline.path" stroke="polyline.stroke" visible='polyline.visible' geodesic='polyline.geodesic' fit="false" draggable="polyline.draggable" icons='polyline.icons' events="polyline.events"></ui-gmap-polyline>
+				<ui-gmap-polyline path="polyline.path" stroke="polyline.stroke" visible='polyline.visible' geodesic='polyline.geodesic' fit="false" editable="polyline.editable" draggable="polyline.draggable" icons='polyline.icons' events="polyline.events">
+				</ui-gmap-polyline>
 			</ui-gmap-google-map>
 		</div>
 		</div>
@@ -22,6 +22,6 @@
 		<textarea md-maxlength="400" required name="description"  ng-model="string" readonly>
 		</textarea>
 	</md-input-container>
-	</form>
+
 </md-content>
-	<div ng-include="'templates/footer.html'"></div>
+<div ng-include="'templates/footer.html'"></div>
