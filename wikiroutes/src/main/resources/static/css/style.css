@@ -27,10 +27,19 @@ ng-md-icon * {
 	left: 0;
 	top: 0;
 	width: 100%;
+	z-index: 5;
 }
 
 #eslogan {
-	height: 90%;
-	width: 100%;
+	width: 50%;
+	margin: 0 auto 0 auto;
+	padding-bottom: 50px;
 }
 
+#footer {
+	min-height: 5rem;
+}
+
+#pequeño {
+	height: 300px;
+}
