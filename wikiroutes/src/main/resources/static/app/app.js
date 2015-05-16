@@ -146,6 +146,38 @@ app.controller('MapCtrl', function($scope) {
 	};
 });
 
+app.controller('MapViewCtrl', function($scope) {
+
+	$scope.map = {
+		center : {
+			latitude : 40.1451,
+			longitude : -99.6680
+		},
+		zoom : 4,
+		bounds : {},
+		
+	};
+	$scope.polyline = {
+		id : 1,
+		path : [],
+		stroke : {
+			color : '#6060FB',
+			weight : 3
+		},
+		editable : false,
+		draggable : false,
+		visible : true,
+		icons : [ {
+			icon : {
+				path : google.maps.SymbolPath.FORWARD_OPEN_ARROW
+			},
+			offset : '25px',
+			repeat : '50px'
+		} ]
+	};
+});
+
+
 app.controller("HomeCtrl", function($scope) {
 	$scope.routes = [ {
 		"id" : null,
