@@ -21,6 +21,8 @@ app.config(function($routeProvider) {
 		templateUrl : "/templates/search.html"
 	}).when("/developers", {
 		templateUrl : "/templates/developers.html"
+	}).when("/viewRoute", {
+		templateUrl : "/templates/viewRoute.html"		
 	}).otherwise({
 		redirectTo : "/"
 	})
