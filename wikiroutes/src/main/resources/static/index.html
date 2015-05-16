@@ -12,77 +12,70 @@
 
 </head>
 <body layout="column" ng-controller="NavCtrl as ctrl">
-	<div id="cabecera">
-		<md-toolbar layout="row">
-		<div flex="10">
-			<h1 class="md-toolbar-tools" layout-align="left">
-				<a href="#/"><img
-					src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Wikipedia's_W.svg/50px-Wikipedia's_W.svg.png" /></a>
-			</h1>
-		</div>
-		<div flex="10">
-			<h1 class="md-toolbar-tools">Wikiroutes</h1>
-		</div>
-		<div flex="60">
-			<h1 class="md-toolbar-tools">
-				<ng-md-icon icon="search" size="36"></ng-md-icon>
-				<md-autocomplete flex md-no-cache="ctrl.noCache"
-					md-selected-item="ctrl.selectedItem"
-					md-search-text="ctrl.searchText"
-					md-items="item in ctrl.querySearch(ctrl.searchText)"
-					md-item-text="item.display" placeholder="Buscar rutas"
-					md-floating-label="Favorite state"> <span
-					md-highlight-text="ctrl.searchText">{{item.display}}</span> </md-autocomplete>
-			</h1>
-		</div>
-		<div flex="20" layout-align="right">
-			<h1 class="md-toolbar-tools">
-				<a href="#/login"> <ng-md-icon icon="account_box" size="36"></ng-md-icon>
-					<span>Iniciar sesión</span>
-				</a>
-			</h1>
-		</div>
-
-		</md-toolbar>
-
-		<md-divider></md-divider>
-
-		<md-toolbar layout="row">
-		<div flex=30></div>
-
-		<div flex offset=40 layout="row">
-
-			<div flex=25>
-				<a href="#/"><img src="img/icono_andar.png"></a>
-			</div>
-
-			<div flex=25>
-				<a href="#/"><img src="img/icono_bici.png"></a>
-			</div>
-
-			<div flex=25>
-				<a href="#/"><img src="img/icono_caballo.png"></a>
-			</div>
-
-			<div flex=25>
-				<a href="#/"><img src="img/icono_barco.ico"></a>
-			</div>
-		</div>
-		<div flex=30></div>
-
-		</md-toolbar>
+	<md-toolbar id="cabecera" layout=row>
+	<div flex="10">
+		<h1 class="md-toolbar-tools" layout-align="left">
+			<a href="#/"><img
+				src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Wikipedia's_W.svg/50px-Wikipedia's_W.svg.png" /></a>
+		</h1>
 	</div>
+	<div flex="10">
+		<h1 class="md-toolbar-tools">Wikiroutes</h1>
+	</div>
+	<div flex="60">
+		<h1 class="md-toolbar-tools">
+			<ng-md-icon icon="search" size="36"></ng-md-icon>
+			<md-autocomplete flex md-no-cache="ctrl.noCache"
+				md-selected-item="ctrl.selectedItem"
+				md-search-text="ctrl.searchText"
+				md-items="item in ctrl.querySearch(ctrl.searchText)"
+				md-item-text="item.display" placeholder="Buscar rutas"
+				md-floating-label="Favorite state"> <span
+				md-highlight-text="ctrl.searchText">{{item.display}}</span> </md-autocomplete>
+		</h1>
+	</div>
+	<div flex="20" layout-align="right">
+		<h1 class="md-toolbar-tools">
+			<a href="#/login"> <ng-md-icon icon="account_box" size="36"></ng-md-icon>
+				<span>Iniciar sesión</span>
+			</a>
+		</h1>
+	</div>
+
+	</md-toolbar>
+
+	<md-divider></md-divider>
+
+	<md-toolbar layout="row">
+	<div flex=30></div>
+
+	<div flex offset=40 layout="row">
+
+		<div flex=25>
+			<a href="#/"><img src="img/icono_andar.png"></a>
+		</div>
+
+		<div flex=25>
+			<a href="#/"><img src="img/icono_bici.png"></a>
+		</div>
+
+		<div flex=25>
+			<a href="#/"><img src="img/icono_caballo.png"></a>
+		</div>
+
+		<div flex=25>
+			<a href="#/"><img src="img/icono_barco.ico"></a>
+		</div>
+	</div>
+	<div flex=30></div>
+
+	</md-toolbar>
+	</md-toolbar>
 
 	<div id="eslogan">
-		<div flex="row">
-			<h1>Aqui va el lema</h1>
-		
-		</div>
-		<div fle="row">
-			<h1>Aqui va el carrusel</h1>
-		</div>
+		<img id="fotoEslogan"src="img/ruta_noche.jpg" width=100% height=100%>
 	</div>
-	
+
 
 	<div ng-view></div>
 
@@ -90,7 +83,7 @@
 
 
 	<div ng-include="'templates/footer.html'"></div>
-	
+
 
 
 	<!-- Angular Material Dependencies -->

@@ -25,7 +25,16 @@ ng-md-icon * {
 
 #cabecera {
 	left: 0;
-	position: fixed;
 	top: 0;
 	width: 100%;
+}
+
+#eslogan {
+	height: 900px;
+	width: 100%;
+}
+
+#fotoEslogan {
+	max-width: 100%;
+	max-height: 100%;
 }
