@@ -7,6 +7,22 @@
 \usepackage[spanish,es-nodecimaldot,es-lcroman,es-tabla,es-noshorthands]{babel}
 \usepackage[left=3cm,right=2cm, bottom=4cm]{geometry}
 \usepackage{subfigure}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{color}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+
+\definecolor{PUTCOLOR}{RGB}{46,74,255}
+\definecolor{POSTCOLOR}{RGB}{187,136,0}
+\definecolor{GETCOLOR}{RGB}{76,158,64}
+\definecolor{DELETECOLOR}{RGB}{181,32,0}
+
+\newcommand{\GET}{\colorbox{GETCOLOR}{GET}}
+\newcommand{\POST}{\colorbox{POSTCOLOR}{POST}}
+\newcommand{\PUT}{\colorbox{PUTCOLOR}{PUT}}
+\newcommand{\DELETE}{\colorbox{DELETECOLOR}{DELETE}}
 
 \setsansfont[Ligatures=TeX]{texgyreadventor}
 \setmainfont[Ligatures=TeX]{texgyrepagella}
@@ -26,7 +42,7 @@ GIS+MAT: & José Ignacio Escribano Pablos
 \pagenumbering{alph}
 \setcounter{page}{1}
 
-\portada{Práctica 3}{Diseño de Aplicaciones Web}{Diseño e implementación de una \\ aplicación web de rutas en AngularJS y Spring}{\autores}{Móstoles}
+\portada{Práctica 3}{Diseño de Aplicaciones Web}{Diseño e implementación de una  aplicación web \\ de rutas en AngularJS y Spring MVC}{\autores}{Móstoles}
 
 \tableofcontents
 \thispagestyle{empty}
@@ -37,6 +53,12 @@ GIS+MAT: & José Ignacio Escribano Pablos
 
 \section{Introducción}
 
+Para esta práctica, hemos decidido diseñar e implementar una aplicación que permita a sus usuarios ver, añadir rutas, de distintos tipos como senderismo, a caballo, a vela, etc. La aplicación es similar a Wikiloc.
+
+\textcolor{red}{Añadir que tenemos aplicación de móvil en Google Play, y la API REST está desplegada en AWS}
+
+\section{Arquitectura del sistema}
+
 \section{Diagramas UML}
 
 \subsection{Diagramas UML del backend}
@@ -45,7 +67,61 @@ GIS+MAT: & José Ignacio Escribano Pablos
 
 \section{Recorrido por la aplicación}
 
+\subsection{Aplicación de escritorio}
+
+\subsection{Aplicación móvil}
+
 \section{Conclusiones}
 
+\appendix
+\section{Diseño de la API REST}
+
+\begin{longtable}[c]{@{}cllC{6cm}@{}}
+\toprule
+ID & URL & Método & Descripción\tabularnewline
+\midrule
+\endhead
+ 1 & /users & \GET & Muestra  todos los
+usuarios\tabularnewline
+\hline
+ 2 & /users/:id & \GET & Muestra información del
+usuario :id\tabularnewline \hline
+ 3 & /users/:id/routes & \GET & Muestra todas las
+rutas del usuario :id\tabularnewline \hline
+ 4 & /users/:id/friends & \GET & Muestra los amigos
+del usuario :id\tabularnewline \hline
+ 5 & /users/:id/friends/routes & \GET & Muestra
+todas las rutas de los amigos del usuario :id\tabularnewline \hline
+ 6 & /users/:id/routes/:id & \PUT & Actualiza la
+ruta :id del usuario :id\tabularnewline \hline
+ 7 & /users/:id/ & \DELETE & Borra el usuario
+:id\tabularnewline \hline
+ 8 & /users/:id/routes/:id & \DELETE & Borra la
+ruta :id del usuario :id\tabularnewline \hline
+ 9 & /users/:id & \PUT & Actualiza el usuario
+:id\tabularnewline \hline
+ 10 & /routes & \GET & Muestra todas las
+rutas\tabularnewline \hline
+ 11 & /users/ & \POST & Añade un nuevo
+usuario\tabularnewline \hline
+ 12 & /users/:id/routes & \POST & Añade una nueva
+ruta al usuario :id\tabularnewline \hline
+ 13 & /users/:id/comments & \GET & Muestra todos
+los comentarios del usuario :id\tabularnewline \hline
+ 14 & /users/:id/routes/:id/comments & \GET &
+Muestra todos los comentarios de la ruta :id del usuario
+:id\tabularnewline \hline
+ 15 & /users/:id/routes/:id/comments & \POST &
+Añade un nuevo comentario a la ruta :id del usuario :id\tabularnewline \hline
+ 16 & /users/:id/routes/:id/comments/:id & \DELETE
+& Borra el comentario :id del usuario :id en la ruta :id\tabularnewline \hline
+ 17 & /users/:id/routes/:id/comments/:id & \PUT &
+Modifica el comentario :id del usuario :id en la ruta :id\tabularnewline \hline
+ 18 & /users/:id/routes/:id & \GET & Muestra
+información de la ruta :id del usuario :id\tabularnewline \hline
+ 19 & /users/:id/friends & \POST & Añade un nuevo
+amigo al usuario :id\tabularnewline
+\bottomrule
+\end{longtable}
 
 \end{document}
