@@ -30,7 +30,15 @@ ng-md-icon * {
 }
 
 #eslogan {
-	height: 90%;
-	width: 100%;
+	width: 50%;
+	margin: 0 auto 0 auto;
+	padding-bottom:50px;
 }
 
+#footer {
+	min-height: 5rem;
+}
+
+#pequeño{
+	height:300px;
+}
