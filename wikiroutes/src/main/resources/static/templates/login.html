@@ -1,9 +1,13 @@
-
+<md-content layout-padding style="padding: 50px" ng-controller="LoginCtrl"> 
 <div layout="row">
 <div flex="15">
   </div>
   <div flex="30">
+ 
 	<md-list>
+  		<md-list-item>
+         	<h3 class="md-title">¿No tienes cuenta? ¡Registrate!</h3>
+  		</md-list-item>
   		<md-list-item>
          	<p>Crea tus propias rutas</p>
   		</md-list-item>
@@ -19,11 +23,12 @@
 	</md-list>
 	 <md-content> 
 		<a href="#/register"><md-button md-no-ink class="md-accent">Registrarse</md-button></a> 
-	</md-content> 
+  </md-content> 
   </div>
-  
+  <div flex="5">
+  </div>
   <div flex="30">
-    <md-content layout-padding style="padding: 50px" ng-controller="LoginCtrl"> 
+     <h3 class="md-title">Miembros de WikiRoute</h3>
 	<md-content layout-padding>
 <form name="loginForm">
 	<md-input-container> <label>Nombre de
@@ -48,13 +53,10 @@
 					</md-button>
 				</a>
 			</md-input-container>
-
-
 </form>
 </md-content> 
-</md-content>
   </div>
-  <div flex="15">
+  <div flex="10">
   </div>
 </div>
-
+</md-content>
