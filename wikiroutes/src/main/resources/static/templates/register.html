@@ -1,14 +1,14 @@
-<md-content layout-padding style="padding: 50px" ng-controller="LoginCtrl">
+<md-content layout-padding style="padding: 50px" ng-controller="RegisterCtrl">
 <div layout="row">
 <div flex="33">
 </div>
 <div flex="33">
 
 	<md-content layout-padding>
-		<form name="loginForm">
+		<form name="loginForm" ng-submit="register(login)">
 			<md-input-container>
 				<label>Nombre de usuario</label>
-				<input md-maxlength="10" required name="username" ng-model="login.username">
+				<input md-maxlength="10" required name="username" ng-model="login.userName">
 				<div ng-messages="loginForm.username.$error">
 					<div ng-message="required">Campo requerido</div>
 					<div ng-message="md-maxlength">El nombre de usuario es demasiado largo</div>
@@ -30,7 +30,7 @@
 				</div>
 			</md-input-container>
 			<md-input-container>
-				<md-checkbox class="md-primary" ng-model="login.notifications" name="notifications" aria-label="notificaciones">
+				<md-checkbox class="md-primary" ng-model="login.activatedNotifications" name="activatedNotifications" aria-label="notificaciones">
 					Quiero recibir notificaciones al correo electrónico {{login.email}} de parte de mis amigos
 				</md-checkbox>
 			</md-input-container>

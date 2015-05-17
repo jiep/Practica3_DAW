@@ -1,5 +1,5 @@
 var app = angular.module('WikiroutesApp', [ 'ngMaterial', 'uiGmapgoogle-maps',
-		'ngMdIcons', 'ngRoute', 'slick', 'ngMessages' ]);
+		'ngMdIcons', 'ngRoute', 'ngResource', 'slick', 'ngMessages', 'wikiroutes.services']);
 
 app.config(function($mdThemingProvider) {
 	$mdThemingProvider.theme('default').primaryPalette('blue-grey')
@@ -268,5 +268,12 @@ app.controller("HomeCtrl", function($scope) {
 });
 
 app.controller("LoginCtrl", function($scope) {
+	
+});
 
+app.controller("RegisterCtrl", function($scope, User, $location){
+	$scope.register = function(new_user){
+		console.log(new_user);
+		console.log(User.add(new_user));
+	};
 });
