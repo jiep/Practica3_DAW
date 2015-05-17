@@ -273,7 +273,7 @@ app.controller("LoginCtrl", function($scope) {
 
 app.controller("RegisterCtrl", function($scope, User, $location){
 	$scope.register = function(new_user){
-		console.log(new_user);
-		console.log(User.add(new_user));
+		console.log(User.register(new_user));
+		$location.path("/");
 	};
 });
