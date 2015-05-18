@@ -98,7 +98,7 @@ function NavCtrl($timeout, $q, $log) {
 	;
 };
 
-app.controller('MapCtrl', function($scope) {
+app.controller('MapCtrl', function($scope, $rootScope, Route, $location) {
 	
 	$scope.route = {};
 
@@ -152,8 +152,8 @@ app.controller('MapCtrl', function($scope) {
 		} ]
 	};
 	
-	function cRoute(){
-		var route = {name : {}, description: {}, user : {}, type: {}, isPrivate : false, stretches: []};
+	function setRoute(){
+		var route = {name : "", description: "", user : {}, type: {}, isPrivate : false, stretches: []};
 		for(var i =0; i < $scope.polyline.path.length - 1; i++){
 			var p1 = $scope.polyline.path[i];
 			var p2 = $scope.polyline.path[i+1];
@@ -165,8 +165,16 @@ app.controller('MapCtrl', function($scope) {
 	}
 	
 	$scope.createRoute = function(route){
-		$scope.route = cRoute();
-		console.log($scope.route);
+		$scope.route = setRoute();
+		$scope.route.name = route.name;
+		$scope.route.description = route.description;
+		$scope.route.isPrivate = route.isPrivate;
+		$scope.route.user = $rootScope.user;
+		var newroute = new Route($scope.route).$save({id : $rootScope.user.id}).then(function(r){
+			$rootScope.user.routes.push(r);
+			$location.path("/profile");
+
+		});
 	}
 });
 
@@ -297,6 +305,7 @@ app.controller("LoginCtrl", function($scope, $rootScope) {
 
 app.controller("RegisterCtrl", function($scope, Register, $location, $rootScope){
 	$scope.register = function(new_user){
+		console.log(new_user);
 		newuser = new Register(new_user);
 		newuser.$save().then(function(user){
 		$scope.user = user;
