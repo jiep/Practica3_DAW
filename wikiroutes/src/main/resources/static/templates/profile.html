@@ -1,11 +1,11 @@
 <md-content layout-padding style="padding: 50px"
-	ng-controller="HomeCtrl">
+	ng-controller="ProfileCtrl">
 <div layout="row">
 	<div md-container flex="30">
 		<div layout="column">
 			<div flex="60">
 				<div class="md-list-item-text">
-					<h3>NOMBRE USUARIO</h3>
+					<h3>{{user.userName}}</h3>
 				</div>
 			</div>
 			<div flex="40">
@@ -18,7 +18,7 @@
 	<div md-container flex="70">
 		<div layout="column">
 			<div layout="row" layout-align="end center">
-				<a href="#/editRoute"> <md-button class="md-raised md-primary"
+				<a href="/editRoute"> <md-button class="md-raised md-primary"
 						layout-align="right">
 					<h3>Añadir ruta</h3>
 					</md-button>
@@ -44,7 +44,7 @@
 								class="md-avatar" alt="{{item.who}}" /> </md-card>
 						</div>
 						<div flex="60">
-							<div class="md-list-item-text">
+							<div class="md-list-item-text" ng-repeat="route in user.routes">
 								<h3>{{route.name}}</h3>
 								<h4>{{route.description}}</h4>
 								<p>{{route.user}}</p>

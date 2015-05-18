@@ -28,6 +28,10 @@ app.config(function($routeProvider) {
 	})
 });
 
+app.config(function($locationProvider){
+	$locationProvider.html5Mode(true);
+});
+
 app.controller('NavCtrl', NavCtrl);
 function NavCtrl($timeout, $q, $log) {
 
@@ -95,11 +99,13 @@ function NavCtrl($timeout, $q, $log) {
 };
 
 app.controller('MapCtrl', function($scope) {
+	
+	$scope.route = {};
 
 	$scope.map = {
 		center : {
-			latitude : 40.1451,
-			longitude : -99.6680
+			latitude : 40.000,
+			longitude : -3.000
 		},
 		zoom : 4,
 		bounds : {},
@@ -110,6 +116,7 @@ app.controller('MapCtrl', function($scope) {
 						latitude : originalEventArgs[0].latLng.A,
 						longitude : originalEventArgs[0].latLng.F
 					});
+					console.log($scope.polyline.path);
 				});
 			}
 		}
@@ -144,6 +151,23 @@ app.controller('MapCtrl', function($scope) {
 			repeat : '50px'
 		} ]
 	};
+	
+	function cRoute(){
+		var route = {name : {}, description: {}, user : {}, type: {}, isPrivate : false, stretches: []};
+		for(var i =0; i < $scope.polyline.path.length - 1; i++){
+			var p1 = $scope.polyline.path[i];
+			var p2 = $scope.polyline.path[i+1];
+			var stretch = {points : [p1, p2]};
+			route.stretches.push(stretch);
+		}
+		
+		return route;
+	}
+	
+	$scope.createRoute = function(route){
+		$scope.route = cRoute();
+		console.log($scope.route);
+	}
 });
 
 app.controller('MapViewCtrl', function($scope) {
@@ -267,13 +291,23 @@ app.controller("HomeCtrl", function($scope) {
 	} ]
 });
 
-app.controller("LoginCtrl", function($scope) {
+app.controller("LoginCtrl", function($scope, $rootScope) {
+	$scope.user = $rootScope.user;
+});
+
+app.controller("RegisterCtrl", function($scope, Register, $location, $rootScope){
+	$scope.register = function(new_user){
+		newuser = new Register(new_user);
+		newuser.$save().then(function(user){
+		$scope.user = user;
+		$rootScope.user = $scope.user;
+		console.log($scope.user);
+		$location.path('/profile');
+		});
+	};
 	
 });
 
-app.controller("RegisterCtrl", function($scope, User, $location){
-	$scope.register = function(new_user){
-		console.log(User.register(new_user));
-		$location.path("/");
-	};
-});
+app.controller("ProfileCtrl", function($rootScope, $scope){
+	$scope.user = $rootScope.user;
+})

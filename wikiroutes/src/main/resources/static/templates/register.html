@@ -5,10 +5,10 @@
 <div flex="33">
 
 	<md-content layout-padding>
-		<form name="loginForm" ng-submit="register(login)">
+		<form name="loginForm" ng-submit="register(new_user)">
 			<md-input-container>
 				<label>Nombre de usuario</label>
-				<input md-maxlength="10" required name="username" ng-model="login.userName">
+				<input md-maxlength="10" required name="username" ng-model="new_user.userName">
 				<div ng-messages="loginForm.username.$error">
 					<div ng-message="required">Campo requerido</div>
 					<div ng-message="md-maxlength">El nombre de usuario es demasiado largo</div>
@@ -16,22 +16,22 @@
 			</md-input-container>
 			<md-input-container>
 				<label>Contraseña</label>
-				<input type="password" required name="pass" ng-model="login.pass">
+				<input type="password" required name="pass" ng-model="new_user.pass">
 				<div ng-messages="loginForm.pass.$error">
 					<div ng-message="required">Campo requerido</div>
 				</div>
 			</md-input-container>
 			<md-input-container>
 				<label>Correo electrónico</label>
-				<input type="email" required name="email" ng-model="login.email">
+				<input type="email" required name="email" ng-model="new_user.email">
 				<div ng-messages="loginForm.email.$error">
 					<div ng-message="required">Campo requerido</div>
 					<div ng-message="email">El correo electrónico es inválido</div>
 				</div>
 			</md-input-container>
 			<md-input-container>
-				<md-checkbox class="md-primary" ng-model="login.activatedNotifications" name="activatedNotifications" aria-label="notificaciones">
-					Quiero recibir notificaciones al correo electrónico {{login.email}} de parte de mis amigos
+				<md-checkbox class="md-primary" ng-model="new_user.activatedNotifications" name="activatedNotifications" aria-label="notificaciones">
+					Quiero recibir notificaciones al correo electrónico {{new_user.email}} de parte de mis amigos
 				</md-checkbox>
 			</md-input-container>
 			<md-input-container layout-align="right">

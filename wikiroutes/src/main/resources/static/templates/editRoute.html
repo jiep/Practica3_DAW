@@ -1,27 +1,38 @@
-<md-content layout-padding style="padding: 50px">
-	<form name="editRoute">
+<md-content layout-padding style="padding: 50px" ng-controller="MapCtrl">
+<form name="editRouteForm" ng-submit="createRoute(route)">
+	<div layout="row" layout-align="end center">
+			 <md-button class="md-raised md-primary"
+				layout-align="right">
+			<h3>Añadir ruta</h3>
+			</md-button>
+		</a>
+	</div>
+	<md-input-container> <label>Nombre de la
+		ruta</label> <input md-maxlength="50" required name="username"
+		ng-model="route.name"> </md-input-container>
+	<md-input-container> <label>Descripción</label> <textarea
+		md-maxlength="400" required name="description"
+		ng-model="route.description">
+		</textarea> </md-input-container>
+	<md-switch ng-model="route.isPrivate"> Configurar la ruta
+	como <strong>{{ route.isPrivate ? 'privada' : 'pública' }}</strong> </md-switch>
+	<br> <br>
 	<md-input-container>
-		<label>Nombre de usuario</label>
-		<input md-maxlength="10" required name="username" ng-model="login.username">
-	</md-input-container>
-	<br>
-	<br>
-	<md-input-container>		
-		<div layout="row" ng-controller="MapCtrl">
+	<div layout="row">
 		<div flex>
-			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds" events="map.events">
-				<ui-gmap-polyline path="polyline.path" stroke="polyline.stroke" visible='polyline.visible' geodesic='polyline.geodesic' fit="false" editable="polyline.editable" draggable="polyline.draggable" icons='polyline.icons' events="polyline.events"></ui-gmap-polyline>
+			<ui-gmap-google-map center="map.center" zoom="map.zoom"
+				draggable="true" options="options" bounds="map.bounds"
+				events="map.events"> <ui-gmap-polyline
+				path="polyline.path" stroke="polyline.stroke"
+				visible='polyline.visible' geodesic='polyline.geodesic' fit="false"
+				editable="polyline.editable" draggable="polyline.draggable"
+				icons='polyline.icons' events="polyline.events"></ui-gmap-polyline>
 			</ui-gmap-google-map>
 		</div>
-		</div>
+	</div>
 	</md-input-container>
-		<br>
-		<br>
-	<md-input-container>
-		<label>Descripción</label>
-		<textarea md-maxlength="400" required name="description"  ng-model="string">
-		</textarea>
-	</md-input-container>
-	</form>
+	<br> <br>
+
+</form>
 </md-content>
-	<div ng-include="'templates/footer.html'"></div>
+<div ng-include="'templates/footer.html'"></div>
