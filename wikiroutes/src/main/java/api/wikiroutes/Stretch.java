@@ -20,20 +20,16 @@ public class Stretch {
 	@Column(name = "stretch_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@OneToMany(mappedBy="stretch", cascade= CascadeType.ALL)
+
+	@OneToMany(mappedBy = "stretch", cascade = CascadeType.ALL)
 	private List<Point> points;
-	
+
 	@Column(name = "order_")
 	private int order;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	private Route route;
-	
-    @JsonManagedReference
-	@OneToMany(mappedBy="stretch", cascade= CascadeType.ALL)
-	private List<Image> images;
 
 	public Stretch() {
 
@@ -70,14 +66,6 @@ public class Stretch {
 
 	public void setPoints(List<Point> points) {
 		this.points = points;
-	}
-
-	public List<Image> getImages() {
-		return images;
-	}
-
-	public void setImages(List<Image> images) {
-		this.images = images;
 	}
 
 }

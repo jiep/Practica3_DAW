@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Route {
@@ -22,6 +23,8 @@ public class Route {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
+	
+	@Column(columnDefinition = "TEXT")
 	private String description;
 
 	@JsonIgnore
@@ -34,10 +37,14 @@ public class Route {
 	private double rate;
 	private boolean isPrivate;
 
-	@OneToMany(mappedBy="route", cascade= CascadeType.ALL)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
+	private List<Image> images;
+
+	@OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
 	private List<Stretch> stretches;
 
-	@OneToMany(mappedBy="route", cascade= CascadeType.ALL)
+	@OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
 	private List<Comment> comments;
 
 	public Route() {
@@ -133,6 +140,14 @@ public class Route {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
 	}
 
 }

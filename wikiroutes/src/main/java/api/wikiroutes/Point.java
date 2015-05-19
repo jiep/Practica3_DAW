@@ -15,30 +15,30 @@ public class Point {
 	@Column(name = "point_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private double latiude;
+	private double latitude;
 	private double longitude;
 	private double altitude;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	private Stretch stretch;
-	
-	public Point(){
-		
+
+	public Point() {
+
 	}
-	
-	public Point(double latitude, double longitude, double altitude){
-		this.latiude = latitude;
+
+	public Point(double latitude, double longitude, double altitude) {
+		this.latitude = latitude;
 		this.longitude = longitude;
 		this.altitude = altitude;
 	}
 
-	public double getLatiude() {
-		return latiude;
+	public double getLatitude() {
+		return latitude;
 	}
 
-	public void setLatiude(double latiude) {
-		this.latiude = latiude;
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
 	}
 
 	public double getLongitude() {

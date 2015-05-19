@@ -1,5 +1,6 @@
 var app = angular.module('WikiroutesApp', [ 'ngMaterial', 'uiGmapgoogle-maps',
-		'ngMdIcons', 'ngRoute', 'ngResource', 'slick', 'ngMessages', 'wikiroutes.services']);
+		'ngMdIcons', 'ngRoute', 'ngResource', 'slick', 'ngMessages',
+		'wikiroutes.services' ]);
 
 app.config(function($mdThemingProvider) {
 	$mdThemingProvider.theme('default').primaryPalette('blue-grey')
@@ -22,13 +23,13 @@ app.config(function($routeProvider) {
 	}).when("/developers", {
 		templateUrl : "/templates/developers.html"
 	}).when("/viewRoute", {
-		templateUrl : "/templates/viewRoute.html"		
+		templateUrl : "/templates/viewRoute.html"
 	}).otherwise({
 		redirectTo : "/"
 	})
 });
 
-app.config(function($locationProvider){
+app.config(function($locationProvider) {
 	$locationProvider.html5Mode(true);
 });
 
@@ -99,7 +100,7 @@ function NavCtrl($timeout, $q, $log) {
 };
 
 app.controller('MapCtrl', function($scope, $rootScope, Route, $location) {
-	
+
 	$scope.route = {};
 
 	$scope.map = {
@@ -116,7 +117,6 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location) {
 						latitude : originalEventArgs[0].latLng.A,
 						longitude : originalEventArgs[0].latLng.F
 					});
-					console.log($scope.polyline.path);
 				});
 			}
 		}
@@ -151,30 +151,61 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location) {
 			repeat : '50px'
 		} ]
 	};
-	
-	function setRoute(){
-		var route = {name : "", description: "", user : {}, type: {}, isPrivate : false, stretches: []};
-		for(var i =0; i < $scope.polyline.path.length - 1; i++){
+
+	function setRoute() {
+		var route = {
+			name : "",
+			description : "",
+			user : {},
+			type : {},
+			isPrivate : false,
+			stretches : []
+		};
+		route.stretches.points = [];
+		for (var i = 0; i < $scope.polyline.path.length - 1; i++) {
 			var p1 = $scope.polyline.path[i];
-			var p2 = $scope.polyline.path[i+1];
-			var stretch = {points : [p1, p2]};
+			var p2 = $scope.polyline.path[i + 1];
+			var stretch = {
+				points : [ {
+					latitude : p1.latitude,
+					longitude : p1.longitude,
+					altitude : 0
+				}, {
+					latitude : p2.latitude,
+					longitude : p2.longitude,
+					altitude : 0
+				} ],
+				order : i + 1
+			};
+
 			route.stretches.push(stretch);
 		}
-		
+
 		return route;
 	}
-	
-	$scope.createRoute = function(route){
+
+	$scope.createRoute = function(route) {
 		$scope.route = setRoute();
 		$scope.route.name = route.name;
 		$scope.route.description = route.description;
 		$scope.route.isPrivate = route.isPrivate;
 		$scope.route.user = $rootScope.user;
-		var newroute = new Route($scope.route).$save({id : $rootScope.user.id}).then(function(r){
-			$rootScope.user.routes.push(r);
-			$location.path("/profile");
+		console.log("identificativo", $scope.route.user);
+
+		var newroute = new Route($scope.route).$save({
+			id : $rootScope.user.id
+		}).then(function(r) {
+			console.log("Usuariosds");
+			$scope.routes = $rootScope.user.routes;
+			$scope.routes.push(r);
+			$rootScope.user.routes = $scope.routes;
+			console.log("Usuario");
+			console.log("Usuario root", $rootScope.user);
 
 		});
+
+		$location.path("/profile");
+
 	}
 });
 
@@ -187,7 +218,7 @@ app.controller('MapViewCtrl', function($scope) {
 		},
 		zoom : 4,
 		bounds : {},
-		
+
 	};
 	$scope.polyline = {
 		id : 1,
@@ -209,7 +240,6 @@ app.controller('MapViewCtrl', function($scope) {
 	};
 });
 
-
 app.controller("HomeCtrl", function($scope) {
 	$scope.routes = [ {
 		"id" : null,
@@ -224,11 +254,11 @@ app.controller("HomeCtrl", function($scope) {
 		"stretches" : [ {
 			"id" : null,
 			"points" : [ {
-				"latiude" : 30.0,
+				"latitude" : 30.0,
 				"longitude" : 40.0,
 				"altitude" : 50.0
 			}, {
-				"latiude" : 10.0,
+				"latitude" : 10.0,
 				"longitude" : 20.0,
 				"altitude" : 30.0
 			} ],
@@ -236,11 +266,11 @@ app.controller("HomeCtrl", function($scope) {
 		}, {
 			"id" : null,
 			"points" : [ {
-				"latiude" : 30.0,
+				"latitude" : 30.0,
 				"longitude" : 40.0,
 				"altitude" : 50.0
 			}, {
-				"latiude" : 10.0,
+				"latitude" : 10.0,
 				"longitude" : 20.0,
 				"altitude" : 30.0
 			} ],
@@ -261,11 +291,11 @@ app.controller("HomeCtrl", function($scope) {
 		"stretches" : [ {
 			"id" : null,
 			"points" : [ {
-				"latiude" : 30.0,
+				"latitude" : 30.0,
 				"longitude" : 40.0,
 				"altitude" : 50.0
 			}, {
-				"latiude" : 10.0,
+				"latitude" : 10.0,
 				"longitude" : 20.0,
 				"altitude" : 30.0
 			} ],
@@ -273,11 +303,11 @@ app.controller("HomeCtrl", function($scope) {
 		}, {
 			"id" : null,
 			"points" : [ {
-				"latiude" : 30.0,
+				"latitude" : 30.0,
 				"longitude" : 40.0,
 				"altitude" : 50.0
 			}, {
-				"latiude" : 10.0,
+				"latitude" : 10.0,
 				"longitude" : 20.0,
 				"altitude" : 30.0
 			} ],
@@ -303,20 +333,25 @@ app.controller("LoginCtrl", function($scope, $rootScope) {
 	$scope.user = $rootScope.user;
 });
 
-app.controller("RegisterCtrl", function($scope, Register, $location, $rootScope){
-	$scope.register = function(new_user){
-		console.log(new_user);
-		newuser = new Register(new_user);
-		newuser.$save().then(function(user){
-		$scope.user = user;
-		$rootScope.user = $scope.user;
-		console.log($scope.user);
-		$location.path('/profile');
-		});
-	};
-	
-});
+app.controller("RegisterCtrl",
+		function($scope, Register, $location, $rootScope) {
+			$scope.register = function(new_user) {
+				newuser = new Register(new_user);
+				newuser.$save().then(function(user) {
+					$scope.user = user;
+					$rootScope.user = $scope.user;
+					$location.path('/profile');
+				});
+			};
 
-app.controller("ProfileCtrl", function($rootScope, $scope){
+		});
+
+app.controller("ProfileCtrl", function($rootScope, $scope) {
+	console.log($rootScope.user.routes);
+	console.log("hola");
+
 	$scope.user = $rootScope.user;
+	$scope.routes = $rootScope.user.routes;
+	console.log("Rutas root", $rootScope.user.routes);
+
 })

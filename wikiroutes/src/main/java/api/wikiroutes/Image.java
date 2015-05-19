@@ -1,6 +1,5 @@
 package api.wikiroutes;
 
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,16 +20,14 @@ public class Image {
 	private String description;
 	private String place;
 	private Date date;
-	
+
 	@JsonBackReference
 	@ManyToOne
-	private Stretch stretch;
-	
-	
+	private Route route;
+
 	public Image() {
 
 	}
-
 
 	public Image(String description, String place, Date date) {
 		this.description = description;
@@ -66,14 +63,16 @@ public class Image {
 		this.date = date;
 	}
 
-
-	public Stretch getStretch() {
-		return stretch;
+	public Route getRoute() {
+		return route;
 	}
 
+	public void setRoute(Route route) {
+		this.route = route;
+	}
 
-	public void setStretch(Stretch stretch) {
-		this.stretch = stretch;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
