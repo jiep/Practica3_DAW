@@ -2,8 +2,10 @@
 	ng-controller="ProfileCtrl">
 <div layout="row">
 	<div flex="70">
-		<div>
-			<h3>{{user.userName}}</h3>
+		<div style='margin: 0 auto 0 auto;'>
+			<h1>
+				<strong>{{user.userName}}</strong>
+			</h1>
 		</div>
 
 	</div>
@@ -20,7 +22,8 @@
 
 
 
-	<md-content layout-padding style="height: 600px;padding: 24px">
+	<md-content layout-padding
+		style="height: 600px;padding: 24px;width:80%;margin: 0 auto 0 auto;">
 
 	<md-toolbar>
 	<div class="md-toolbar-tools">
@@ -31,7 +34,8 @@
 	</md-toolbar>
 
 	<div ng-repeat="route in user.routes">
-		<a href="/"> <md-list-item class="md-3-line">
+		<a href="/" style='text-decoration: none; color: black';> <md-list-item
+				class="md-3-line">
 			<div layout="row">
 				<div flex="20">
 					<md-card class="card"> <img ng-src="/img/nature4.jpg"
@@ -58,7 +62,7 @@
 				</div>
 			</div>
 			</md-list-item>
-		</a>s
+		</a>
 		<md-divider></md-divider>
 
 		</md-toolbar>
