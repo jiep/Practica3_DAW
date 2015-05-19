@@ -13,11 +13,11 @@
 		md-maxlength="400" required name="description"
 		ng-model="route.description">
 		</textarea> </md-input-container>
-	<md-radio-group ng-model="data.group1"> <md-radio-button
-		value="Apple" class="md-primary">A pie</md-radio-button> <md-radio-button
-		value="Banana"> Bicicleta </md-radio-button> <md-radio-button
-		value="Mango">A caballo </md-radio-button> <md-radio-button
-		value="Mango">Barco</md-radio-button></md-radio-group>
+	<md-radio-group ng-model="data.group1" ng-required="true">
+	<md-radio-button value="walk" class="md-primary" required>A
+	pie</md-radio-button> <md-radio-button value="bike" required> Bicicleta
+	</md-radio-button> <md-radio-button value="horse" required>A caballo </md-radio-button> <md-radio-button
+		value="boat" required>Barco</md-radio-button></md-radio-group>
 	<md-switch ng-model="route.isPrivate"> Configurar la ruta
 	como <strong>{{ route.isPrivate ? 'privada' : 'pública' }}</strong> </md-switch>
 	<br> <br>
