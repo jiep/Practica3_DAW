@@ -35,10 +35,10 @@
 			<md-autocomplete flex md-no-cache="ctrl.noCache"
 				md-selected-item="ctrl.selectedItem"
 				md-search-text="ctrl.searchText"
-				md-items="item in ctrl.querySearch(ctrl.searchText)"
-				md-item-text="item.display" placeholder="Buscar rutas"
-				md-floating-label="Favorite state"> <span
-				md-highlight-text="ctrl.searchText">{{item.display}}</span> </md-autocomplete>
+				md-items="route in ctrl.querySearch(ctrl.searchText)"
+				md-item-text="route.name" placeholder="Buscar rutas"
+				md-floating-label="Ruta"> <span
+				md-highlight-text="ctrl.searchText">{{route.name}}</span> </md-autocomplete>
 		</h1>
 	</div>
 	<div flex="20" layout-align="right">
