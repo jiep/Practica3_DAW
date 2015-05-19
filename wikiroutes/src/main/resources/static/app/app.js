@@ -10,7 +10,7 @@ app.config(function($mdThemingProvider) {
 app.config(function($routeProvider) {
 	$routeProvider.when("/", {
 		templateUrl : "/templates/home.html"
-	}).when("/editRoute", {
+	}).when("/editRoute/:id", {
 		templateUrl : "/templates/editRoute.html"
 	}).when("/login", {
 		templateUrl : "/templates/login.html"
@@ -22,7 +22,7 @@ app.config(function($routeProvider) {
 		templateUrl : "/templates/search.html"
 	}).when("/developers", {
 		templateUrl : "/templates/developers.html"
-	}).when("/viewRoute", {
+	}).when("/viewRoute/:id", {
 		templateUrl : "/templates/viewRoute.html"
 	}).otherwise({
 		redirectTo : "/"
@@ -209,8 +209,21 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location) {
 	}
 });
 
-app.controller('MapViewCtrl', function($scope) {
+app.controller('MapViewCtrl', function($scope, Comment, $rootScope) {
+	
 
+		$scope.newcomment = function(new_comment) {
+			newcomment= new Comment(new_comment);
+			newcomment.$save().then(function(comment) {
+				$scope.user.comments.push(comment);
+				$rootScope.user.comments = $scope.user.comments;
+				$scope.comment= ""; 
+			});
+		};
+	
+	
+	
+	
 	$scope.map = {
 		center : {
 			latitude : 40.1451,
@@ -333,6 +346,14 @@ app.controller("LoginCtrl", function($scope, $rootScope) {
 	$scope.user = $rootScope.user;
 });
 
+app.controller("ProfileCtrl", function($rootScope, $scope) {
+	console.log($rootScope.user.routes);
+
+	$scope.user = $rootScope.user;
+	$scope.routes = $rootScope.user.routes;
+
+});
+
 app.controller("RegisterCtrl",
 		function($scope, Register, $location, $rootScope) {
 			$scope.register = function(new_user) {
@@ -346,138 +367,11 @@ app.controller("RegisterCtrl",
 
 		});
 
-app.controller("ProfileCtrl", function($rootScope, $scope) {
-	console.log($rootScope.user.routes);
+
+app.controller("ViewCtrl", function($scope, Comment, $rootScope) {
 	console.log("hola");
-
-	$scope.user = $rootScope.user;
-	$scope.routes = $rootScope.user.routes;
-	console.log("Rutas root", $rootScope.user.routes);
-
-});
-
-app.controller(
-		'IndexController',
-		function IndexController($scope, $timeout) {
-
-			/**
-			 * @property interface
-			 * @type {Object}
-			 */
-			$scope.interface = {};
-
-			/**
-			 * @property uploadCount
-			 * @type {Number}
-			 */
-			$scope.uploadCount = 0;
-
-			/**
-			 * @property success
-			 * @type {Boolean}
-			 */
-			$scope.success = false;
-
-			/**
-			 * @property error
-			 * @type {Boolean}
-			 */
-			$scope.error = false;
-
-			// Listen for when the interface has been configured.
-			$scope.$on('$dropletReady', function whenDropletReady() {
-
-				$scope.interface.allowedExtensions([ 'png', 'jpg', 'bmp',
-						'gif', 'svg', 'torrent' ]);
-				$scope.interface.setRequestUrl('upload.html');
-				$scope.interface.defineHTTPSuccess([ /2.{2}/ ]);
-				$scope.interface.useArray(false);
-
-			});
-
-			// Listen for when the files have been successfully uploaded.
-			$scope.$on('$dropletSuccess', function onDropletSuccess(event,
-					response, files) {
-
-				$scope.uploadCount = files.length;
-				$scope.success = true;
-				console.log(response, files);
-
-				$timeout(function timeout() {
-					$scope.success = false;
-				}, 5000);
-
-			});
-
-			// Listen for when the files have failed to upload.
-			$scope.$on('$dropletError',
-					function onDropletError(event, response) {
-
-						$scope.error = true;
-						console.log(response);
-
-						$timeout(function timeout() {
-							$scope.error = false;
-						}, 5000);
-
-					});
-
-		}).directive('progressbar', function ProgressbarDirective() {
-
-	return {
-
-		/**
-		 * @property restrict
-		 * @type {String}
-		 */
-		restrict : 'A',
-
-		/**
-		 * @property scope
-		 * @type {Object}
-		 */
-		scope : {
-			model : '=ngModel'
-		},
-
-		/**
-		 * @property ngModel
-		 * @type {String}
-		 */
-		require : 'ngModel',
-
-		/**
-		 * @method link
-		 * @param scope
-		 *            {Object}
-		 * @param element
-		 *            {Object}
-		 * @return {void}
-		 */
-		link : function link(scope, element) {
-
-			var progressBar = new ProgressBar.Path(element[0], {
-				strokeWidth : 2
-			});
-
-			scope.$watch('model', function() {
-
-				progressBar.animate(scope.model / 100, {
-					duration : 1000
-				});
-
-			});
-
-			scope.$on('$dropletSuccess', function onSuccess() {
-				progressBar.animate(0);
-			});
-
-			scope.$on('$dropletError', function onSuccess() {
-				progressBar.animate(0);
-			});
-
-		}
-
-	}
-
+	$scope.comment = function(new_comment) {
+		newcomment = new Comment(new_comment);
+		$location.path('/profile');
+	};
 });

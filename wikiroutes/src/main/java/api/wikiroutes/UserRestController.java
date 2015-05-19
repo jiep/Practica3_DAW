@@ -431,7 +431,7 @@ public class UserRestController {
 				cmmnt.setRoute(route);
 				cmmnt.setUser(u);
 				cmmnt.setDate(comment.getDate());
-				cmmnt.setDescription(comment.getDescription());
+				cmmnt.setComment(comment.getComment());
 				commentList.add(comment);
 				comments.save(commentList);
 

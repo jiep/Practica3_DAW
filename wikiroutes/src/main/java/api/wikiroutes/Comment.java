@@ -22,9 +22,9 @@ public class Comment {
 	@JsonIgnore
 	@ManyToOne
 	private User user;
-	private String description;
+	private String comment;
 	private Date date;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	private Route route;
@@ -45,12 +45,12 @@ public class Comment {
 		this.user = user;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getComment() {
+		return comment;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	public Date getDate() {

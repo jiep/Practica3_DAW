@@ -30,4 +30,20 @@ angular.module('wikiroutes.services', []).factory("Register",
 			}
 		}
 	});
+}).factory("Comment", function($resource, $rootScope) {
+
+	return $resource('/users/:idu/routes/:idr/comments', {
+		idu : '@idu',
+		idr : '@idr'
+	}, {
+
+		save : {
+			method : "POST",
+			headers : {
+				'Content-Type' : 'application/json',
+				'Authorization' : $rootScope.user.apiKey
+			}
+		}
+
+	});
 });
