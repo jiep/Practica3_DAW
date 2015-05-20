@@ -5,7 +5,10 @@ angular.module('wikiroutes.services', []).factory("Register",
 				id : '@id'
 			}, {
 				update : {
-					method : "PUT"
+					method : "PUT",
+					headers : {
+						'Content-Type' : 'application/json',
+					}
 				},
 				save : {
 					method : "POST",
@@ -21,7 +24,11 @@ angular.module('wikiroutes.services', []).factory("Register",
 		id : '@id', id_route : '@id_route'
 	}, {
 		update : {
-			method : "PUT"
+			method : "PUT",
+			headers : {
+				'Content-Type' : 'application/json',
+				'Authorization' : $rootScope.user.apiKey
+			}
 		},
 		save : {
 			method : "POST",

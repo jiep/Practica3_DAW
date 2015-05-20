@@ -194,6 +194,8 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location,
 		$scope.route.name = route.name;
 		$scope.route.description = route.description;
 		$scope.route.private = route.isPrivate;
+		$scope.route.type = route.type;
+		console.log($scope.route.type);
 		console.log($scope.route.private);
 		$scope.route.user = $rootScope.user;
 
@@ -491,7 +493,4 @@ app.controller('EditMapCtrl', function($scope, $rootScope, Route, $routeParams, 
 
 		
 	}
-
-	
-
 });

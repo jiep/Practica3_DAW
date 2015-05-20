@@ -5,12 +5,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import api.wikiroutes.TypeRoute.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -31,9 +34,8 @@ public class Route {
 	@ManyToOne
 	private User user;
 
-	@ManyToOne
-	@JoinColumn(name = "typeroute_id")
-	private TypeRoute type;
+    @Enumerated(EnumType.STRING)
+	private Type type;
 	private double rate;
 	private boolean isPrivate;
 
@@ -51,7 +53,7 @@ public class Route {
 
 	}
 
-	public Route(String name, String description, User user, TypeRoute type,
+	public Route(String name, String description, User user, Type type,
 			double rate, boolean isPrivate) {
 		this.name = name;
 		this.description = description;
@@ -94,11 +96,11 @@ public class Route {
 		this.user = user;
 	}
 
-	public TypeRoute getType() {
+	public Type getType() {
 		return type;
 	}
 
-	public void setType(TypeRoute type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 
