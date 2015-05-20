@@ -1,9 +1,9 @@
 <md-content layout-padding style="padding: 50px"
-	ng-controller="MapViewCtrl"> <md-input-container>
-<h1>
-	<strong>{{user.userName}}</strong>
-</h1>
-</md-input-container> <br>
+	ng-controller="MapViewCtrl"> 
+<md-toolbar layout-align="center center">
+	<h1><strong>{{route.name}}</strong></h1>
+</md-toolbar>
+</br>
 <br>
 <md-input-container>
 <div layout="row">
@@ -20,35 +20,36 @@
 </div>
 </md-input-container> <br>
 <br>
-<md-input-container> <label>Descripción</label> <textarea
-	md-maxlength="400" required name="description" ng-model="string"
-	readonly>
-		</textarea> </md-input-container>
+<h2>{{route.description}}</h2>
 
+<md-divider></md-divider>
+
+
+<md-toolbar layout-align="center center">
+	<h3><strong>Comentarios</strong></h3>
+</md-toolbar>
+
+<h3 ng-show="!route.comments.length">No hay comentarios para esta ruta</h3>
 
 <div ng-repeat="comment in route.comments">
 	<md-list-item class="md-3-line">
 	<div layout="row">
-		
+		<h1>{{comment.description}}</h1>
 	</div>
 	</md-list-item>
-	</md-toolbar>
 </div>
 
-
-
-
-
+<md-divider></md-divider>
 
 <md-content>
 <form name="CommentForm" ng-submit="newcomment(new_comment)">
-	<h3>{{user.userName}}</h3>
-	<label>Añade tu comentario</label>
 	<md-input-container> <textarea md-maxlength="250"
-		name="comment" ng-model="new_comment"></textarea> </md-input-container>
+		name="comment" ng-model="new_comment" placeholder="Introduce tu comentario" required></textarea> </md-input-container>
 
 	<md-input-container layout-align="right"> <md-button
 		md-no-ink class="md-primary">Añade tu comentario</md-button> </md-input-container>
 </form>
-</md-content> </md-content>
+</md-content> 
+
+</md-content>
 <div ng-include="'templates/footer.html'"></div>

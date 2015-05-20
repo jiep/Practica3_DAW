@@ -179,6 +179,7 @@ app.controller('MapViewCtrl', function($scope, Comment, $rootScope, Route, $rout
 	
 	var r = new Route({id: $rootScope.user.id, id_route : $routeParams.id});
 	r.$query().then(function(return_route){
+		$scope.route = return_route;
 		route = setPath(return_route);
 		console.log(return_route);
 		
@@ -225,92 +226,7 @@ app.controller('MapViewCtrl', function($scope, Comment, $rootScope, Route, $rout
 });
 
 app.controller("HomeCtrl", function($scope) {
-	$scope.routes = [ {
-		"id" : null,
-		"name" : "Ruta de la muerte",
-		"description" : "La ruta de la muerte es temida",
-		"type" : {
-			"id" : null,
-			"name" : null,
-			"routes" : null
-		},
-		"rate" : 6.0,
-		"stretches" : [ {
-			"id" : null,
-			"points" : [ {
-				"latitude" : 30.0,
-				"longitude" : 40.0,
-				"altitude" : 50.0
-			}, {
-				"latitude" : 10.0,
-				"longitude" : 20.0,
-				"altitude" : 30.0
-			} ],
-			"order" : 1
-		}, {
-			"id" : null,
-			"points" : [ {
-				"latitude" : 30.0,
-				"longitude" : 40.0,
-				"altitude" : 50.0
-			}, {
-				"latitude" : 10.0,
-				"longitude" : 20.0,
-				"altitude" : 30.0
-			} ],
-			"order" : 2
-		} ],
-		"comments" : null,
-		"private" : false
-	}, {
-		"id" : null,
-		"name" : "Ruta de la muerte",
-		"description" : "La ruta de la muerte es temida",
-		"type" : {
-			"id" : null,
-			"name" : null,
-			"routes" : null
-		},
-		"rate" : 6.0,
-		"stretches" : [ {
-			"id" : null,
-			"points" : [ {
-				"latitude" : 30.0,
-				"longitude" : 40.0,
-				"altitude" : 50.0
-			}, {
-				"latitude" : 10.0,
-				"longitude" : 20.0,
-				"altitude" : 30.0
-			} ],
-			"order" : 1
-		}, {
-			"id" : null,
-			"points" : [ {
-				"latitude" : 30.0,
-				"longitude" : 40.0,
-				"altitude" : 50.0
-			}, {
-				"latitude" : 10.0,
-				"longitude" : 20.0,
-				"altitude" : 30.0
-			} ],
-			"order" : 2
-		} ],
-		"comments" : null,
-		"private" : false
-	}
-
-	];
-	$scope.users = [ {
-		"id" : null,
-		"userName" : "CarlosElGRande",
-		"pass" : null,
-		"permission" : null,
-		"apiKey" : null,
-		"email" : "carlosElGrandeHaceMasCommitsQueGermán@syahoo.com",
-		"activatedNotifications" : null
-	} ]
+	
 });
 
 app.controller("LoginCtrl", function($scope, $rootScope, Login, $location) {
@@ -322,7 +238,7 @@ app.controller("LoginCtrl", function($scope, $rootScope, Login, $location) {
 				$rootScope.user = user_logged;
 				$location.path("/profile");
 			}else{
-				$scope.message = user_logged
+				$scope.message = user_logged;
 			}
 		});
 	}
