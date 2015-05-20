@@ -34,7 +34,7 @@
 	</md-toolbar>
 
 	<div ng-repeat="route in user.routes">
-		<a href="/viewRoute" style='text-decoration: none; color: black';>
+		<a href="/viewRoute/{{route.id}}" style='text-decoration: none; color: black';>
 			<md-list-item class="md-3-line">
 			<div layout="row">
 				<div flex="20">
@@ -44,14 +44,18 @@
 				<div flex="60">
 					<div class="md-list-item-text">
 						<h3>{{route.name}}</h3>
-						<h4>{{route.description}}</h4>
+						<h4>{{route.description | limitTo:50}}...</h4>
 						<p>{{route.user}}</p>
 					</div>
 				</div>
 				<div flex="20">
 					<div layout="column">
 						<div>
-							<span><ng-md-icon icon="lock" size="36"></ng-md-icon></span> <span><ng-md-icon
+							<span>
+							<ng-md-icon ng-if="route.private" icon="lock_outline" size="36"></ng-md-icon>
+							<ng-md-icon ng-if="!route.private" icon="lock_open" size="36"></ng-md-icon>
+							
+							</span> <span><ng-md-icon
 									icon="mode_edit" size="36"></ng-md-icon></span> <span><ng-md-icon
 									icon="clear" size="36"></ng-md-icon></span>
 						</div>

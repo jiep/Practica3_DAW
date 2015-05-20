@@ -158,48 +158,70 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location) {
 	}
 });
 
-app.controller('MapViewCtrl', function($scope, Comment, $rootScope) {
+app.controller('MapViewCtrl', function($scope, Comment, $rootScope, Route, $routeParams) {
+		
+	function setPath(route){
+		route.path = [];
+		for(var i = 0; i < route.stretches.length; i++){
+			if(i != route.stretches.length - 1){
+				route.path.push({latitude: route.stretches[i].points[0].latitude, longitude: route.stretches[i].points[0].longitude});
+			}else{
+				route.path.push({latitude: route.stretches[i].points[0].latitude, longitude: route.stretches[i].points[0].longitude});
+				route.path.push({latitude: route.stretches[i].points[1].latitude, longitude: route.stretches[i].points[1].longitude});
+			}
+			console.log(route.path);
+		}
+		
+		return route.path;
+	}
+	
+	var route = {};
+	
+	var r = new Route({id: $rootScope.user.id, id_route : $routeParams.id});
+	r.$query().then(function(return_route){
+		route = setPath(return_route);
+		console.log(return_route);
+		
+		$scope.map = {
+				center : {
+					latitude : route[0].latitude,
+					longitude : route[0].longitude
+				},
+				zoom : 4,
+				bounds : {},
+
+			};
+			$scope.polyline = {
+				id : 1,
+				path : route,
+				stroke : {
+					color : '#6060FB',
+					weight : 3
+				},
+				editable : false,
+				draggable : false,
+				visible : true,
+				icons : [ {
+					icon : {
+						path : google.maps.SymbolPath.FORWARD_OPEN_ARROW
+					},
+					offset : '25px',
+					repeat : '50px'
+				} ]
+			};
+	});
 	
 
-		$scope.newcomment = function(new_comment) {
-			newcomment= new Comment(new_comment);
-			newcomment.$save().then(function(comment) {
-				$scope.user.comments.push(comment);
-				$rootScope.user.comments = $scope.user.comments;
-				$scope.comment= ""; 
-			});
-		};
 	
-	
-	
-	
-	$scope.map = {
-		center : {
-			latitude : 40.1451,
-			longitude : -99.6680
-		},
-		zoom : 4,
-		bounds : {},
-
+	$scope.newcomment = function(new_comment) {
+		newcomment= new Comment(new_comment);
+		newcomment.$save().then(function(comment) {
+			$scope.user.comments.push(comment);
+			$rootScope.user.comments = $scope.user.comments;
+			$scope.comment= ""; 
+		});
 	};
-	$scope.polyline = {
-		id : 1,
-		path : [],
-		stroke : {
-			color : '#6060FB',
-			weight : 3
-		},
-		editable : false,
-		draggable : false,
-		visible : true,
-		icons : [ {
-			icon : {
-				path : google.maps.SymbolPath.FORWARD_OPEN_ARROW
-			},
-			offset : '25px',
-			repeat : '50px'
-		} ]
-	};
+		
 });
 
 app.controller("HomeCtrl", function($scope) {

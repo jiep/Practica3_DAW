@@ -17,8 +17,8 @@ angular.module('wikiroutes.services', []).factory("Register",
 			});
 		})
 .factory("Route", function($resource, $rootScope) {
-	return $resource('/users/:id/routes', {
-		id : '@id'
+	return $resource('/users/:id/routes/:id_route', {
+		id : '@id', id_route : '@id_route'
 	}, {
 		update : {
 			method : "PUT"
@@ -29,6 +29,10 @@ angular.module('wikiroutes.services', []).factory("Register",
 				'Content-Type' : 'application/json',
 				'Authorization' : $rootScope.user.apiKey
 			}
+		},
+		query : {
+			method : "GET",
+			isArray : false
 		}
 	});
 }).factory("Comment", function($resource, $rootScope) {
