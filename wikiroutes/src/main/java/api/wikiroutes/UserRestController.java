@@ -51,7 +51,6 @@ public class UserRestController {
 	// POST /users
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<User> addUser(@RequestBody User user) {
-		System.out.println(user.getPass());
 		user.setRoutes(new ArrayList<Route>());
 		user.setComments(new ArrayList<Comment>());
 		user.setPass(user.getPass());

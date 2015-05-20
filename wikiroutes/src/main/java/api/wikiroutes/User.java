@@ -23,6 +23,8 @@ public class User {
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+    @Column(unique=true)
 	private String userName;
 	private String pass;
 	private boolean permission;
