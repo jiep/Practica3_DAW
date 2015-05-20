@@ -34,7 +34,7 @@ angular.module('wikiroutes.services', []).factory("Register",
 			method : "GET",
 			isArray : false
 		}
-	});
+	})
 }).factory("Comment", function($resource, $rootScope) {
 
 	return $resource('/users/:idu/routes/:idr/comments', {
@@ -58,7 +58,8 @@ angular.module('wikiroutes.services', []).factory("Register",
 			method : "PUT"
 		},
 		query : {
-			method : "POST",
+			method : "GET",
+			isArray : false,
 			headers : {
 				'Content-Type' : 'application/json'
 			}

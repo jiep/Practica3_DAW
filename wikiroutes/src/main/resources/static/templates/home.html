@@ -13,35 +13,21 @@
 			</h2>
 		</div>
 		</md-toolbar>
+		
+		<div><p ng-show="!routes.length">Todavía no tenemos rutas disponibles</p></div>
 
 		<div ng-repeat="route in routes">
 			<md-list-item class="md-3-line">
 			<div layout="row">
 				<div flex="20">
 					<md-card class="card"> <img ng-src="/img/nature4.jpg"
-						class="md-avatar" alt="{{item.who}}" /> </md-card>
+						class="md-avatar" /> </md-card>
 				</div>
-				<div flex="60">
+				<div flex="80">
 					<div class="md-list-item-text">
-						<h3>{{route.name}}</h3>
+						<a ng-if="user" href="/viewRoute/{{route.id}}"><h3>{{route.name}}</h3></a>
+						<a ng-if="!user" href="/login"><h3>{{route.name}}</h3></a>
 						<h4>{{route.description}}</h4>
-						<p>{{route.user}}</p>
-					</div>
-				</div>
-				<div flex="20">
-					<div layout="column">
-						<div>
-							<span><ng-md-icon icon="star" size="36"
-									style="fill:#e9dba5"></ng-md-icon></span><span><ng-md-icon
-									icon="star" size="36" style="fill:#e9dba5"></ng-md-icon></span><span><ng-md-icon
-									icon="star" size="36" style="fill:#e9dba5"></ng-md-icon></span><span><ng-md-icon
-									icon="star" size="36" style="fill:#e9dba5"></ng-md-icon></span><span><ng-md-icon
-									icon="star" size="36" style="fill:#e9dba5"></ng-md-icon></span>
-						</div>
-
-						<div>
-							<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
-						</div>
 					</div>
 				</div>
 			</div>

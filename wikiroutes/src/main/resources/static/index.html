@@ -26,24 +26,25 @@
 				src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Wikipedia's_W.svg/50px-Wikipedia's_W.svg.png" /></a>
 		</h1>
 	</div>
-	<div flex="10">
-		<h1 class="md-toolbar-tools">Wikiroutes</h1>
-	</div>
-	<div flex="60">
+	<div flex="70">
 		<h1 class="md-toolbar-tools">
 			<ng-md-icon icon="search" size="36"></ng-md-icon>
-			<md-autocomplete flex md-no-cache="ctrl.noCache"
+			<md-autocomplete id="autocomplete" flex md-no-cache="ctrl.noCache"
 				md-selected-item="ctrl.selectedItem"
 				md-search-text="ctrl.searchText"
 				md-items="route in ctrl.querySearch(ctrl.searchText)"
 				md-item-text="route.name" placeholder="Buscar rutas"
 				md-floating-label="Ruta"> <span
 				md-highlight-text="ctrl.searchText">{{route.name}}</span> </md-autocomplete>
+						<md-button ng-click="findByName(ctrl.selectedItem)">Buscar</md-button>
+				
 		</h1>
 	</div>
 	<div flex="20" layout-align="right">
 		<h1 class="md-toolbar-tools">
-			<a href="/login"> <ng-md-icon icon="account_box" size="36"></ng-md-icon>
+			<a ng-if="user" href="/profile">Ver perfil</a>
+			<a ng-if="user" ng-click="logout()" ng-if="user" href="/login"> Cerrar sesión</a>
+			<a ng-if="!user" href="/login"> <ng-md-icon icon="account_box" size="36"></ng-md-icon>
 				<span>Iniciar sesión</span>
 			</a>
 		</h1>

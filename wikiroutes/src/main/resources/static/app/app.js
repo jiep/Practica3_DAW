@@ -13,7 +13,7 @@ app.config(function($routeProvider) {
 	}).when("/editRoute/:id", {
 		templateUrl : "/templates/editRoute.html"
 	}).when("/newRoute", {
-		templateUrl : "/templates/editRoute.html"
+		templateUrl : "/templates/newRoute.html"
 	}).when("/login", {
 		templateUrl : "/templates/login.html"
 	}).when("/register", {
@@ -36,13 +36,27 @@ app.config(function($locationProvider) {
 });
 
 app.controller('NavCtrl', NavCtrl);
-function NavCtrl($http) {
+function NavCtrl($http, $rootScope, $scope, $location) {
+	
+	$scope.$apply(function(){
+		$scope.user = $rootScope.user;
+	});
+
+	$scope.logout = function(){
+		$rootScope.user = undefined;
+		$scope.user = undefined;
+		$location.path("/login");
+	};
 
 	this.querySearch = function() {
 		return $http.get('/routes').then(function(result) {
 			return result.data;
 		});
-	}
+	};
+
+	$scope.findByName = function(object){
+		$location.path("/viewRoute/" + object.id);
+	};
 
 };
 
@@ -275,8 +289,13 @@ app.controller('MapViewCtrl', function($scope, Comment, $rootScope, Route,
 
 });
 
-app.controller("HomeCtrl", function($scope) {
-
+app.controller("HomeCtrl", function($scope, $http, $rootScope) {
+	$http.get('/routes').then(function(result) {
+			$scope.routes =  result.data;
+			$scope.user = $rootScope.user;
+	});
+	
+	console.log($scope.routes);
 });
 
 app.controller("LoginCtrl", function($scope, $rootScope, Login, $location) {
@@ -285,6 +304,7 @@ app.controller("LoginCtrl", function($scope, $rootScope, Login, $location) {
 		login.$save().then(function(user_logged) {
 			console.log(user_logged);
 			if (user_logged.apiKey) {
+				$scope.user = user_logged;
 				$rootScope.user = user_logged;
 				$location.path("/profile");
 			} else {
@@ -320,4 +340,158 @@ app.controller("ViewCtrl", function($scope, Comment, $rootScope) {
 		newcomment = new Comment(new_comment);
 		$location.path('/profile');
 	};
+})
+
+app.controller('EditMapCtrl', function($scope, $rootScope, Route, $routeParams, $location) {
+
+	$scope.route = {};
+
+	if ($routeParams.id) { // Editar ruta
+		
+		function setPath(route) {
+			route.path = [];
+			for (var i = 0; i < route.stretches.length; i++) {
+				if (i != route.stretches.length - 1) {
+					route.path.push({
+						latitude : route.stretches[i].points[0].latitude,
+						longitude : route.stretches[i].points[0].longitude
+					});
+				} else {
+					route.path.push({
+						latitude : route.stretches[i].points[0].latitude,
+						longitude : route.stretches[i].points[0].longitude
+					});
+					route.path.push({
+						latitude : route.stretches[i].points[1].latitude,
+						longitude : route.stretches[i].points[1].longitude
+					});
+				}
+			}
+
+			return route.path;
+		}
+
+		var r = new Route({
+			id : $rootScope.user.id,
+			id_route : $routeParams.id
+		});
+		r.$query().then(function(return_route) {
+			$scope.route = return_route;
+			$scope.route.path = setPath(return_route);
+			console.log("Path route", $scope.route.path);
+			
+			$scope.map = {
+					center : {
+						latitude : $scope.route.path[0].latitude,
+						longitude : $scope.route.path[0].longitude
+					},
+					zoom : 4,
+					bounds : {},
+					events : {
+						click : function(mapModel, eventName, originalEventArgs) {
+							$scope.$apply(function() {
+								$scope.polyline.path.push({
+									latitude : originalEventArgs[0].latLng.A,
+									longitude : originalEventArgs[0].latLng.F
+								});
+							});
+						}
+					}
+				};
+				
+			
+				$scope.polyline = {
+					id : 1,
+					path : $scope.route.path,
+					stroke : {
+						color : '#6060FB',
+						weight : 3
+					},
+					events : {
+						rightclick : function(mapModel, eventName, originalEventArgs,
+								arguments) {
+							$scope.$apply(function() {
+								console.log("1", mapModel);
+								console.log("2", eventName);
+								console.log("3", originalEventArgs);
+								console.log("4", arguments);
+			
+							});
+						}
+					},
+					editable : true,
+					draggable : true,
+					visible : true,
+					icons : [ {
+						icon : {
+							path : google.maps.SymbolPath.FORWARD_OPEN_ARROW
+						},
+						offset : '25px',
+						repeat : '50px'
+					} ]
+				};
+			
+				function setRoute() {
+					var route = {
+						name : "",
+						description : "",
+						user : {},
+						type : {},
+						private : false,
+						stretches : []
+					};
+					route.stretches.points = [];
+					console.log(route);
+					for (var i = 0; i < $scope.polyline.path.length - 1; i++) {
+						var p1 = $scope.polyline.path[i];
+						var p2 = $scope.polyline.path[i + 1];
+						var stretch = {
+							points : [ {
+								latitude : p1.latitude,
+								longitude : p1.longitude,
+								altitude : 0
+							}, {
+								latitude : p2.latitude,
+								longitude : p2.longitude,
+								altitude : 0
+							} ],
+							order : i + 1
+						};
+			
+						route.stretches.push(stretch);
+					}
+			
+					return route;
+				}
+				
+				console.log("Polilínea", $scope.polyline);
+			
+				$scope.editRoute = function(route) {
+					$scope.route = setRoute();
+					$scope.route.name = route.name;
+					$scope.route.description = route.description;
+					$scope.route.private = route.isPrivate;
+					console.log($scope.route.private);
+					$scope.route.user = $rootScope.user;
+			
+					var newroute = new Route($scope.route).$update({
+						id : $rootScope.user.id,
+						id_route : $routeParams.id
+					}).then(function(r) {
+						$scope.routes = $rootScope.user.routes;
+						$scope.routes.push(r);
+						$rootScope.user.routes = $scope.routes;
+					});
+			
+					$location.path("/profile");
+			
+				}
+		});
+	
+
+		
+	}
+
+	
+
 });
