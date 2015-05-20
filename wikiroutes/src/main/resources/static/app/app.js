@@ -12,6 +12,8 @@ app.config(function($routeProvider) {
 		templateUrl : "/templates/home.html"
 	}).when("/editRoute/:id", {
 		templateUrl : "/templates/editRoute.html"
+	}).when("/newRoute", {
+		templateUrl : "/templates/editRoute.html"
 	}).when("/login", {
 		templateUrl : "/templates/login.html"
 	}).when("/register", {
@@ -289,8 +291,19 @@ app.controller("HomeCtrl", function($scope) {
 	} ]
 });
 
-app.controller("LoginCtrl", function($scope, $rootScope) {
-	$scope.user = $rootScope.user;
+app.controller("LoginCtrl", function($scope, $rootScope, Login, $location) {
+	$scope.login = function(user){
+		var login = new Login(user);
+		login.$save().then(function(user_logged){
+			console.log(user_logged);
+			if(user_logged.apiKey){
+				$rootScope.user = user_logged;
+				$location.path("/profile");
+			}else{
+				$scope.message = user_logged
+			}
+		});
+	}
 });
 
 app.controller("ProfileCtrl", function($rootScope, $scope) {
@@ -316,7 +329,6 @@ app.controller("RegisterCtrl",
 
 
 app.controller("ViewCtrl", function($scope, Comment, $rootScope) {
-	console.log("hola");
 	$scope.comment = function(new_comment) {
 		newcomment = new Comment(new_comment);
 		$location.path('/profile');

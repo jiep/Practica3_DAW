@@ -60,4 +60,17 @@ angular.module('wikiroutes.services', []).factory("Register",
 			}
 		}
 	})
+})
+.factory("Login", function($resource){
+	return $resource('/login', {}, {
+		update : {
+			method : "PUT"
+		},
+		query : {
+			method : "POST",
+			headers : {
+				'Content-Type' : 'application/json'
+			}
+		}
+	});
 });
