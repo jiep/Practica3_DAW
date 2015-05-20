@@ -37,23 +37,62 @@ app.config(function($locationProvider) {
 
 app.controller('NavCtrl', NavCtrl);
 function NavCtrl($http) {
-	
-	this.querySearch = function(){
-		return $http.get('/routes').then(function(result){
+
+	this.querySearch = function() {
+		return $http.get('/routes').then(function(result) {
 			return result.data;
 		});
 	}
-	
+
 };
 
-app.controller('MapCtrl', function($scope, $rootScope, Route, $location) {
+app.controller('MapCtrl', function($scope, $rootScope, Route, $location,
+		$routeParams) {
 
 	$scope.route = {};
 
+	if ($routeParams.id) { // Editar ruta
+		
+		function setPath(route) {
+			route.path = [];
+			for (var i = 0; i < route.stretches.length; i++) {
+				if (i != route.stretches.length - 1) {
+					route.path.push({
+						latitude : route.stretches[i].points[0].latitude,
+						longitude : route.stretches[i].points[0].longitude
+					});
+				} else {
+					route.path.push({
+						latitude : route.stretches[i].points[0].latitude,
+						longitude : route.stretches[i].points[0].longitude
+					});
+					route.path.push({
+						latitude : route.stretches[i].points[1].latitude,
+						longitude : route.stretches[i].points[1].longitude
+					});
+				}
+			}
+
+			return route.path;
+		}
+
+		var r = new Route({
+			id : $rootScope.user.id,
+			id_route : $routeParams.id
+		});
+		r.$query().then(function(return_route) {
+			$scope.route = return_route;
+			$scope.route.path = setPath(return_route);
+			console.log("Path route", $scope.route.path);
+		});
+
+		console.log("Ruta", $scope.route);
+	}
+
 	$scope.map = {
 		center : {
-			latitude : 40.000,
-			longitude : -3.000
+			latitude : 40,
+			longitude : -3.00
 		},
 		zoom : 4,
 		bounds : {},
@@ -68,6 +107,8 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location) {
 			}
 		}
 	};
+	
+
 	$scope.polyline = {
 		id : 1,
 		path : [],
@@ -131,6 +172,8 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location) {
 
 		return route;
 	}
+	
+	console.log("Polilínea", $scope.polyline)
 
 	$scope.createRoute = function(route) {
 		$scope.route = setRoute();
@@ -139,17 +182,13 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location) {
 		$scope.route.private = route.isPrivate;
 		console.log($scope.route.private);
 		$scope.route.user = $rootScope.user;
-		console.log("identificativo", $scope.route.user);
 
 		var newroute = new Route($scope.route).$save({
 			id : $rootScope.user.id
 		}).then(function(r) {
-			console.log("Usuariosds");
 			$scope.routes = $rootScope.user.routes;
 			$scope.routes.push(r);
 			$rootScope.user.routes = $scope.routes;
-			console.log("Usuario");
-			console.log("Usuario root", $rootScope.user);
 
 		});
 
@@ -158,86 +197,97 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location) {
 	}
 });
 
-app.controller('MapViewCtrl', function($scope, Comment, $rootScope, Route, $routeParams) {
-		
-	function setPath(route){
+app.controller('MapViewCtrl', function($scope, Comment, $rootScope, Route,
+		$routeParams) {
+
+	function setPath(route) {
 		route.path = [];
-		for(var i = 0; i < route.stretches.length; i++){
-			if(i != route.stretches.length - 1){
-				route.path.push({latitude: route.stretches[i].points[0].latitude, longitude: route.stretches[i].points[0].longitude});
-			}else{
-				route.path.push({latitude: route.stretches[i].points[0].latitude, longitude: route.stretches[i].points[0].longitude});
-				route.path.push({latitude: route.stretches[i].points[1].latitude, longitude: route.stretches[i].points[1].longitude});
+		for (var i = 0; i < route.stretches.length; i++) {
+			if (i != route.stretches.length - 1) {
+				route.path.push({
+					latitude : route.stretches[i].points[0].latitude,
+					longitude : route.stretches[i].points[0].longitude
+				});
+			} else {
+				route.path.push({
+					latitude : route.stretches[i].points[0].latitude,
+					longitude : route.stretches[i].points[0].longitude
+				});
+				route.path.push({
+					latitude : route.stretches[i].points[1].latitude,
+					longitude : route.stretches[i].points[1].longitude
+				});
 			}
 			console.log(route.path);
 		}
-		
+
 		return route.path;
 	}
-	
+
 	var route = {};
-	
-	var r = new Route({id: $rootScope.user.id, id_route : $routeParams.id});
-	r.$query().then(function(return_route){
+
+	var r = new Route({
+		id : $rootScope.user.id,
+		id_route : $routeParams.id
+	});
+	r.$query().then(function(return_route) {
 		$scope.route = return_route;
 		route = setPath(return_route);
 		console.log(return_route);
-		
+
 		$scope.map = {
-				center : {
-					latitude : route[0].latitude,
-					longitude : route[0].longitude
-				},
-				zoom : 4,
-				bounds : {},
+			center : {
+				latitude : route[0].latitude,
+				longitude : route[0].longitude
+			},
+			zoom : 4,
+			bounds : {},
 
-			};
-			$scope.polyline = {
-				id : 1,
-				path : route,
-				stroke : {
-					color : '#6060FB',
-					weight : 3
+		};
+		$scope.polyline = {
+			id : 1,
+			path : route,
+			stroke : {
+				color : '#6060FB',
+				weight : 3
+			},
+			editable : false,
+			draggable : false,
+			visible : true,
+			icons : [ {
+				icon : {
+					path : google.maps.SymbolPath.FORWARD_OPEN_ARROW
 				},
-				editable : false,
-				draggable : false,
-				visible : true,
-				icons : [ {
-					icon : {
-						path : google.maps.SymbolPath.FORWARD_OPEN_ARROW
-					},
-					offset : '25px',
-					repeat : '50px'
-				} ]
-			};
+				offset : '25px',
+				repeat : '50px'
+			} ]
+		};
 	});
-	
 
-	
 	$scope.newcomment = function(new_comment) {
-		newcomment= new Comment(new_comment);
+		newcomment = new Comment(new_comment);
 		newcomment.$save().then(function(comment) {
 			$scope.user.comments.push(comment);
 			$rootScope.user.comments = $scope.user.comments;
-			$scope.comment= ""; 
+			$scope.comment = "";
 		});
 	};
-		
+
 });
 
 app.controller("HomeCtrl", function($scope) {
-	
+
 });
 
 app.controller("LoginCtrl", function($scope, $rootScope, Login, $location) {
-	$scope.login = function(user){
+	$scope.login = function(user) {
 		var login = new Login(user);
-		login.$save().then(function(user_logged){
+		login.$save().then(function(user_logged) {
 			console.log(user_logged);
-			if(user_logged.apiKey){
+			if (user_logged.apiKey) {
 				$rootScope.user = user_logged;
 				$location.path("/profile");
-			}else{
+			} else {
 				$scope.message = user_logged;
 			}
 		});
@@ -264,7 +314,6 @@ app.controller("RegisterCtrl",
 			};
 
 		});
-
 
 app.controller("ViewCtrl", function($scope, Comment, $rootScope) {
 	$scope.comment = function(new_comment) {

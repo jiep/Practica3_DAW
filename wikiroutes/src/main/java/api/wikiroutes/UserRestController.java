@@ -299,7 +299,7 @@ public class UserRestController {
 			List<Route> usersRoutes = routes.findByUserId(user_id);
 
 			Route route = null;
-
+						
 			for (Route r1 : usersRoutes) {
 				if (r1.getId() == route_id) {
 					route = r1;
@@ -307,7 +307,17 @@ public class UserRestController {
 			}
 
 			if (route != null) {
+				auth_user.getRoutes().remove(route_id);
+				users.save(auth_user);
+				for(Stretch s : route.getStretches()){
+					for(Point p : s.getPoints()){
+						points.delete(p);
+					}
+					stretches.delete(s);
+				}
+				
 				routes.delete(route);
+
 			}
 
 			status = HttpStatus.CREATED;
