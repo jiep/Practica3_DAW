@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import utils.ApiKeyGenerator;
 import utils.HashPassword;
+import api.wikiroutes.TypeRoute.Type;
 
 @RestController
 @RequestMapping("/users")
@@ -25,9 +26,6 @@ public class UserRestController {
 
 	@Autowired
 	RouteRepository routes;
-
-	@Autowired
-	TypeRouteRepository types;
 
 	@Autowired
 	StretchRepository stretches;
@@ -167,7 +165,8 @@ public class UserRestController {
 
 				r = new Route(route.getName(), route.getDescription(), user,
 						route.getRate(), route.isPrivate());
-
+				r.setType(route.getType());
+								
 				List<Stretch> ls = route.getStretches();
 
 				r.setStretches(ls);
