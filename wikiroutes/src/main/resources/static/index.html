@@ -36,16 +36,16 @@
 				md-item-text="route.name" placeholder="Buscar rutas"
 				md-floating-label="Ruta"> <span
 				md-highlight-text="ctrl.searchText">{{route.name}}</span> </md-autocomplete>
-						<md-button ng-click="findByName(ctrl.selectedItem)">Buscar</md-button>
-				
+			<md-button ng-click="findByName(ctrl.selectedItem)">Buscar</md-button>
+
 		</h1>
 	</div>
 	<div flex="20" layout-align="right">
 		<h1 class="md-toolbar-tools">
-			<a ng-if="user" href="/profile">Ver perfil</a>
-			<a ng-if="user" ng-click="logout()" ng-if="user" href="/login"> Cerrar sesión</a>
-			<a ng-if="!user" href="/login"> <ng-md-icon icon="account_box" size="36"></ng-md-icon>
-				<span>Iniciar sesión</span>
+			<a ng-if="user" href="/profile">Ver perfil</a> <a ng-if="user"
+				ng-click="logout()" ng-if="user" href="/login"> Cerrar sesión</a> <a
+				ng-if="!user" href="/login"> <ng-md-icon icon="account_box"
+					size="36"></ng-md-icon> <span>Iniciar sesión</span>
 			</a>
 		</h1>
 	</div>
@@ -54,7 +54,7 @@
 
 	<md-divider></md-divider>
 
-	<md-toolbar layout="row">
+	<md-toolbar layout="row" style='padding:6px;'>
 	<div flex=30></div>
 
 	<div flex offset=40 layout="row">
@@ -77,7 +77,6 @@
 	</div>
 	<div flex=30></div>
 
-	</md-toolbar>
 	</md-toolbar>
 
 	<div ng-view></div>
