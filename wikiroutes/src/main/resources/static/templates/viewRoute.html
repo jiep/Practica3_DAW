@@ -7,7 +7,7 @@
 <br>
 {{route.type}}
 angular.equals(route.type, BOAT);
-<div ng-if="angular.equals(route.type, BOAT)">
+<div ng-if="route.type == WALK">
 	Ruta a pie. ¡Encuentra más rutas de este tipo! <a href="/category/walk"><img src="img/icono_andar.png"></a>
 </div>
 <div ng-if="route.type == BIKE">
