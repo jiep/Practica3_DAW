@@ -1,7 +1,7 @@
 <md-content layout-padding style="padding: 50px"
 	ng-controller="ProfileCtrl">
 <div layout="row">
-	<div flex="50">
+	<div flex="80">
 		<div style='margin: 0 auto 0 auto;'>
 			<h1>
 				<strong>¡Hola, {{user.userName}}!</strong>
@@ -9,20 +9,28 @@
 		</div>
 
 	</div>
-	<div flex="50">
+	<div flex="20">
 
-		<a href="/newRoute"> <md-button class="md-raised md-primary"
-				layout-align="right">
-			<h3>Añadir ruta</h3>
-			</md-button>
+		<a href="/newRoute"> 	
+	  <md-button class="md-fab md-fab" aria-label="Añadir ruta" layout-align="right">
+      <ng-md-icon icon="map" style="fill: 24px" size="24"></ng-md-icon> 
+      <md-tooltip md-visible="demo.showTooltip">
+        Añadir ruta
+      </md-tooltip>
+      </md-button>
 		</a>
-		<a href="/preferences"> <md-button class="md-raised md-primary"
-				layout-align="right">
-			<h3>Editar perfil</h3>
-			</md-button>
+		
+	<a href="/preferences"> 
+	<md-button class="md-fab md-fab" aria-label="Editar perfil" layout-align="right">
+      <ng-md-icon icon="edit" style="fill: 24px" size="24"></ng-md-icon> 
+      <md-tooltip md-visible="demo.showTooltip">
+        Editar perfil
+      </md-tooltip>
+      </md-button>
 		</a>
-	</div>
 </div>
+</div>
+	</div>
 <div layout="row">
 
 
@@ -55,7 +63,7 @@
 				</div>
 				<div flex="20">
 					<div layout="column">
-						<div>
+						<div align="right">
 							<span>
 							<ng-md-icon ng-if="route.private" icon="lock_outline" size="36"></ng-md-icon>
 							<ng-md-icon ng-if="!route.private" icon="lock_open" size="36"></ng-md-icon>
@@ -74,7 +82,7 @@
 					</div>
 				</div>
 			</div>
-			</md-list-item>
+		</md-list-item>
 		<md-divider></md-divider>
 		</md-toolbar>
 	</div>
