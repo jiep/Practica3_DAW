@@ -167,10 +167,10 @@ Se incluyen clases como Route, Comment, User, Register, etc. que son necesarias 
 
 \section{Recorrido por la aplicación}
 \subsection{Inicio}
-La primera pantalla tras iniciar la aplicación de escritorio muestra una cabecera y un pie de página que serán comunes en todas las pantallas (están presentes en \textit{index.html}), además de una imagen logotipo de la página y las rutas mejor valoradas. En la cabecera se podrán realizar búsquedas de rutas (se muestran posibles opciones con un autocompletado automático desplegable) así como mostrar resultados sólo de una categoría, y en el footer se incluye un enlace a los desarrolladores, así como a una página de contacto y ayuda. Desde esta página inicial pueden accederse al resto de las vistas de la aplicación.
+La primera pantalla tras iniciar la aplicación de escritorio muestra una cabecera que será común en todas las pantallas (está presente en \textit{index.html}), además de una imagen logotipo de la página y las rutas mejor valoradas. En la cabecera se podrán realizar búsquedas de rutas (se muestran posibles opciones con un autocompletado automático desplegable), filtrar resultados por categoría, un enlace a los desarrolladores y una página de ayuda. Desde esta página inicial pueden accederse al resto de las vistas de la aplicación.
 \begin{figure}[h]
 \centering
-  \includegraphics[width=0.3\textwidth]{./imagenes/logoURJC}
+  \includegraphics[width=0.7\textwidth]{./imagenes/inicial}
   \caption{Página inicial}
   \label{fig: Página inicial}
 \end{figure}
@@ -179,7 +179,7 @@ Tras seleccionar el botón de iniciar sesión se abrirá la página desde la que
 
 \begin{figure}[h]
 \centering
-  \includegraphics[width=0.3\textwidth]{./imagenes/logoURJC}
+  \includegraphics[width=0.7\textwidth]{./imagenes/login}
   \caption{Página de login}
   \label{fig: Página de login}
 \end{figure}
@@ -188,56 +188,70 @@ En esta misma página hemos añadido también la opción para registrarse, en cu
 
 \begin{figure}[h]
 \centering
-  \includegraphics[width=0.3\textwidth]{./imagenes/logoURJC}
+  \includegraphics[width=0.7\textwidth]{./imagenes/registro}
   \caption{Página de registro}
   \label{fig: Página de registro}
 \end{figure}
+\clearpage
 \subsection{Perfil}
 Una vez registrado o autentificado correctamente, se mostrará  la página personal de cada usuario. En esta vista se mostrarán un botón para añadir una nueva ruta, así como las rutas que el usuario ha subido junto su foto, nombre, descripción y distintas opciones como editar, eliminar, hacer privada o comentar dicha ruta. 
 \begin{figure}[h]
 \centering
-  \includegraphics[width=0.3\textwidth]{./imagenes/logoURJC}
+  \includegraphics[width=0.7\textwidth]{./imagenes/perfil}
   \caption{Página de perfil de usuario}
   \label{fig: Página de perfil de usuario}
 \end{figure}
 
-\subsection{Añadir ruta}
-Si se selecciona el botón de añadir una nueva ruta, se mostrará la ventana más importante de nuestra aplicación: se muestra un mapa proporcionado por \textit{Google maps} sobre el que puedes crear tu ruta mediante clicks del botón izquierdo del ratón. La ruta se irá creando mediante segmentos unidos por vértices, los cuales se pueden mover a otra posición del mapa pulsando y arrastrándolos. Por suspuesto las opciones típicas de Google maps como cambiar entre las vistas de mapa/satélite, hacer zoom o moverse por el mapa están disponibles.\\
-También se incluyen los campos necesarios para añadir a una ruta toda la información necesaria: nombre de la ruta (obligatorio), descripción, pública o privada, y tipo de ruta.\\
+También se dispone de una pequeña vista en la que se pueden modificar parámetros de la cuenta como correo electrónico o contraseña
 \begin{figure}[h]
 \centering
-  \includegraphics[width=0.3\textwidth]{./imagenes/logoURJC}
+  \includegraphics[width=0.7\textwidth]{./imagenes/editar}
+  \caption{Página de editar perfil de usuario}
+  \label{fig: Página de editar perfil de usuario}
+\end{figure}
+\clearpage
+\subsection{Añadir y buscar rutas}
+Si se selecciona el botón de añadir una nueva ruta, se mostrará la ventana más importante de nuestra aplicación: se muestra un mapa proporcionado por \textit{Google maps} sobre el que puedes crear tu ruta mediante clicks del botón izquierdo del ratón. La ruta se irá creando mediante segmentos unidos por vértices, los cuales se pueden mover a otra posición del mapa pulsando y arrastrándolos. Por suspuesto las opciones típicas de Google maps como cambiar entre las vistas de mapa/satélite, hacer zoom o moverse por el mapa están disponibles.\\
+También se incluyen los campos necesarios para añadir a una ruta toda la información necesaria: nombre de la ruta (obligatorio), descripción, pública o privada, tipo de ruta y la foto que la identificará (obligatoria).\\
+
+\begin{figure}[h]
+\centering
+  \includegraphics[width=0.7\textwidth]{./imagenes/anadir}
   \caption{Página para añadir una ruta nueva}
   \label{fig: Página para añadir una ruta nueva}
 \end{figure}
-Para guardar la ruta basta con completar todos los campos requeridos y pulsar el botón ``Añadir ruta'', el cual nos llevará de nuevo a nuestro perfil, dónde se puede ver nuestra ruta añadida correctamente.
+
+Para guardar la ruta basta con completar todos los campos requeridos y pulsar el botón ``Añadir ruta'', el cual nos llevará de nuevo a nuestro perfil, dónde se puede ver nuestra ruta añadida correctamente.\\
+\clearpage
 \begin{figure}[h]
 \centering
-  \includegraphics[width=0.3\textwidth]{./imagenes/logoURJC}
+  \includegraphics[width=0.7\textwidth]{./imagenes/perfilanadir}
   \caption{Página de perfil con rutas añadidas}
   \label{fig: Página de perfil con rutas añadidas}
 \end{figure}
-\subsection{Editar ruta}
-Desde esta página de perfil también se pueden modificar las rutas propias. Basta con seleccionar la ruta que queremos editar para que se cargue en el mapa la ruta anteriormente guardada para que podamos modificarla o añadir comentarios.
-\begin{figure}[h]
-\centering
-  \includegraphics[width=0.3\textwidth]{./imagenes/logoURJC}
-  \caption{Página de modificar ruta}
-  \label{fig: Página de modificar ruta}
-\end{figure}
+
 Citar que las rutas que hemos añadido pueden localizarse desde el buscador, en cuyo caso redirigirían a la vista que acabamos de explicar.\\
 
 \begin{figure}[h]
 \centering
-  \includegraphics[width=0.3\textwidth]{./imagenes/logoURJC}
+  \includegraphics[width=0.7\textwidth]{./imagenes/buscar}
   \caption{Página de búsqueda de ruta}
   \label{fig: Página de búsqueda de ruta}
 \end{figure}
+
+Además pueden añadirse a comentarios siempre que la ruta se haya declarado como pública. Para ello podemos acceder a la ruta a través de la página principal, buscando por nombre, categoría o desde la página de perfil de usuario. Si se accede a la página sin identificarse, no se podrá comentar.
+\begin{figure}[h]
+\centering
+  \includegraphics[width=0.7\textwidth]{./imagenes/comentarios}
+  \caption{Página de comentarios de una ruta}
+  \label{fig: Página de comentarios de una ruta}
+\end{figure}
+
 \subsection{Desarrolladores}
 Por último hemos añadido una página de ``developers'', en la que mostramos brevemente los creadores de la página web, así como enlaces a sus linkedin, github o twitter.
 \begin{figure}[h]
 \centering
-  \includegraphics[width=0.3\textwidth]{./imagenes/logoURJC}
+  \includegraphics[width=0.7\textwidth]{./imagenes/developers}
   \caption{Página de búsqueda de ruta}
   \label{fig: Página de búsqueda de developers}
 \end{figure}
