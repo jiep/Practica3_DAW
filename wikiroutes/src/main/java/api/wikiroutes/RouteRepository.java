@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import api.wikiroutes.TypeRoute.Type;
+
 public interface RouteRepository extends JpaRepository<Route, Long> {
 
 	// Busca rutas por id de usuario
@@ -20,5 +22,9 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
 	
 	// Busca rutas por nombre de ruta y que sean publicas
 	List<Route> findByNameContainingAndIsPrivate(String name, boolean isPrivate);
+	
+	// Busca rutas por tipo y por privacidad(público/privado)
+	List<Route> findByTypeAndIsPrivate(Type type, boolean isPrivate);
+
 }
 

@@ -19,5 +19,4 @@ public class RouteRestController {
 	public List<Route> getRoutes(){
 		return routes.findByIsPrivate(false);
 	}
-	
 }

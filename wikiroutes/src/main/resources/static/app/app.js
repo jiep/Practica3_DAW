@@ -26,6 +26,8 @@ app.config(function($routeProvider) {
 		templateUrl : "/templates/developers.html"
 	}).when("/viewRoute/:id", {
 		templateUrl : "/templates/viewRoute.html"
+	}).when("/category/:type", {
+		templateUrl : "/templates/search.html"
 	}).otherwise({
 		redirectTo : "/"
 	})
@@ -492,5 +494,13 @@ app.controller('EditMapCtrl', function($scope, $rootScope, Route, $routeParams, 
 	
 
 		
+	}
+});
+
+app.controller("SearchByCategoryCtrl", function($scope, $http, $routeParams){
+	if($routeParams.type){
+		$http.get('/search/category/' + $routeParams.type).then(function(result) {
+			$scope.routes =  result.data;
+		});
 	}
 });
