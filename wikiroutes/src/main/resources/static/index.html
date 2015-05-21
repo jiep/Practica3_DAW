@@ -42,8 +42,8 @@
 	</div>
 	<div flex="20" layout-align="right">
 		<h1 class="md-toolbar-tools">
-			<span><a ng-if="user" href="/profile">Ver perfil   </a> <span><a ng-if="user"
-+				ng-click="logout()" ng-if="user" href="/login"> Cerrar sesión</span></a> <a
+			<span><a ng-if="user" href="/profile"><md-button>Ver perfil</md-button>   </a> <span><a ng-if="user"
++				ng-click="logout()" ng-if="user" href="/login"> <md-button>Cerrar sesión</md-button></span></a> <a
 +				ng-if="!user" href="/login"> <ng-md-icon icon="account_box"
 +					size="36"></ng-md-icon> <span>Iniciar sesión</span>
  			</a>
