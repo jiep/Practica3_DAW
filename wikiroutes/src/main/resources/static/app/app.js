@@ -290,13 +290,17 @@ app.controller('MapViewCtrl', function($scope, Comment, $rootScope, Route,
 			} ]
 		};
 	});
+	
+	$scope.comments = {};
 
 	$scope.newcomment = function(new_comment) {
-		newcomment = new Comment(new_comment);
-		newcomment.$save().then(function(comment) {
+		console.log(new_comment);
+		console.log("Voy a comentar");
+		newcomment = new Comment({comment : new_comment, date : new Date()});
+		newcomment.$save({id : $routeParams.id}).then(function(comment) {
+			$scope.route.comments.push(comment);
 			$scope.user.comments.push(comment);
-			$rootScope.user.comments = $scope.user.comments;
-			$scope.comment = "";
+			$scope.new_comment = "";
 		});
 	};
 
@@ -348,12 +352,13 @@ app.controller("RegisterCtrl",
 
 		});
 
-app.controller("ViewCtrl", function($scope, Comment, $rootScope) {
+/*app.controller("ViewCtrl", function($scope, Comment, $rootScope, $routeParams) {
 	$scope.comment = function(new_comment) {
 		newcomment = new Comment(new_comment);
+		newcomment.$save({id : $routeParams.id}).then
 		$location.path('/profile');
 	};
-})
+})*/
 
 app.controller('EditMapCtrl', function($scope, $rootScope, Route, $routeParams, $location) {
 
@@ -514,7 +519,10 @@ app.controller("SearchByCategoryCtrl", function($scope, $http, $routeParams){
 	}
 });
 
-app.controller("ViewPublicRouteCtrl", function($scope, $http, $routeParams){
+app.controller("ViewPublicRouteCtrl", function($scope, $http, $routeParams, $rootScope, Comment2){
+	
+	$scope.user = $rootScope.user;
+	
 	if($routeParams.id){
 		$http.get('/search/' + $routeParams.id).then(function(result) {
 			$scope.route =  result.data;
@@ -573,6 +581,21 @@ app.controller("ViewPublicRouteCtrl", function($scope, $http, $routeParams){
 						offset : '25px',
 						repeat : '50px'
 					} ]
+				};
+				
+				
+				$scope.comments = {};
+
+				$scope.newcomment = function(new_comment) {
+					console.log(new_comment);
+					console.log("Voy a comentar");
+					$http.defaults.headers.common['Authorization']= $rootScope.user.apiKey; //Using $http we can set header also
+					newcomment = new Comment2({comment : new_comment, date : new Date()});
+					newcomment.$save({id : $routeParams.id}).then(function(comment) {
+						$scope.route.comments.push(comment);
+						$scope.user.comments.push(comment);
+						$scope.new_comment = "";
+					});
 				};
 			
 		});

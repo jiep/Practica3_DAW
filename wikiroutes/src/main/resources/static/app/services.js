@@ -45,11 +45,9 @@ angular.module('wikiroutes.services', [])
 	})
 }).factory("Comment", function($resource, $rootScope) {
 
-	return $resource('/users/:idu/routes/:idr/comments', {
-		idu : '@idu',
-		idr : '@idr'
+	return $resource('/routes/:id/comments', {
+		id : '@id',
 	}, {
-
 		save : {
 			method : "POST",
 			headers : {
@@ -108,4 +106,19 @@ angular.module('wikiroutes.services', [])
 				}
 
 			});
-		});
+		})
+		
+.factory("Comment2", function($resource, $rootScope) {
+
+	return $resource('/routes/:id/comments', {
+		id : '@id',
+	}, {
+		save : {
+			method : "POST",
+			headers : {
+				'Content-Type' : 'application/json',
+			}
+		}
+
+	});
+});

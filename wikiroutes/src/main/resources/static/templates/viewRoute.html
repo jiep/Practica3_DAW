@@ -42,7 +42,7 @@ angular.equals(route.type, BOAT);
 
 <md-divider></md-divider>
 
-
+<div ng-show="!route.isPrivate">
 <md-toolbar layout-align="center center">
 	<h3><strong>Comentarios</strong></h3>
 </md-toolbar>
@@ -52,7 +52,7 @@ angular.equals(route.type, BOAT);
 <div ng-repeat="comment in route.comments">
 	<md-list-item class="md-3-line">
 	<div layout="row">
-		<h1>{{comment.description}}</h1>
+		<h1>{{comment.comment}}</h1>
 	</div>
 	</md-list-item>
 </div>
@@ -68,6 +68,7 @@ angular.equals(route.type, BOAT);
 		md-no-ink class="md-primary">Añade tu comentario</md-button> </md-input-container>
 </form>
 </md-content> 
+</div>
 
 </md-content>
 <div ng-include="'templates/footer.html'"></div>

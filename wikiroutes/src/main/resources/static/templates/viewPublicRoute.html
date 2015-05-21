@@ -24,5 +24,32 @@
 <br>
 <h2>{{route.description}}</h2>
 
+
+<md-toolbar layout-align="center center">
+	<h3><strong>Comentarios</strong></h3>
+</md-toolbar>
+
+<h3 ng-show="!route.comments.length">No hay comentarios para esta ruta</h3>
+
+<div ng-repeat="comment in route.comments">
+	<md-list-item class="md-3-line">
+	<div layout="row">
+		<h1>{{comment.comment}}</h1>
+	</div>
+	</md-list-item>
+</div>
+
+<md-divider></md-divider>
+
+<md-content ng-show="user">
+<form name="CommentForm" ng-submit="newcomment(new_comment)">
+	<md-input-container> <textarea md-maxlength="250"
+		name="comment" ng-model="new_comment" placeholder="Introduce tu comentario" required></textarea> </md-input-container>
+
+	<md-input-container layout-align="right"> <md-button
+		md-no-ink class="md-primary">Añade tu comentario</md-button> </md-input-container>
+</form>
+</md-content> 
+
 </md-content>
 <div ng-include="'templates/footer.html'"></div>
