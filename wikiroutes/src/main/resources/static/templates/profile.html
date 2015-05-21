@@ -33,8 +33,6 @@
 	</div>
 <div layout="row">
 
-
-
 	<md-content layout-padding
 		style="height: 600px;padding: 24px;width:80%;margin: 0 auto 0 auto;">
 
@@ -49,7 +47,7 @@
 	<div ng-repeat="route in user.routes">
 		
 			<md-list-item class="md-3-line">
-			<div layout="row">
+			<!--  <div layout="row">-->
 				<div flex="20">
 					<md-card class="card"> <img ng-src="/img/nature4.jpg"
 						class="md-avatar" /> </md-card>
@@ -62,7 +60,6 @@
 					</div>
 				</div>
 				<div flex="20">
-					<div layout="column">
 						<div align="right">
 							<span>
 							<ng-md-icon ng-if="route.private" icon="lock_outline" size="36"></ng-md-icon>
@@ -75,16 +72,12 @@
 							<span>
 								<ng-md-icon icon="clear" size="36"></ng-md-icon>
 							</span>
-						</div>
-						<div>
 							<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
 						</div>
-					</div>
 				</div>
-			</div>
+			<!--</div>-->
 		</md-list-item>
 		<md-divider></md-divider>
-		</md-toolbar>
 	</div>
 	</md-content>
 </div>
