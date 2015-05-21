@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<md-content layout-padding style="padding: 50px" ng-controller="PreferencesCtrl">
+<div layout="row">
+<div flex="33">
+</div>
+<div flex="33">
 
-</body>
-</html>
+	<md-content layout-padding>
+		<form name="loginForm" ng-submit="preferences(user)">
+			<md-input-container>
+				<label>Nombre de usuario</label>
+				<input md-maxlength="10" required name="username" ng-model="user.userName">
+				<div ng-messages="loginForm.username.$error">
+					<div ng-message="required">Campo requerido</div>
+					<div ng-message="md-maxlength">El nombre de usuario es demasiado largo</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Contraseña</label>
+				<input type="password" required name="pass" ng-model="user.pass">
+				<div ng-messages="loginForm.pass.$error">
+					<div ng-message="required">Campo requerido</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Correo electrónico</label>
+				<input type="email" required name="email" ng-model="user.email">
+				<div ng-messages="loginForm.email.$error">
+					<div ng-message="required">Campo requerido</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+			<md-input-container layout-align="right">
+				<md-button md-no-ink class="md-primary">Editar</md-button>
+			</md-input-container>
+
+		</form>
+	</md-content>
+
+</div>
+<div flex="33">
+</div>
+</div>
+</md-content>
+	<div ng-include="'templates/footer.html'"></div>

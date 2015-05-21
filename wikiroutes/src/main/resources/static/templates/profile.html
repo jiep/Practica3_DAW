@@ -1,7 +1,7 @@
 <md-content layout-padding style="padding: 50px"
 	ng-controller="ProfileCtrl">
 <div layout="row">
-	<div flex="70">
+	<div flex="50">
 		<div style='margin: 0 auto 0 auto;'>
 			<h1>
 				<strong>¡Hola, {{user.userName}}!</strong>
@@ -9,11 +9,16 @@
 		</div>
 
 	</div>
-	<div flex="30">
+	<div flex="50">
 
 		<a href="/newRoute"> <md-button class="md-raised md-primary"
 				layout-align="right">
 			<h3>Añadir ruta</h3>
+			</md-button>
+		</a>
+		<a href="/preferences/{{user.id}}"> <md-button class="md-raised md-primary"
+				layout-align="right">
+			<h3>Editar perfil</h3>
 			</md-button>
 		</a>
 	</div>
