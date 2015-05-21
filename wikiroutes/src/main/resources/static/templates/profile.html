@@ -1,7 +1,9 @@
 <md-content layout-padding style="padding: 50px"
 	ng-controller="ProfileCtrl">
 <div layout="row">
-	<div flex="80">
+	<div flex="15">
+	</div>
+	<div flex="65">
 		<div style='margin: 0 auto 0 auto;'>
 			<h1>
 				<strong>¡Hola, {{user.userName}}!</strong>
@@ -11,11 +13,11 @@
 	</div>
 	<div flex="20">
 
-		<a href="#/newRoute"> <md-button class="md-fab md-fab"
+		<a href="/newRoute"> <md-button class="md-fab md-fab"
 				aria-label="Añadir ruta" layout-align="right"> <ng-md-icon
 				icon="add" style="fill: 24px" size="24"></ng-md-icon> <md-tooltip
 				md-visible="demo.showTooltip"> Añadir ruta </md-tooltip> </md-button>
-		</a> <a href="#/preferences"> <md-button class="md-fab md-fab"
+		</a> <a href="/preferences"> <md-button class="md-fab md-fab"
 				aria-label="Editar perfil" layout-align="right"> <ng-md-icon
 				icon="settings" style="fill: 24px" size="24"></ng-md-icon> <md-tooltip
 				md-visible="demo.showTooltip"> Editar perfil </md-tooltip> </md-button>
@@ -45,7 +47,7 @@
 		</div>
 		<div flex="60">
 			<div class="md-list-item-text">
-				<a href="#/viewRoute/{{route.id}}"><h3>{{route.name}}</h3></a>
+				<a href="/viewRoute/{{route.id}}"><h3>{{route.name}}</h3></a>
 				<h4>{{route.description | limitTo:50}}...</h4>
 				<p>{{route.user}}</p>
 			</div>
@@ -56,7 +58,7 @@
 						size="36"></ng-md-icon> <ng-md-icon ng-if="!route.private"
 						icon="lock_open" size="36"></ng-md-icon>
 
-				</span> <a href="#/editRoute/{{route.id}}"><span> <ng-md-icon
+				</span> <a href="/editRoute/{{route.id}}"><span> <ng-md-icon
 							icon="mode_edit" size="36"></ng-md-icon>
 				</span> </a> <span> <ng-md-icon icon="clear" size="36"></ng-md-icon>
 				</span> <span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>

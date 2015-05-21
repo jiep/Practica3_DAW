@@ -4,14 +4,6 @@
 </div>
 <div flex="33">
 
-	<div flex="50">
-	
-			<md-button ng-click="removeUser(user)" class="md-raised md-primary"
-					layout-align="right">
-				<h3>Borrar cuenta</h3>
-				</md-button>
-			</a>
-		</div>
 
 	<md-content layout-padding>
 		<form name="loginForm" ng-submit="changeProfile(user)">
@@ -42,6 +34,10 @@
 
 </div>
 <div flex="33">
+ <md-button ng-click="removeUser(user)" class="md-fab md-fab"
+				aria-label="Borrar cuenta" layout-align="right"> <ng-md-icon
+				icon="add" style="fill: 24px" size="24"></ng-md-icon> <md-tooltip
+				md-visible="demo.showTooltip"> Borrar cuenta </md-tooltip> </md-button>
 </div>
 </div>
 </md-content>

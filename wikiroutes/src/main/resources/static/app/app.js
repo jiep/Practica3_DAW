@@ -111,7 +111,6 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location,
 			fileBody = file.getAsDataURL();
 			$scope.route.images.push(fileBody);
 		});
-
 	}
 
 	$scope.map = {
@@ -145,7 +144,10 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location,
 			rightclick : function(mapModel, eventName, originalEventArgs,
 					arguments) {
 				$scope.$apply(function() {
-				
+					console.log("1", mapModel);
+					console.log("2", eventName);
+					console.log("3", originalEventArgs);
+					console.log("4", arguments);
 
 				});
 			}
@@ -237,7 +239,6 @@ app.controller('MapViewCtrl', function($scope, Comment, $rootScope, Route,
 					longitude : route.stretches[i].points[1].longitude
 				});
 			}
-		
 		}
 
 		return route.path;
@@ -299,9 +300,8 @@ app.controller("HomeCtrl", function($scope, $http, $rootScope) {
 	$http.get('/routes').then(function(result) {
 			$scope.routes =  result.data;
 			$scope.user = $rootScope.user;
-			console.log(typeof($scope.routes[0].type));
 	});
-
+	
 });
 
 app.controller("LoginCtrl", function($scope, $rootScope, Login, $location) {
@@ -320,6 +320,7 @@ app.controller("LoginCtrl", function($scope, $rootScope, Login, $location) {
 });
 
 app.controller("ProfileCtrl", function($rootScope, $scope) {
+
 	$scope.user = $rootScope.user;
 	$scope.routes = $rootScope.user.routes;
 
@@ -414,7 +415,10 @@ app.controller('EditMapCtrl', function($scope, $rootScope, Route, $routeParams, 
 						rightclick : function(mapModel, eventName, originalEventArgs,
 								arguments) {
 							$scope.$apply(function() {
-								
+								console.log("1", mapModel);
+								console.log("2", eventName);
+								console.log("3", originalEventArgs);
+								console.log("4", arguments);
 			
 							});
 						}
@@ -523,7 +527,6 @@ app.controller("ViewPublicRouteCtrl", function($scope, $http, $routeParams, $roo
 							longitude : route.stretches[i].points[1].longitude
 						});
 					}
-			
 				}
 
 				return route.path;
