@@ -11,9 +11,7 @@
 <link rel="stylesheet"
 	href="bower_components/slick-carousel/slick/slick.css">
 <link rel="stylesheet" href="css/style.css">
-<link rel="shortcut icon"
-	href="http://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Wikipedia's_W.svg/50px-Wikipedia's_W.svg.png"
-	type="image/png" />
+<link rel="shortcut icon" href="img/Wikipedia.png" type="image/png" />
 
 
 
@@ -22,8 +20,7 @@
 	<md-toolbar id="cabecera" layout=row>
 	<div flex="10">
 		<h1 class="md-toolbar-tools" layout-align="left">
-			<a href="/"><img
-				src="img/Wikipedia.png" /></a>
+			<a href="/"><img src="img/Wikipedia.png" /></a>
 		</h1>
 	</div>
 	<div flex="70">
@@ -42,11 +39,13 @@
 	</div>
 	<div flex="20" layout-align="right">
 		<h1 class="md-toolbar-tools">
-			<span><a ng-if="user" href="/profile"><md-button>Ver perfil</md-button>   </a> <span><a ng-if="user"
-+				ng-click="logout()" ng-if="user" href="/login"> <md-button>Cerrar sesión</md-button></span></a> <a
-+				ng-if="!user" href="/login"> <ng-md-icon icon="account_box"
-+					size="36"></ng-md-icon> <span>Iniciar sesión</span>
- 			</a>
+			<span><a ng-if="user" href="/profile"><md-button>Ver
+					perfil</md-button> </a> <span><a ng-if="user" +				ng-click="logout()"
+					ng-if="user" href="/login"> <md-button>Cerrar
+						sesión</md-button></span></a> <a +				ng-if="!user" href="/login"> <ng-md-icon
+						icon="account_box" +					size="36"></ng-md-icon> <span>Iniciar
+						sesión</span>
+			</a>
 		</h1>
 	</div>
 
@@ -58,8 +57,10 @@
 
 	<md-toolbar layout="row" id="lineaIconos">
 	<div flex=5></div>
-	<div flex=25><a href="/developers" layout-align="left"><md-button >Desarrolladores</md-button></a></div>
-	<div flex  layout="row" style="padding-top: 5px">
+	<div flex=25>
+		<a href="/developers" layout-align="left"><md-button>Desarrolladores</md-button></a>
+	</div>
+	<div flex layout="row" style="padding-top: 5px">
 
 		<div flex=25>
 			<a href="/category/walk"><img src="img/icono_andar.png"></a>
@@ -77,10 +78,10 @@
 			<a href="/category/boat"><img src="img/icono_barco.ico"></a>
 		</div>
 	</div>
-	<div flex=20>
-	</div>
+	<div flex=20></div>
 	<div flex=10>
-	<a href="/ayuda" layout-align="right"><md-button >Ayuda</md-button></a></div>
+		<a href="/ayuda" layout-align="right"><md-button>Ayuda</md-button></a>
+	</div>
 
 	</md-toolbar>
 
@@ -108,8 +109,9 @@
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/slick-carousel/slick/slick.js"></script>
 	<script src="bower_components/angular-slick/dist/slick.js"></script>
-	<script src="bower_components/angular-base64-upload/dist/angular-base64-upload.js"></script>
-	
+	<script
+		src="bower_components/angular-base64-upload/dist/angular-base64-upload.js"></script>
+
 
 	<script src="app/services.js"></script>
 	<script src="app/app.js"></script>
