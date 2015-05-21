@@ -43,21 +43,23 @@
 	<div flex="20" layout-align="right">
 		<h1 class="md-toolbar-tools">
 			<a ng-if="user" href="/profile">Ver perfil</a> <a ng-if="user"
-				ng-click="logout()" ng-if="user" href="/login"> Cerrar sesión</a> <a
-				ng-if="!user" href="/login"> <ng-md-icon icon="account_box"
-					size="36"></ng-md-icon> <span>Iniciar sesión</span>
-			</a>
++				ng-click="logout()" ng-if="user" href="/login"> Cerrar sesión</a> <a
++				ng-if="!user" href="/login"> <ng-md-icon icon="account_box"
++					size="36"></ng-md-icon> <span>Iniciar sesión</span>
+ 			</a>
 		</h1>
 	</div>
 
 	</md-toolbar>
 
+
+
 	<md-divider></md-divider>
 
-	<md-toolbar layout="row" style='padding:6px;'>
+	<md-toolbar layout="row">
 	<div flex=30></div>
 
-	<div flex offset=40 layout="row">
+	<div flex  layout="row">
 
 		<div flex=25>
 			<a href="/category/walk"><img src="img/icono_andar.png"></a>
@@ -79,7 +81,10 @@
 
 	</md-toolbar>
 
+
 	<div ng-view></div>
+
+
 
 	<!-- Angular Material Dependencies -->
 	<script src='https://maps.googleapis.com/maps/api/js?sensor=false'></script>
