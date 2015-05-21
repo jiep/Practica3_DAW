@@ -21,7 +21,7 @@
 	<md-switch ng-model="route.isPrivate"> Configurar la ruta
 	como <strong>{{ route.isPrivate ? 'privada' : 'pública' }}</strong> </md-switch>
 	<input name="file" type="file" ng-model="route.images" base-sixty-four-input />
-	<img style="width:100%; height: 75%" base-sixty-four-image="route.images" base-sixty-four-image-placeholder="placeholder.png" alt="">
+	<img style="width:100%; height: 75%" base-sixty-four-image="route.images" base-sixty-four-image-placeholder="img/placeholder.png" alt="">
 	<p id="base64" style="display:none">{{route.images.base64}}</p>
 	<br> <br>
 	<md-input-container>
