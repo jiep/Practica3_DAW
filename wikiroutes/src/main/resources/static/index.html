@@ -17,7 +17,7 @@
 	<md-toolbar id="cabecera" layout=row>
 	<div flex="10">
 		<h1 class="md-toolbar-tools" layout-align="left">
-			<a href="#/"><img src="img/Wikipedia.png" /></a>
+			<a href="/"><img src="img/Wikipedia.png" /></a>
 		</h1>
 	</div>
 	<div flex="70">
@@ -36,11 +36,11 @@
 	</div>
 	<div flex="20" layout-align="right">
 		<h1 class="md-toolbar-tools">
-			<span><a ng-if="user" href="#/profile"><md-button>Ver
-					perfil</md-button> </a> <span><a ng-if="user" +				ng-click="logout()"
-					ng-if="user" href="#/login"> <md-button>Cerrar
-						sesión</md-button></span></a> <a +				ng-if="!user" href="/login"> <ng-md-icon
-						icon="account_box" +					size="36"></ng-md-icon> <span>Iniciar
+			<span><a ng-if="user" href="/profile"><md-button>Ver
+					perfil</md-button> </a> <span><a ng-if="user" ng-click="logout()"
+					ng-if="user" href="/login"> <md-button>Cerrar
+						sesión</md-button></span></a> <a ng-if="!user" href="/login"> <ng-md-icon
+						icon="account_box" size="36"></ng-md-icon> <span>Iniciar
 						sesión</span>
 			</a>
 		</h1>
@@ -55,29 +55,29 @@
 	<md-toolbar layout="row" id="lineaIconos">
 	<div flex=5></div>
 	<div flex=25>
-		<a href="#/developers" layout-align="left"><md-button>Desarrolladores</md-button></a>
+		<a href="/developers" layout-align="left"><md-button>Desarrolladores</md-button></a>
 	</div>
 	<div flex layout="row" style="padding-top: 5px">
 
 		<div flex=25>
-			<a href="#/category/walk"><img src="img/icono_andar.png"></a>
+			<a href="/category/walk"><img src="img/icono_andar.png"></a>
 		</div>
 
 		<div flex=25>
-			<a href="#/category/bike"><img src="img/icono_bici.png"></a>
+			<a href="/category/bike"><img src="img/icono_bici.png"></a>
 		</div>
 
 		<div flex=25>
-			<a href="#/category/horse"><img src="img/icono_caballo.png"></a>
+			<a href="/category/horse"><img src="img/icono_caballo.png"></a>
 		</div>
 
 		<div flex=25>
-			<a href="#/category/boat"><img src="img/icono_barco.ico"></a>
+			<a href="/category/boat"><img src="img/icono_barco.ico"></a>
 		</div>
 	</div>
 	<div flex=20></div>
 	<div flex=10>
-		<a href="#/ayuda" layout-align="right"><md-button>Ayuda</md-button></a>
+		<a href="/ayuda" layout-align="right"><md-button>Ayuda</md-button></a>
 	</div>
 
 	</md-toolbar>

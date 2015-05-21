@@ -40,7 +40,10 @@ app.config(function($routeProvider) {
 });
 
 app.config(function($locationProvider) {
-	$locationProvider.html5Mode(true);
+	$locationProvider.html5Mode({
+	  enabled: true,
+	  requireBase: false
+	});
 });
 
 app.controller('NavCtrl', NavCtrl);
