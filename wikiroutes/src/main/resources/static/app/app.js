@@ -26,6 +26,8 @@ app.config(function($routeProvider) {
 		templateUrl : "/templates/developers.html"
 	}).when("/viewRoute/:id", {
 		templateUrl : "/templates/viewRoute.html"
+	}).when("/route/:id", {
+		templateUrl : "/templates/viewPublicRoute.html"
 	}).when("/category/:type", {
 		templateUrl : "/templates/search.html"
 	}).otherwise({
@@ -57,7 +59,7 @@ function NavCtrl($http, $rootScope, $scope, $location) {
 	};
 
 	$scope.findByName = function(object){
-		$location.path("/viewRoute/" + object.id);
+		$location.path("/route/" + object.id);
 	};
 
 };
@@ -501,6 +503,71 @@ app.controller("SearchByCategoryCtrl", function($scope, $http, $routeParams){
 	if($routeParams.type){
 		$http.get('/search/category/' + $routeParams.type).then(function(result) {
 			$scope.routes =  result.data;
+		});
+	}
+});
+
+app.controller("ViewPublicRouteCtrl", function($scope, $http, $routeParams){
+	if($routeParams.id){
+		$http.get('/search/' + $routeParams.id).then(function(result) {
+			$scope.route =  result.data;
+			function setPath(route) {
+				route.path = [];
+				for (var i = 0; i < route.stretches.length; i++) {
+					if (i != route.stretches.length - 1) {
+						route.path.push({
+							latitude : route.stretches[i].points[0].latitude,
+							longitude : route.stretches[i].points[0].longitude
+						});
+					} else {
+						route.path.push({
+							latitude : route.stretches[i].points[0].latitude,
+							longitude : route.stretches[i].points[0].longitude
+						});
+						route.path.push({
+							latitude : route.stretches[i].points[1].latitude,
+							longitude : route.stretches[i].points[1].longitude
+						});
+					}
+					console.log(route.path);
+				}
+
+				return route.path;
+			}
+
+			var route = {};
+
+
+				route = setPath($scope.route);
+
+				$scope.map = {
+					center : {
+						latitude : route[0].latitude,
+						longitude : route[0].longitude
+					},
+					zoom : 4,
+					bounds : {},
+
+				};
+				$scope.polyline = {
+					id : 1,
+					path : route,
+					stroke : {
+						color : '#6060FB',
+						weight : 3
+					},
+					editable : false,
+					draggable : false,
+					visible : true,
+					icons : [ {
+						icon : {
+							path : google.maps.SymbolPath.FORWARD_OPEN_ARROW
+						},
+						offset : '25px',
+						repeat : '50px'
+					} ]
+				};
+			
 		});
 	}
 });

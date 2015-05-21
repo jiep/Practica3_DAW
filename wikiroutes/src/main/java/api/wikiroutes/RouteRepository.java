@@ -25,6 +25,8 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
 	
 	// Busca rutas por tipo y por privacidad(público/privado)
 	List<Route> findByTypeAndIsPrivate(Type type, boolean isPrivate);
-
+	
+	// Busca rutas por id y por privacidad(público/privado)
+	Route findByIdAndIsPrivate(Long id, boolean isPrivate);
 }
 

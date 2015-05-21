@@ -21,6 +21,12 @@ public class SearchRestController {
 		return routes.findByNameContainingAndIsPrivate(name,false);
 	}
 	
+	@RequestMapping("/{id}")
+	public Route getRouteById(@PathVariable Long id){
+		
+		return routes.findByIdAndIsPrivate(id, false);
+	}
+	
 	@RequestMapping("/category/{route_type}")
 	public List<Route> findByType(Type type, boolean isPrivate, @PathVariable String route_type){
 		
