@@ -582,7 +582,19 @@ app.controller("PreferencesCtrl", function($rootScope, $location, UploadUser, $s
 		console.log(user);
 		upload_user.$update({id: $rootScope.user.id}).then(function(uploaded_user){
 			$rootScope.user = uploaded_user;
+			$scope.user = uploaded_user;
 			$location.path("/profile");
 		});
+	};
+	
+	$scope.removeUser = function(user){
+		var delete_user = new UploadUser(user);
+		delete_user.$remove({id: $rootScope.user.id}).then(function(data){
+			$scope.user = undefined;
+			$rootScope.user = undefined;
+			$location.path("");
+		});
 	}
+	
+	
 });
