@@ -1,199 +1,34 @@
-<div>
-	<md-content class="md-padding">
-		<md-tabs md-dynamic-height md-border-bottom>
-			<md-tab label="Todo">
-				<md-content class="md-padding">
-					<md-content layout-padding style="padding: 50px" ng-controller="HomeCtrl">
-					
-						<div layout="row">
-							<div md-container flex="100">
-
-								<md-toolbar>
-									<div class="md-toolbar-tools">
-										<h2 class="md-flex">
-					<strong>Rutas encontradas:</strong>
-				</h2>
-									</div>
-								</md-toolbar>
-								 <md-content layout-padding style="height: 400px;padding: 24px;">
-
-								<div ng-repeat="route in routes">
-									<md-list-item class="md-3-line">
-										<div layout="row">
-											<div flex="20">
-												<md-card class="card"> <img ng-src="/img/nature4.jpg" class="md-avatar" alt="{{item.who}}" /> </md-card>
-											</div>
-											<div flex="60">
-												<div class="md-list-item-text">
-													<h3>{{route.name}}</h3>
-													<h4>{{route.description}}</h4>
-													<p>{{route.user}}</p>
-												</div>
-											</div>
-											<div flex="20">
-												<div layout="column">
-													<div>
-														<span><ng-md-icon icon="add" size="36">
-							</div>
-							<div>
-								<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</md-list-item>
-									<md-divider></md-divider>
-									</md-toolbar>
-								</div>
-								</md-content>
-							</div>
-						</div>
-					
-						<div layout="row">
-							<div md-container flex="100">
-
-								<md-toolbar>
-									<div class="md-toolbar-tools">
-										<h2 class="md-flex">
-					<strong>Usuarios encontrados:</strong>
-				</h2>
-									</div>
-								</md-toolbar>
-								 <md-content layout-padding style="height: 400px;padding: 24px;">
-
-								<div ng-repeat="user in users">
-									<md-list-item class="md-3-line">
-										<div layout="row">
-											<div flex="20">
-												<md-card class="card"> <img ng-src="/img/foto_user.png" class="md-avatar" alt="{{item.who}}" /> </md-card>
-											</div>
-											<div flex="60">
-												<div class="md-list-item-text">
-													<h3>{{user.userName}}</h3>
-													<h4>{{user.email}}</h4>
-												</div>
-											</div>
-											<div flex="20">
-												<div layout="column">
-													<div>
-														<span><ng-md-icon icon="add" size="36"></ng-md-icon></span> <span><ng-md-icon
-										icon="block" size="36"></ng-md-icon>
-							</div>
-							<div>
-								<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
-													</div>
-
-												</div>
-											</div>
-										</div>
-									</md-list-item>
-									<md-divider></md-divider>
-									</md-toolbar>
-								</div>
-								</md-content>
-							</div>
-						</div>
-					</md-content>
-				</md-content>
-			</md-tab>
-			<md-tab label="Rutas">
-				<md-content class="md-padding">
-
-					<md-content layout-padding style="padding: 50px" ng-controller="HomeCtrl">
-						<div layout="row">
-							<div md-container flex="100">
-
-								<md-toolbar>
-									<div class="md-toolbar-tools">
-										<h2 class="md-flex">
-					<strong>Rutas encontradas:</strong>
-				</h2>
-									</div>
-								</md-toolbar>
-
-								<div ng-repeat="route in routes">
-									<md-list-item class="md-3-line">
-										<div layout="row">
-											<div flex="20">
-												<md-card class="card"> <img ng-src="/img/nature4.jpg" class="md-avatar" alt="{{item.who}}" /> </md-card>
-											</div>
-											<div flex="60">
-												<div class="md-list-item-text">
-													<h3>{{route.name}}</h3>
-													<h4>{{route.description}}</h4>
-													<p>{{route.user}}</p>
-												</div>
-											</div>
-											<div flex="20">
-												<div layout="column">
-													<div>
-														<span><ng-md-icon icon="add" size="36">
-							</div>
-							<div>
-								<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</md-list-item>
-									<md-divider></md-divider>
-									</md-toolbar>
-								</div>
-							</div>
-						</div>
-					</md-content>
-				</md-content>
-			</md-tab>
-			<md-tab label="Usuarios">
-				<md-content class="md-padding">
-
-					<md-content layout-padding style="padding: 50px" ng-controller="HomeCtrl">
-						<div layout="row">
-							<div md-container flex="100">
-
-								<md-toolbar>
-									<div class="md-toolbar-tools">
-										<h2 class="md-flex">
-					<strong>Usuarios encontrados:</strong>
-				</h2>
-									</div>
-								</md-toolbar>
-
-								<div ng-repeat="user in users">
-									<md-list-item class="md-3-line">
-										<div layout="row">
-											<div flex="20">
-												<md-card class="card"> <img ng-src="/img/foto_user.png" class="md-avatar" alt="{{item.who}}" /> </md-card>
-											</div>
-											<div flex="60">
-												<div class="md-list-item-text">
-													<h3>{{user.userName}}</h3>
-													<h4>{{user.email}}</h4>
-												</div>
-											</div>
-											<div flex="20">
-												<div layout="column">
-													<div>
-														<span><ng-md-icon icon="add" size="36"></ng-md-icon></span> <span><ng-md-icon
-										icon="block" size="36"></ng-md-icon>
-							</div>
-							<div>
-								<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
-													</div>
-
-												</div>
-											</div>
-										</div>
-									</md-list-item>
-									<md-divider></md-divider>
-									</md-toolbar>
-								</div>
-							</div>
-						</div>
-					</md-content>
-				</md-content>
-			</md-tab>
-		</md-tabs>
+<md-content layout-padding style="padding: 50px" ng-controller="SearchTypeCtrl">
+	<div layout="row">
+	<strong>Rutas encontradas:</strong>
+	<md-content layout-padding style="height: 400px;padding: 24px;">
+	<div ng-repeat="route in routes">
+		<md-list-item class="md-3-line">
+		<div layout="row">
+				<div flex="20">
+					<md-card class="card"> <img ng-src="/img/nature4.jpg" class="md-avatar" alt="{{item.who}}" /> </md-card>
+				</div>
+			<div flex="60">
+				<div class="md-list-item-text">
+						<h3>{{route.name}}</h3>
+						<h4>{{route.description}}</h4>
+						<p>{{route.user.userName}}</p>
+				</div>
+			</div>
+			<div flex="20">
+			   <div layout="column">
+				<div>
+					<span><ng-md-icon icon="add" size="36">
+				</div>
+				<div>
+					<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
+				</div>
+			  </div>
+			</div>
+		</div>
+		</md-list-item>
+	</div>
 	</md-content>
-</div>
-	<div ng-include="'templates/footer.html'"></div>
+	</div>
+</md-content>
+<div ng-include="'templates/footer.html'"></div>
