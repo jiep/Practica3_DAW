@@ -32,6 +32,8 @@ app.config(function($routeProvider) {
 		templateUrl : "/templates/search.html"
 	}).when("/preferences", {
 		templateUrl : "/templates/preferences.html"
+	}).when("/ayuda", {
+		templateUrl : "/templates/ayuda.html"
 	}).otherwise({
 		redirectTo : "/"
 	})

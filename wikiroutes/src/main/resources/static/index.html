@@ -23,7 +23,7 @@
 	<div flex="10">
 		<h1 class="md-toolbar-tools" layout-align="left">
 			<a href="/"><img
-				src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Wikipedia's_W.svg/50px-Wikipedia's_W.svg.png" /></a>
+				src="img/Wikipedia.png" /></a>
 		</h1>
 	</div>
 	<div flex="70">
@@ -42,8 +42,8 @@
 	</div>
 	<div flex="20" layout-align="right">
 		<h1 class="md-toolbar-tools">
-			<span><a ng-if="user" href="/profile">Ver perfil   </a> <span><a ng-if="user"
-+				ng-click="logout()" ng-if="user" href="/login"> Cerrar sesión</span></a> <a
+			<span><a ng-if="user" href="/profile"><md-button>Ver perfil</md-button>   </a> <span><a ng-if="user"
++				ng-click="logout()" ng-if="user" href="/login"> <md-button>Cerrar sesión</md-button></span></a> <a
 +				ng-if="!user" href="/login"> <ng-md-icon icon="account_box"
 +					size="36"></ng-md-icon> <span>Iniciar sesión</span>
  			</a>
@@ -57,8 +57,8 @@
 	<md-divider></md-divider>
 
 	<md-toolbar layout="row" id="lineaIconos">
-	<div flex=30></div>
-
+	<div flex=5></div>
+	<div flex=25><a href="/developers" layout-align="left"><md-button >Desarrolladores</md-button></a></div>
 	<div flex  layout="row" style="padding-top: 5px">
 
 		<div flex=25>
@@ -77,7 +77,10 @@
 			<a href="/category/boat"><img src="img/icono_barco.ico"></a>
 		</div>
 	</div>
-	<div flex=30></div>
+	<div flex=20>
+	</div>
+	<div flex=10>
+	<a href="/ayuda" layout-align="right"><md-button >Ayuda</md-button></a></div>
 
 	</md-toolbar>
 

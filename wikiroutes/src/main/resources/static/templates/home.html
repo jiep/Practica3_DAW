@@ -14,13 +14,13 @@
 		</div>
 		</md-toolbar>
 		
-		<div><p ng-show="!routes.length">Todavía no tenemos rutas disponibles</p></div>
+		<div><p ng-show="!routes.length">Todavía no hay rutas disponibles</p></div>
 
 		<div ng-repeat="route in routes">
 			<md-list-item class="md-3-line">
 			<div layout="row">
 				<div flex="20">
-					<md-card class="card"> <img ng-src="data:image/png;base64,{{route.image}}"
+					<md-card class="card"> <img ng-src="data:image/png;base64,{{route.image}}" err-src="/img/placeholder.png"
 						class="md-avatar" /> </md-card>
 				</div>
 				<div flex="80">
@@ -40,4 +40,3 @@
 </div>
 
 </md-content>
-<div ng-include="'templates/footer.html'"></div>
