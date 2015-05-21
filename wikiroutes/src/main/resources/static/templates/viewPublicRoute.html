@@ -1,11 +1,27 @@
 <md-content layout-padding style="padding: 50px"
-	ng-controller="ViewPublicRouteCtrl"> 
-<md-toolbar layout-align="center center">
-	<h1><strong>{{route.name}}</strong></h1>
-</md-toolbar>
-</br>
+	ng-controller="ViewPublicRouteCtrl">
+<h2 class="md-display-3">{{route.name}}</h2>
+<md-divider></md-divider> <br>
+{{route.type}} angular.equals(route.type, BOAT);
+<div ng-if="route.type == WALK">
+	Ruta a pie. ¡Encuentra más rutas de este tipo! <a href="/category/walk"><img
+		src="img/icono_andar.png"></a>
+</div>
+<div ng-if="route.type == BIKE">
+	Ruta en bicicleta. ¡Encuentra más rutas de este tipo! <a
+		href="/category/bike"><img src="img/icono_bici.png"></a>
+</div>
+<div ng-if="route.type == HORSE">
+	Ruta a caballo. ¡Encuentra más rutas de este tipo! <a
+		href="/category/horse"><img src="img/icono_caballo.png"></a>
+</div>
+<div ng-if="route.type == BOAT">
+	Ruta en barco. ¡Encuentra más rutas de este tipo! <a
+		href="/category/boat"><img src="img/icono_barco.ico"></a>
+</div>
 <br>
-<h2>{{route.type}}</h2>
+
+
 <br>
 <md-input-container>
 <div layout="row">
@@ -22,32 +38,11 @@
 </div>
 </md-input-container> <br>
 <br>
-<h2>{{route.description}}</h2>
+<md-divider></md-divider> <br>
 
-<md-toolbar layout-align="center center">
-	<h3><strong>Comentarios</strong></h3>
-</md-toolbar>
+<h3>Descripción de la ruta:</h3>
 
-<h3 ng-show="!route.comments.length">No hay comentarios para esta ruta</h3>
+<p>{{route.description}}</p>
 
-<div ng-repeat="comment in route.comments">
-	<md-list-item class="md-3-line">
-	<div layout="row">
-		<h1>{{comment.comment}}</h1>
-	</div>
-	</md-list-item>
-</div>
-
-<md-divider></md-divider>
-
-<md-content ng-show="user">
-<form name="CommentForm" ng-submit="newcomment(new_comment)">
-	<md-input-container> <textarea md-maxlength="250"
-		name="comment" ng-model="new_comment" placeholder="Introduce tu comentario" required></textarea> </md-input-container>
-
-	<md-input-container layout-align="right"> <md-button
-		md-no-ink class="md-primary">Añade tu comentario</md-button> </md-input-container>
-</form>
-</md-content> 
 
 </md-content>
