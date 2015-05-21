@@ -11,7 +11,13 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{color}
-\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue]{hyperref} 
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue, unicode=true]{hyperref} 
+\hypersetup{pdfencoding=auto}
+
+\usepackage{tikz}
+\usepackage{xstring}
+\usepackage{./tikz-uml}
+
 
 \newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
 
@@ -29,6 +35,7 @@
 \setmainfont[Ligatures=TeX]{texgyrepagella}
 
 \input{portada}
+\input{diagramas}
 
 \newcommand*{\autores}{
 \begin{tabular}{r l}
@@ -49,6 +56,10 @@ GIS+MAT: & José Ignacio Escribano Pablos
 \thispagestyle{empty}
 \newpage
 
+\listoffigures
+\thispagestyle{empty}
+\newpage
+
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
@@ -56,23 +67,73 @@ GIS+MAT: & José Ignacio Escribano Pablos
 
 Para esta práctica hemos decidido diseñar e implementar una aplicación que permita a sus usuarios ver, añadir, y modificar rutas de distintos tipos como senderismo, a caballo, a vela, etc. La aplicación es similar a la existente Wikiloc, con la diferencia que nuestras rutas se crearán siempre dibujándolas mediante \textit{google maps}.
 
-\section{Tecnologías empleadas}
+\subsection{Tecnologías empleadas}
 \begin{itemize}
 \item Tal y como se pedía en el enunciado  de la práctica, nuestra aplicación sigue una arquitectura SPA que utiliza Angular JS para el front-end y Spring MVC para el back end.
 \item Para instlar las dependencias necesarias para el front-end hemos usado Bower.
-\item Para realizar todo lo relacionado co mapas hemos usado la API de \textit{Google Maps}.
+\item Para realizar todo lo relacionado con mapas hemos usado la API de \textit{Google Maps}.
 \item Angular material ha sido el framework elegido para realizar la interfaz de usuario.
 \item La aplicación ha sido desplegada mediante Amazon Web Services.
 
 \end{itemize}
-\colorbox{red}{FOTO CON TODAS LAS TECNOLOGÍAS USADAS AQUÍ}
 
-\section{Arquitectura del sistema}
+\begin{figure}[htbp]
+\centering
+\tecnologias
+\caption{Tecnologías usadas}
+\label{fig:tecnologias}
+\end{figure}
+
+\clearpage
+
+\subsection{Arquitectura del sistema}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\linewidth]{imagenes/arquitectura}
+\caption{Arquitectura de la aplicación}
+\label{fig:arquitectura}
+\end{figure}
+
+
+\clearpage
+
 \section{Diagramas UML}
 
 \subsection{Diagramas UML del backend}
 
+\subsection{Diagrama de clases}
+
+\begin{figure}
+\centering
+\clasesbackend
+\caption{Diagrama de clases del backend}
+\label{fig:clases_backend}
+\end{figure}
+
+\subsection{Diagrama de actividad de añadir ruta}
+
+\begin{figure}[htbp]
+\centering
+\anadirruta
+\caption{Diagrama de actividad de añadir ruta}
+\label{fig:anadirruta}
+\end{figure}
+
+
+\subsection{Diagrama de actividad de buscar ruta}
+
+
+\begin{figure}
+\centering
+\buscarruta
+\caption{Diagrama de actividad de buscar ruta}
+\label{fig:buscarruta}
+\end{figure}
+
 \subsection{Diagramas UML del frontend}
+
+\clearpage
 
 \section{Recorrido por la aplicación}
 \subsection{Inicio}
@@ -150,6 +211,9 @@ Por último hemos añadido una página de ``developers'', en la que mostramos br
   \caption{Página de búsqueda de ruta}
   \label{fig: Página de búsqueda de developers}
 \end{figure}
+
+\clearpage
+
 \section{Mejoras futuras}
 Ha habido numerosas funcionalidades que no hemos podido implementar por falta de tiempo. A continuación mostramos las mejoras más significativas que incorporaría una hipotética siguiente versión:
 \begin{itemize}
@@ -160,10 +224,16 @@ Ha habido numerosas funcionalidades que no hemos podido implementar por falta de
 \item Incorporar un sistema de calificación de rutas. Se realizaría mediante un sistema de puntuación de 5 estrellas, simimlar al utilizado por amazon. Esta puntuación serviría para actualizar las rutas más valoradas o filtrar los resultados según su puntuación.
 \item Dar más flexibilidad al perfil de usuario: permitir modificar el aspecto de tu cuenta o cambiar tu avatar.
 \end{itemize} 
+
+\clearpage
+
 \section{Conclusiones}
 Tras concluir la práctica nos hemos quedado con un sabor agridulce. Ha sido muy positivo y gratificante realizar una pequeña aplicación real usando tecnologías modernas y utilizadas. Sin embargo, ese ha sido también nuestro principal impedimento: nos hemos enfrentado por primera vez a muchas herramientas que desconocíamos, por lo que hemos tenido problemas que no habíamos previsto cuando planificamos las funcionalidades de la aplicación. \\
 
 Por último decir que esta ha sido posiblemente la práctica más difícil que hemos tenido hasta el momento en la carrera (tanto por la cantidad de conceptos y tecnologías que tenías que controlar, como por el poco tiempo disponible), pero también ha sido la que más se ha podido acercar a una hipotética situación real de trabajo, por lo que calificamos esta práctica como muy positiva.
+
+\clearpage
+
 \appendix
 \section{Diseño de la API REST}
 

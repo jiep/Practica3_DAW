@@ -1,0 +1,116 @@
+\newcommand{\anadirruta}{
+\begin{tikzpicture}
+\tikzumlset{fill state=white}
+\umlstateinitial[name=initial]
+\begin{umlstate}[x=0, y=-3,name=datos]{Iniciar sesión}
+\end{umlstate}
+
+\umlstatedecision[y=-5, name=permiso] 
+
+\begin{umlstate}[x=0, y=-8,name=comprobar]{Ver perfil}
+\end{umlstate}
+
+\begin{umlstate}[y=-11,name=sesion]{Añadir ruta}
+\end{umlstate}
+
+\umlstatefinal[y=-13, name=final]
+
+\umltrans{initial}{datos}
+\umltrans{datos}{permiso}
+\umltrans[arg1=correcto]{permiso}{comprobar}
+\umltrans{comprobar}{sesion}
+\umltrans{sesion}{final}
+\umlHVHtrans[arg1=incorrecto, arm2=-4]{permiso}{final}
+
+\end{tikzpicture}
+}
+
+\newcommand{\buscarruta}{
+	\begin{tikzpicture}
+	\tikzumlset{fill state=white}
+	\umlstateinitial[name=initial]
+	\begin{umlstate}[x=0, y=-3,name=datos]{Buscar ruta}
+	\end{umlstate}
+	
+	\umlstatefinal[y=-5, name=final]
+	
+	\umltrans{initial}{datos}
+	\umltrans{datos}{final}
+	
+	\end{tikzpicture}
+}
+
+\newcommand{\clasesbackend}{
+	
+\begin{tikzpicture}
+	
+\tikzumlset{fill state=white}
+\umlclass[x=0, y=0]{User}{
+}{
+}
+
+\umlclass[x=5, y=0]{Route}{
+}{
+}
+
+\umlclass[x=8, y=0]{Stretch}{
+}{
+}
+
+\umlclass[x=11, y=0]{Point}{
+}{
+}
+
+\umlclass[x=8, y=-5]{Image}{
+}{
+}
+
+\umlclass[x=3, y=-5]{Comment}{
+}{
+}
+
+\umlclass[x=11, y=-5]{TypeRoute}{
+}{
+}
+
+
+% Relaciones
+
+\umlassoc[mult1=0..n, mult2=1]{User}{Route}
+
+\umlassoc[mult1=0..n, mult2=1]{User}{Comment}
+
+\umlassoc[mult1=1, mult2=0..n]{Route}{Image}
+
+\umlassoc[mult1=0..n, mult2=1]{Route}{Comment}
+
+\umlassoc[mult1=1, mult2=1]{Route}{TypeRoute}
+
+\umlcompo{Route}{Stretch}
+
+\umlcompo{Stretch}{Point}
+
+
+\end{tikzpicture}
+
+}
+
+\newcommand{\tecnologias}{
+
+\begin{tikzpicture}[scale=1]
+\node[inner sep=0pt] (bower) at (0,0)
+    {\includegraphics[width=.2\textwidth]{imagenes/bower.png}};
+\node[inner sep=0pt] (npm) at (0,-6)
+    {\includegraphics[width=.2\textwidth]{imagenes/node-npm.png}};
+\node[inner sep=0pt] (angularjs) at (10,0)
+    {\includegraphics[width=.2\textwidth]{imagenes/angular.png}};
+\node[inner sep=0pt] (npm) at (5,0)
+    {\includegraphics[width=.2\textwidth]{imagenes/spring.png}};
+\node[inner sep=0pt] (npm) at (5,-6)
+    {\includegraphics[width=.2\textwidth]{imagenes/aws.png}};
+\node[inner sep=0pt] (npm) at (10,-6)
+    {\includegraphics[width=.2\textwidth]{imagenes/elastic_beanstalk.png}};
+
+\end{tikzpicture}
+
+}
