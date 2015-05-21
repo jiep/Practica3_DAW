@@ -44,10 +44,12 @@ app.config(function($locationProvider) {
 app.controller('NavCtrl', NavCtrl);
 function NavCtrl($http, $rootScope, $scope, $location) {
 	
-	$scope.$apply(function(){
-		$scope.user = $rootScope.user;
-	});
-
+	if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+		$scope.$apply(function(){
+			$scope.user = $rootScope.user;
+		});
+	}
+	
 	$scope.logout = function(){
 		$rootScope.user = undefined;
 		$scope.user = undefined;
