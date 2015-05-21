@@ -1,23 +1,25 @@
 <md-content layout-padding style="padding: 50px"
-	ng-controller="MapViewCtrl"> 
-	
+	ng-controller="MapViewCtrl">
 
-<h1 class="md-display-3">{{route.name}}</h1>
-<md-divider></md-divider>
-<br>
-{{route.type}}
-angular.equals(route.type, BOAT);
+
+<h2 class="md-display-3">{{route.name}}</h2>
+<md-divider></md-divider> <br>
+{{route.type}} angular.equals(route.type, BOAT);
 <div ng-if="route.type == WALK">
-	Ruta a pie. ¡Encuentra más rutas de este tipo! <a href="/category/walk"><img src="img/icono_andar.png"></a>
+	Ruta a pie. ¡Encuentra más rutas de este tipo! <a href="/category/walk"><img
+		src="img/icono_andar.png"></a>
 </div>
 <div ng-if="route.type == BIKE">
-	Ruta en bicicleta. ¡Encuentra más rutas de este tipo! <a href="/category/bike"><img src="img/icono_bici.png"></a>
+	Ruta en bicicleta. ¡Encuentra más rutas de este tipo! <a
+		href="/category/bike"><img src="img/icono_bici.png"></a>
 </div>
 <div ng-if="route.type == HORSE">
-	Ruta a caballo. ¡Encuentra más rutas de este tipo!  <a href="/category/horse"><img src="img/icono_caballo.png"></a>
+	Ruta a caballo. ¡Encuentra más rutas de este tipo! <a
+		href="/category/horse"><img src="img/icono_caballo.png"></a>
 </div>
 <div ng-if="route.type == BOAT">
-	Ruta en barco. ¡Encuentra más rutas de este tipo!  <a href="/category/boat"><img src="img/icono_barco.ico"></a>
+	Ruta en barco. ¡Encuentra más rutas de este tipo! <a
+		href="/category/boat"><img src="img/icono_barco.ico"></a>
 </div>
 <br>
 
@@ -38,36 +40,42 @@ angular.equals(route.type, BOAT);
 </div>
 </md-input-container> <br>
 <br>
-<h2>{{route.description}}</h2>
+<h3>Descripción de la ruta:</h3>
+
+<p>{{route.description}}</p>
 
 <md-divider></md-divider>
 
 <div ng-show="!route.isPrivate">
-<md-toolbar layout-align="center center">
-	<h3><strong>Comentarios</strong></h3>
-</md-toolbar>
+	<md-toolbar layout-align="center center">
+	<h4>
+		<strong>Comentarios</strong>
+	</h4>
+	</md-toolbar>
 
-<h3 ng-show="!route.comments.length">No hay comentarios para esta ruta</h3>
+	<p ng-show="!route.comments.length">No hay comentarios para esta
+		ruta</p>
 
-<div ng-repeat="comment in route.comments">
-	<md-list-item class="md-3-line">
-	<div layout="row">
-		<h1>{{comment.comment}}</h1>
+	<div ng-repeat="comment in route.comments">
+		<md-list-item class="md-3-line">
+		<div layout="row">
+			<p>{{comment.comment}}</p>
+		</div>
+		</md-list-item>
 	</div>
-	</md-list-item>
-</div>
 
-<md-divider></md-divider>
+	<md-divider></md-divider>
 
-<md-content>
-<form name="CommentForm" ng-submit="newcomment(new_comment)">
-	<md-input-container> <textarea md-maxlength="250"
-		name="comment" ng-model="new_comment" placeholder="Introduce tu comentario" required></textarea> </md-input-container>
+	<md-content>
+	<form name="CommentForm" ng-submit="newcomment(new_comment)">
+		<md-input-container> <textarea md-maxlength="250"
+			name="comment" ng-model="new_comment"
+			placeholder="Introduce tu comentario" required></textarea> </md-input-container>
 
-	<md-input-container layout-align="right"> <md-button
-		md-no-ink class="md-primary">Añade tu comentario</md-button> </md-input-container>
-</form>
-</md-content> 
+		<md-input-container layout-align="right"> <md-button
+			md-no-ink class="md-primary">Añade tu comentario</md-button> </md-input-container>
+	</form>
+	</md-content>
 </div>
 
 </md-content>
