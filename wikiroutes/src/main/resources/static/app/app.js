@@ -3,7 +3,7 @@ var app = angular.module('WikiroutesApp', [ 'ngMaterial', 'uiGmapgoogle-maps',
 		'wikiroutes.services', 'ngDroplet' ]);
 
 app.config(function($mdThemingProvider) {
-	$mdThemingProvider.theme('default').primaryPalette('blue-grey')
+	$mdThemingProvider.theme('default').primaryPalette('teal')
 			.accentPalette('blue');
 });
 
