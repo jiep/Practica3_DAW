@@ -1,10 +1,10 @@
 <md-content layout-padding style="padding: 50px" ng-controller="MapCtrl">
 <form name="editRouteForm" ng-submit="createRoute(route)">
 	<div layout="row" layout-align="end center">
-		<md-button class="md-raised md-primary" layout-align="right">
-		<h3>Añadir ruta</h3>
-		</md-button>
-		</a>
+	
+		<md-button class="md-fab md-primary" aria-label="Use Android" layout-align="right">
+          <ng-md-icon icon="add" style="fill: 24px" size="24"></ng-md-icon> 
+        </md-button>
 	</div>
 	<md-input-container> <label>Nombre de la
 		ruta</label> <input md-maxlength="50" required name="username"
