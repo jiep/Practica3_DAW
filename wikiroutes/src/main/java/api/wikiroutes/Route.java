@@ -48,6 +48,9 @@ public class Route {
 
 	@OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
 	private List<Comment> comments;
+	
+	@Column(columnDefinition = "TEXT")
+	private String image;
 
 	public Route() {
 
@@ -150,6 +153,14 @@ public class Route {
 
 	public void setImages(List<Image> images) {
 		this.images = images;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }

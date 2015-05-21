@@ -133,7 +133,7 @@ public class UserRestController {
 
 		if (auth_user != null && auth_user.getId() == id
 				&& !authorization.isEmpty()) {
-
+			
 			routes_list = users.findOne(id).getRoutes();
 		} else {
 
@@ -166,6 +166,7 @@ public class UserRestController {
 				r = new Route(route.getName(), route.getDescription(), user,
 						route.getRate(), route.isPrivate());
 				r.setType(route.getType());
+				r.setImage(route.getImage());
 								
 				List<Stretch> ls = route.getStretches();
 

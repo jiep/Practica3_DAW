@@ -1,6 +1,6 @@
 var app = angular.module('WikiroutesApp', [ 'ngMaterial', 'uiGmapgoogle-maps',
 		'ngMdIcons', 'ngRoute', 'ngResource', 'slick', 'ngMessages',
-		'wikiroutes.services', 'ngDroplet' ]);
+		'wikiroutes.services', 'ngDroplet', 'naif.base64' ]);
 
 app.config(function($mdThemingProvider) {
 	$mdThemingProvider.theme('default').primaryPalette('teal')
@@ -105,6 +105,10 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location,
 		r.$query().then(function(return_route) {
 			$scope.route = return_route;
 			$scope.route.path = setPath(return_route);
+			var file = $j(file.toString()).attr('files')[0];
+			fileBody = file.getAsDataURL();
+			console.log(fileBody);
+			$scope.route.images.push(fileBody);
 			console.log("Path route", $scope.route.path);
 		});
 
@@ -206,14 +210,13 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location,
 		console.log($scope.route.type);
 		console.log($scope.route.private);
 		$scope.route.user = $rootScope.user;
-
+		$scope.route.image = $('#base64').html();
 		var newroute = new Route($scope.route).$save({
 			id : $rootScope.user.id
 		}).then(function(r) {
 			$scope.routes = $rootScope.user.routes;
 			$scope.routes.push(r);
 			$rootScope.user.routes = $scope.routes;
-
 		});
 
 		$location.path("/profile");
