@@ -5,14 +5,9 @@
 <div flex="33">
 
 	<md-content layout-padding>
-		<form name="loginForm" ng-submit="preferences(user)">
+		<form name="loginForm" ng-submit="changeProfile(user)">
 			<md-input-container>
-				<label>Nombre de usuario</label>
-				<input md-maxlength="10" required name="username" ng-model="user.userName">
-				<div ng-messages="loginForm.username.$error">
-					<div ng-message="required">Campo requerido</div>
-					<div ng-message="md-maxlength">El nombre de usuario es demasiado largo</div>
-				</div>
+				<label>Nombre de usuario: {{user.userName}}</label>
 			</md-input-container>
 			<md-input-container>
 				<label>Contraseña</label>

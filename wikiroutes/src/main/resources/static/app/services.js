@@ -1,4 +1,5 @@
-angular.module('wikiroutes.services', []).factory("Register",
+angular.module('wikiroutes.services', [])
+.factory("Register",
 		function($resource) {
 
 			return $resource('/users/:id', {
@@ -85,4 +86,26 @@ angular.module('wikiroutes.services', []).factory("Register",
 			}
 		}
 	});
-});
+})
+.factory("UploadUser",
+		function($resource, $rootScope) {
+
+			return $resource('/users/:id', {
+				id : '@id'
+			}, {
+				update : {
+					method : "PUT",
+					headers : {
+						'Content-Type' : 'application/json',
+						'Authorization' : $rootScope.user.apiKey
+					}
+				},
+				save : {
+					method : "POST",
+					headers : {
+						'Content-Type' : 'application/json'
+					}
+				}
+
+			});
+		});

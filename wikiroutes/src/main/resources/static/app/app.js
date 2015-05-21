@@ -30,6 +30,8 @@ app.config(function($routeProvider) {
 		templateUrl : "/templates/viewPublicRoute.html"
 	}).when("/category/:type", {
 		templateUrl : "/templates/search.html"
+	}).when("/preferences", {
+		templateUrl : "/templates/preferences.html"
 	}).otherwise({
 		redirectTo : "/"
 	})
@@ -42,10 +44,12 @@ app.config(function($locationProvider) {
 app.controller('NavCtrl', NavCtrl);
 function NavCtrl($http, $rootScope, $scope, $location) {
 	
-	$scope.$apply(function(){
-		$scope.user = $rootScope.user;
-	});
-
+	if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+		$scope.$apply(function(){
+			$scope.user = $rootScope.user;
+		});
+	}
+	
 	$scope.logout = function(){
 		$rootScope.user = undefined;
 		$scope.user = undefined;
@@ -568,6 +572,17 @@ app.controller("ViewPublicRouteCtrl", function($scope, $http, $routeParams){
 					} ]
 				};
 			
+		});
+	}
+});
+
+app.controller("PreferencesCtrl", function($rootScope, $location, UploadUser, $scope){
+	$scope.changeProfile = function(user){
+		var upload_user = new UploadUser(user);
+		console.log(user);
+		upload_user.$update({id: $rootScope.user.id}).then(function(uploaded_user){
+			$rootScope.user = uploaded_user;
+			$location.path("/profile");
 		});
 	}
 });
