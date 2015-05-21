@@ -11,26 +11,18 @@
 	</div>
 	<div flex="20">
 
-		<a href="/newRoute"> 	
-	  <md-button class="md-fab md-fab" aria-label="Añadir ruta" layout-align="right">
-      <ng-md-icon icon="map" style="fill: 24px" size="24"></ng-md-icon> 
-      <md-tooltip md-visible="demo.showTooltip">
-        Añadir ruta
-      </md-tooltip>
-      </md-button>
+		<a href="/newRoute"> <md-button class="md-fab md-fab"
+				aria-label="Añadir ruta" layout-align="right"> <ng-md-icon
+				icon="map" style="fill: 24px" size="24"></ng-md-icon> <md-tooltip
+				md-visible="demo.showTooltip"> Añadir ruta </md-tooltip> </md-button>
+		</a> 
+		<a href="/preferences"> <md-button class="md-fab md-fab"
+				aria-label="Editar perfil" layout-align="right"> <ng-md-icon
+				icon="settings" style="fill: 24px" size="24"></ng-md-icon> <md-tooltip
+				md-visible="demo.showTooltip"> Editar perfil </md-tooltip> </md-button>
 		</a>
-		
-	<a href="/preferences"> 
-	<md-button class="md-fab md-fab" aria-label="Editar perfil" layout-align="right">
-      <ng-md-icon icon="settings" style="fill: 24px" size="24"></ng-md-icon> 
-      <md-tooltip md-visible="demo.showTooltip">
-        Editar perfil
-      </md-tooltip>
-      </md-button>
-		</a>
-</div>
-</div>
 	</div>
+</div>
 <div layout="row">
 
 	<md-content layout-padding
@@ -45,37 +37,31 @@
 	</md-toolbar>
 
 	<div ng-repeat="route in user.routes">
-		
-			<md-list-item class="md-3-line">
-			<!--  <div layout="row">-->
-				<div flex="20">
-					<md-card class="card"> <img ng-src="/img/nature4.jpg"
-						class="md-avatar" /> </md-card>
-				</div>
-				<div flex="60">
-					<div class="md-list-item-text">
-						<a href="/viewRoute/{{route.id}}"><h3>{{route.name}}</h3></a>
-						<h4>{{route.description | limitTo:50}}...</h4>
-						<p>{{route.user}}</p>
-					</div>
-				</div>
-				<div flex="20">
-						<div align="right">
-							<span>
-							<ng-md-icon ng-if="route.private" icon="lock_outline" size="36"></ng-md-icon>
-							<ng-md-icon ng-if="!route.private" icon="lock_open" size="36"></ng-md-icon>
-							
-							</span> 
-							<a href="/editRoute/{{route.id}}"><span>
-								<ng-md-icon icon="mode_edit" size="36"></ng-md-icon>
-							</span> </a>
-							<span>
-								<ng-md-icon icon="clear" size="36"></ng-md-icon>
-							</span>
-							<span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
-						</div>
-				</div>
-			<!--</div>-->
+
+		<md-list-item class="md-3-line"> <!--  <div layout="row">-->
+		<div flex="20">
+			<md-card class="card"> <img ng-src="/img/nature4.jpg"
+				class="md-avatar" /> </md-card>
+		</div>
+		<div flex="60">
+			<div class="md-list-item-text">
+				<a href="/viewRoute/{{route.id}}"><h3>{{route.name}}</h3></a>
+				<h4>{{route.description | limitTo:50}}...</h4>
+				<p>{{route.user}}</p>
+			</div>
+		</div>
+		<div flex="20">
+			<div align="right">
+				<span> <ng-md-icon ng-if="route.private" icon="lock_outline"
+						size="36"></ng-md-icon> <ng-md-icon ng-if="!route.private"
+						icon="lock_open" size="36"></ng-md-icon>
+
+				</span> <a href="/editRoute/{{route.id}}"><span> <ng-md-icon
+							icon="mode_edit" size="36"></ng-md-icon>
+				</span> </a> <span> <ng-md-icon icon="clear" size="36"></ng-md-icon>
+				</span> <span><ng-md-icon icon="comment" size="36"></ng-md-icon></span>
+			</div>
+		</div>
 		</md-list-item>
 		<md-divider></md-divider>
 	</div>
