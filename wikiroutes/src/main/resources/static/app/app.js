@@ -109,12 +109,9 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location,
 			$scope.route.path = setPath(return_route);
 			var file = $j(file.toString()).attr('files')[0];
 			fileBody = file.getAsDataURL();
-			console.log(fileBody);
 			$scope.route.images.push(fileBody);
-			console.log("Path route", $scope.route.path);
 		});
 
-		console.log("Ruta", $scope.route);
 	}
 
 	$scope.map = {
@@ -148,10 +145,7 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location,
 			rightclick : function(mapModel, eventName, originalEventArgs,
 					arguments) {
 				$scope.$apply(function() {
-					console.log("1", mapModel);
-					console.log("2", eventName);
-					console.log("3", originalEventArgs);
-					console.log("4", arguments);
+				
 
 				});
 			}
@@ -178,7 +172,6 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location,
 			stretches : []
 		};
 		route.stretches.points = [];
-		console.log(route);
 		for (var i = 0; i < $scope.polyline.path.length - 1; i++) {
 			var p1 = $scope.polyline.path[i];
 			var p2 = $scope.polyline.path[i + 1];
@@ -201,7 +194,6 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location,
 		return route;
 	}
 	
-	console.log("Polilínea", $scope.polyline)
 
 	$scope.createRoute = function(route) {
 		$scope.route = setRoute();
@@ -209,8 +201,6 @@ app.controller('MapCtrl', function($scope, $rootScope, Route, $location,
 		$scope.route.description = route.description;
 		$scope.route.private = route.isPrivate;
 		$scope.route.type = route.type;
-		console.log($scope.route.type);
-		console.log($scope.route.private);
 		$scope.route.user = $rootScope.user;
 		$scope.route.image = $('#base64').html();
 		var newroute = new Route($scope.route).$save({
@@ -247,7 +237,7 @@ app.controller('MapViewCtrl', function($scope, Comment, $rootScope, Route,
 					longitude : route.stretches[i].points[1].longitude
 				});
 			}
-			console.log(route.path);
+		
 		}
 
 		return route.path;
@@ -262,7 +252,6 @@ app.controller('MapViewCtrl', function($scope, Comment, $rootScope, Route,
 	r.$query().then(function(return_route) {
 		$scope.route = return_route;
 		route = setPath(return_route);
-		console.log(return_route);
 
 		$scope.map = {
 			center : {
@@ -296,8 +285,6 @@ app.controller('MapViewCtrl', function($scope, Comment, $rootScope, Route,
 	$scope.comments = {};
 
 	$scope.newcomment = function(new_comment) {
-		console.log(new_comment);
-		console.log("Voy a comentar");
 		newcomment = new Comment({comment : new_comment, date : new Date()});
 		newcomment.$save({id : $routeParams.id}).then(function(comment) {
 			$scope.route.comments.push(comment);
@@ -312,16 +299,15 @@ app.controller("HomeCtrl", function($scope, $http, $rootScope) {
 	$http.get('/routes').then(function(result) {
 			$scope.routes =  result.data;
 			$scope.user = $rootScope.user;
+			console.log(typeof($scope.routes[0].type));
 	});
-	
-	console.log($scope.routes);
+
 });
 
 app.controller("LoginCtrl", function($scope, $rootScope, Login, $location) {
 	$scope.login = function(user) {
 		var login = new Login(user);
 		login.$save().then(function(user_logged) {
-			console.log(user_logged);
 			if (user_logged.apiKey) {
 				$scope.user = user_logged;
 				$rootScope.user = user_logged;
@@ -334,8 +320,6 @@ app.controller("LoginCtrl", function($scope, $rootScope, Login, $location) {
 });
 
 app.controller("ProfileCtrl", function($rootScope, $scope) {
-	console.log($rootScope.user.routes);
-
 	$scope.user = $rootScope.user;
 	$scope.routes = $rootScope.user.routes;
 
@@ -398,7 +382,6 @@ app.controller('EditMapCtrl', function($scope, $rootScope, Route, $routeParams, 
 		r.$query().then(function(return_route) {
 			$scope.route = return_route;
 			$scope.route.path = setPath(return_route);
-			console.log("Path route", $scope.route.path);
 			
 			$scope.map = {
 					center : {
@@ -431,10 +414,7 @@ app.controller('EditMapCtrl', function($scope, $rootScope, Route, $routeParams, 
 						rightclick : function(mapModel, eventName, originalEventArgs,
 								arguments) {
 							$scope.$apply(function() {
-								console.log("1", mapModel);
-								console.log("2", eventName);
-								console.log("3", originalEventArgs);
-								console.log("4", arguments);
+								
 			
 							});
 						}
@@ -461,7 +441,6 @@ app.controller('EditMapCtrl', function($scope, $rootScope, Route, $routeParams, 
 						stretches : []
 					};
 					route.stretches.points = [];
-					console.log(route);
 					for (var i = 0; i < $scope.polyline.path.length - 1; i++) {
 						var p1 = $scope.polyline.path[i];
 						var p2 = $scope.polyline.path[i + 1];
@@ -484,14 +463,12 @@ app.controller('EditMapCtrl', function($scope, $rootScope, Route, $routeParams, 
 					return route;
 				}
 				
-				console.log("Polilínea", $scope.polyline);
 			
 				$scope.editRoute = function(route) {
 					$scope.route = setRoute();
 					$scope.route.name = route.name;
 					$scope.route.description = route.description;
 					$scope.route.private = route.isPrivate;
-					console.log($scope.route.private);
 					$scope.route.user = $rootScope.user;
 			
 					var newroute = new Route($scope.route).$update({
@@ -546,7 +523,7 @@ app.controller("ViewPublicRouteCtrl", function($scope, $http, $routeParams, $roo
 							longitude : route.stretches[i].points[1].longitude
 						});
 					}
-					console.log(route.path);
+			
 				}
 
 				return route.path;
@@ -589,8 +566,6 @@ app.controller("ViewPublicRouteCtrl", function($scope, $http, $routeParams, $roo
 				$scope.comments = {};
 
 				$scope.newcomment = function(new_comment) {
-					console.log(new_comment);
-					console.log("Voy a comentar");
 					$http.defaults.headers.common['Authorization']= $rootScope.user.apiKey; //Using $http we can set header also
 					newcomment = new Comment2({comment : new_comment, date : new Date()});
 					newcomment.$save({id : $routeParams.id}).then(function(comment) {
@@ -607,7 +582,6 @@ app.controller("ViewPublicRouteCtrl", function($scope, $http, $routeParams, $roo
 app.controller("PreferencesCtrl", function($rootScope, $location, UploadUser, $scope){
 	$scope.changeProfile = function(user){
 		var upload_user = new UploadUser(user);
-		console.log(user);
 		upload_user.$update({id: $rootScope.user.id}).then(function(uploaded_user){
 			$rootScope.user = uploaded_user;
 			$scope.user = uploaded_user;
