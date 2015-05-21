@@ -114,3 +114,110 @@
 \end{tikzpicture}
 
 }
+
+\newcommand{\clasesfrontend}{
+	
+\begin{tikzpicture}
+	
+\tikzumlset{fill state=white}
+\umlclass[x=0, y=0]{Route}{
+}{
+}
+
+\umlclass[x=5, y=0]{Profile}{
+}{
+}
+
+\umlclass[x=-5, y=-2]{MapCtrl}{
+}{
+}
+
+\umlclass[x=0, y=-2]{MapViewCtrl}{
+}{
+}
+
+\umlclass[x=5, y=-2]{EditMapCtrl}{
+}{
+}
+
+\umlclass[x=-5, y=-4]{PreferencesCtrl}{
+}{
+}
+
+\umlclass[x=0, y=-4]{UploadCtrl}{
+}{
+}
+
+\umlclass[x=0, y=-4]{UploadCtrl}{
+}{
+}
+
+\umlclass[x=5, y=-4]{Comment}{
+}{
+}
+
+\umlclass[x=-5, y=-6]{Login}{
+}{
+}
+
+\umlclass[x=0, y=-6]{LoginCtrl}{
+}{
+}
+
+\umlclass[x=5, y=-6]{ViewPublicCtrl}{
+}{
+}
+
+\umlclass[x=-5, y=-8]{Register}{
+}{
+}
+
+\umlclass[x=0, y=-8]{RegisterCtrl}{
+}{
+}
+
+\umlclass[x=3, y=-8]{Search}{
+}{
+}
+
+\umlclass[x=7, y=-8]{SearchByCategory}{
+}{
+}
+
+\umlclass[x=-5, y=-10]{HomeCtrl}{
+}{
+}
+
+\umlclass[x=0, y=-10]{NavCtrl}{
+}{
+}
+
+
+% Relaciones
+
+\umlassoc{MapCtrl}{Route}
+
+\umlassoc{Route}{EditMapCtrl}
+
+\umlassoc{Route}{MapViewCtrl}
+
+\umlassoc{Comment}{MapViewCtrl}
+
+\umlassoc{PreferencesCtrl}{UploadCtrl}
+
+\umlassoc{Comment}{ViewPublicCtrl}
+
+\umlassoc{Route}{MapViewCtrl}
+
+\umlassoc{Login}{LoginCtrl}
+
+\umlassoc{Register}{RegisterCtrl}
+
+\umlassoc{Search}{SearchByCategory}
+
+
+
+
+\end{tikzpicture}
+
+}

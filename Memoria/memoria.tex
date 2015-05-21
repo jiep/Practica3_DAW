@@ -100,9 +100,15 @@ Para esta práctica hemos decidido diseñar e implementar una aplicación que pe
 
 \section{Diagramas UML}
 
+A continuación, representamos los diagramas UML tanto del backend como del frontend. En el primero, de ellos, presentamos el diagrama de clases y dos diagramas de actividad; en el segundo, presentamos el diagrama de clases.
+
 \subsection{Diagramas UML del backend}
 
-\subsection{Diagrama de clases}
+El diagrama de clases del backend se basan en nuestra implementación de la API REST. También incluimos dos diagramas de actividades: añadir ruta y buscar ruta.  
+
+\subsubsection{Diagrama de clases}
+
+El diagrama de clases se compone de las clases de la API REST, entre las que se encuentran Route, Stretch, Point, User, Image, etc. (Figura \ref{fig:clases_backend})
 
 \begin{figure}
 \centering
@@ -111,7 +117,14 @@ Para esta práctica hemos decidido diseñar e implementar una aplicación que pe
 \label{fig:clases_backend}
 \end{figure}
 
-\subsection{Diagrama de actividad de añadir ruta}
+\subsection{Diagramas de actividad}
+
+Los diagramas de actividad que incluimos son algunos de los más utilizados dentro de nuestra aplicación: buscar ruta y añadir ruta. No hemos querido añadir más diagramas para no hacer más extensa esta memoria.
+
+
+\subsubsection{Diagrama de actividad de añadir ruta}
+
+El diagrama de actividad de añadir ruta, indica los pasos que son reuqeridos para añadir una ruta en nuestra aplicación. Lo primero de ello es iniciar sesión, en caso de tener un usuario y contraseña válida, nos lleva a nuestro perfil para finalmente rellenar los datos de nuestra ruta. El diagrama se puede ver en la Figura \ref{fig:anadirruta}
 
 \begin{figure}[htbp]
 \centering
@@ -121,8 +134,9 @@ Para esta práctica hemos decidido diseñar e implementar una aplicación que pe
 \end{figure}
 
 
-\subsection{Diagrama de actividad de buscar ruta}
+\subsubsection{Diagrama de actividad de buscar ruta}
 
+El diagrama de actividad de ruta es muy sencillo, puesto que sólo es necesario ingresar el nombre de la ruta que deseemos buscar para encontrar la ruta que busquemos. La Figura \ref{fig:buscarruta} muestra este diagrama de actividad.  
 
 \begin{figure}
 \centering
@@ -132,6 +146,22 @@ Para esta práctica hemos decidido diseñar e implementar una aplicación que pe
 \end{figure}
 
 \subsection{Diagramas UML del frontend}
+
+En esta sección sólo incluimos los diagramas de clases, puesto que los diagramas de actividad son análogos a los anteriores.
+
+\subsubsection{Diagrama de clases}
+
+El diagrama de clases se corresponde con los servicios y controladores que hemos utilizado en el lado del cliente, implementado en AngularJS.\\
+
+Se incluyen clases como Route, Comment, User, Register, etc. que son necesarias para el correcto funcionamiento de la aplicación. La Figura \ref{fig:clasesfrontend} muestra el diagrama de clases completo.
+
+\begin{figure}
+\centering
+\clasesfrontend
+\caption{Diagrama de clases del frontend}
+\label{fig:clasesfrontend}
+\end{figure}
+
 
 \clearpage
 
