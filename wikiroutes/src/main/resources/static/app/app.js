@@ -1,6 +1,6 @@
 var app = angular.module('WikiroutesApp', [ 'ngMaterial', 'uiGmapgoogle-maps',
-		'ngMdIcons', 'ngRoute', 'ngResource', 'slick', 'ngMessages',
-		'wikiroutes.services', 'ngDroplet', 'naif.base64' ]);
+		'ngMdIcons', 'ngRoute', 'ngResource', 'ngMessages',
+		'wikiroutes.services', 'naif.base64' ]);
 
 app.config(function($mdThemingProvider) {
 	$mdThemingProvider.theme('default').primaryPalette('teal')
